@@ -1,0 +1,46 @@
+.login-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+mat-card{
+    box-shadow: none;
+    width: 100%;
+}
+mat-card .form-login{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+mat-card-title{
+    margin-bottom: 2rem;
+    font-size: 40px;
+    font-size-adjust: 54px;
+    font: 500;
+    font-style: normal;
+    letter-spacing: 0px;
+}
+mat-card-subtitle{
+    font-size: 16px;
+    color: #353535;
+    margin-bottom: 5rem;
+}
+
+mat-form-field{
+    font-size: 16px;
+    color: #717171;
+}
+.recordar{
+    color: #353535;
+    font-weight: 560;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+mat-card-footer{
+    margin-top: 3rem;
+    text-align: center;
+    color: #353535;
+    font-size: 12px;
+}
