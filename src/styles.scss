@@ -37,3 +37,9 @@ $panel-why-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.content-dialog{
+  text-align: center;
+  padding-left: 2em;
+  padding-right: 2em;
+}

@@ -1,31 +1,40 @@
-<div class="login-container">
-    <div></div>
-    <mat-card class="form-login">
-        <mat-icon matSubheader><img src="" alt=""></mat-icon>
-        <form class="form-login" [formGroup]="loginForm">
-            <mat-card-title class="text-center">¡Bienvenido!</mat-card-title>
-            <mat-card-subtitle class="text-center">¡Ten un excelente día!</mat-card-subtitle>
-            <mat-form-field class="col-12 mb-2" appearance="outline">
-                <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="user">
-            </mat-form-field>
-            <mat-form-field class="col-12 mb-1" appearance="outline">
-                <mat-label>Contraseña</mat-label>
-                <input [type]="oculto ? 'password' : 'text'" matInput formControlName="password">
-                <a mat-icon-button matSuffix (click)="oculto = !oculto" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oculto">
-                    <mat-icon>{{oculto ?  'visibility_off' : 'visibility'}}</mat-icon>
-                </a>
-            </mat-form-field>
-            <mat-checkbox>Recuerdame</mat-checkbox>
-            <button mat-raised-button color="primary" class="col-12 mt-2"
-            >Sign in</button>
-            <div class="col-12 row mt-3">
-                <span class="col-6 recordar" (click)="openRemember()">¿Olvidaste tu contraseña?</span>
-                <div class="col-6" style="text-align: right;">
-                    <span class="recordar" (click)="openRegister()">¿No tienes cuenta? Registrate</span>
-                </div>
-            </div>
-            <mat-card-footer>Develop by Camtech</mat-card-footer>
-        </form>
-    </mat-card>
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-md-block col-md-8 col-lg-8 " style="padding: 0;">
+            <img src="https://backend-app.panelwhy.com/static/img/login.jpg" class="img-fluid scroll"/>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 bg-dark text-white pt-5">
+            <mat-card class="form-login bg-dark text-white">
+                <mat-icon matSubheader><img src="" alt=""></mat-icon>
+                <form class="form-login text-white" [formGroup]="loginForm">
+                    <mat-card-title class="text-center text-white">¡Bienvenido!</mat-card-title>
+                    <mat-card-subtitle class="text-center text-white">¡Ten un excelente día!</mat-card-subtitle>
+                    <mat-form-field class="col-12 mb-2" appearance="outline">
+                        <mat-label class="text-white">Email</mat-label>
+                        <input class="text-white" type="text" matInput formControlName="username">
+                    </mat-form-field>
+                    <mat-form-field class="col-12 mb-1" appearance="outline">
+                        <mat-label class="text-white">Contraseña</mat-label>
+                        <input class="text-white" [type]="oculto ? 'password' : 'text'" matInput formControlName="password">
+                        <a mat-icon-button matSuffix (click)="oculto = !oculto" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oculto">
+                            <mat-icon>{{oculto ?  'visibility_off' : 'visibility'}}</mat-icon>
+                        </a>
+                    </mat-form-field>
+                    <mat-checkbox>Recuerdame</mat-checkbox>
+                    <button mat-raised-button color="primary" class="col-12 mt-2" (click)="login()"
+                    >Iniciat sesión</button>
+                    <div class="col-12 row mt-3">
+                        <span class="col-6 recordar text-white" (click)="openRemember()">¿Olvidaste tu contraseña?</span>
+                        <div class="col-6 text-white" style="text-align: right;">
+                            <span class="recordar text-white" (click)="openRegister()">¿No tienes cuenta? Registrate</span>
+                        </div>
+                    </div>
+                    <mat-card-footer class="text-white">App design and development by
+                        CAMTECH™ © 2016-2021
+                        Todos los derechos reservados.</mat-card-footer>
+                </form>
+            </mat-card>
+         </div>
+    </div>
+
 </div>

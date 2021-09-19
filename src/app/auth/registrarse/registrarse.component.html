@@ -1,13 +1,13 @@
-<div mat-dialog-content>
-    <h2>Sign up</h2>
+<div mat-dialog-content class="content-dialog">
+    <h2>Registro</h2>
     <form [formGroup]="registerForm">
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Nombres</mat-label>
-            <input type="text" matInput formControlName="nombres">
+            <input type="text" matInput formControlName="names">
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Apellidos</mat-label>
-            <input type="text" matInput formControlName="apellidos">
+            <input type="text" matInput formControlName="surnames">
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Correo electrónico</mat-label>
@@ -15,25 +15,28 @@
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>País</mat-label>
-            <mat-select formControlName="pais">
+            <mat-select formControlName="pais" (selectionChange)="getStates()">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Departamento</mat-label>
-            <mat-select formControlName="departamento">
+            <mat-select formControlName="departamento" (selectionChange)="getCities()">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state.id">{{state.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Ciudad</mat-label>
-            <mat-select formControlName="ciudad">
+            <mat-select formControlName="geography_city_id">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Teléfono</mat-label>
-            <input type="text" matInput formControlName="apellidos">
+            <input type="number" matInput formControlName="mobile_number">
         </mat-form-field>
         <mat-form-field class="col-12 mb-1" appearance="outline">
             <mat-label>Password</mat-label>
@@ -49,12 +52,13 @@
                 <mat-icon>{{confirma ?  'visibility_off' : 'visibility'}}</mat-icon>
             </a>
         </mat-form-field>
-        <mat-checkbox class="mb-3" style="text-align: center;">
-            <p>Deseo recibir información acerca de las encuestas en
+        <mat-checkbox class="col-12">
+            <p class="text-start text-wrap"> Deseo recibir información acerca de las encuestas en
                 las que soy candidato para participar mediante correo 
-                electrónico</p>
+                electrónico
+            </p>
         </mat-checkbox>
-        <button mat-raised-button color="primary" class="col-12 mb-2">Registrarse</button>
+        <button mat-raised-button color="primary" class="col-12 mb-2" (click)="singUp()">Registrarse</button>
         <div class="col-12" style="text-align: right;">
             <span>¿Ya tienes una cuenta? Inicia sesión</span>
         </div>
