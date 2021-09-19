@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Auth_Authentication: 'https://backend-app.panelwhy.com/api/v1/auth/authentication/login/access-token/login/',
+  Auth_Authorization: 'https://backend-app.panelwhy.com/api/v1/auth/authorization/myself/',
+  Parameters_Geography_Countries: 'https://backend-app.panelwhy.com/api/v1/parameters/geography/geography_countries/',
+  Parameters_Geography_States: 'https://backend-app.panelwhy.com/api/v1/parameters/geography/geography_states/',
+  Parameters_Geography_Cities: 'https://backend-app.panelwhy.com/api/v1/parameters/geography/geography_cities/',
 };
 
 /*

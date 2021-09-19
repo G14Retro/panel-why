@@ -15,20 +15,23 @@
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>País</mat-label>
-            <mat-select formControlName="pais">
+            <mat-select formControlName="pais" (selectionChange)="getStates()">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Departamento</mat-label>
-            <mat-select formControlName="departamento">
+            <mat-select formControlName="departamento" (selectionChange)="getCities()">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state.id">{{state.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Ciudad</mat-label>
             <mat-select formControlName="ciudad">
                 <mat-option>.....</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
