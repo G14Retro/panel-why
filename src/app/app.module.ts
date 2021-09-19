@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { MaterialModule } from './shared/material/material.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MaterialModule } from './shared/material/material.module';
     BrowserAnimationsModule,
     AuthModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

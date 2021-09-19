@@ -1,0 +1,17 @@
+<form [formGroup]="recoveryForm">
+    <mat-form-field class="col-12 mb-1" appearance="outline">
+        <mat-label>Nueva contraseña</mat-label>
+        <input [type]="nueva ? 'password' : 'text'" matInput formControlName="new_password">
+        <a mat-icon-button matSuffix (click)="nueva = !nueva" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="nueva">
+            <mat-icon>{{nueva ?  'visibility_off' : 'visibility'}}</mat-icon>
+        </a>
+    </mat-form-field>
+    <mat-form-field class="col-12 mb-1" appearance="outline">
+        <mat-label>Confirma la contraseña</mat-label>
+        <input [type]="confirma ? 'password' : 'text'" matInput formControlName="confirma">
+        <a mat-icon-button matSuffix (click)="confirma = !confirma" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="confirma">
+            <mat-icon>{{confirma ?  'visibility_off' : 'visibility'}}</mat-icon>
+        </a>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="sendPassword()">Restaurar contraseña</button>
+</form>

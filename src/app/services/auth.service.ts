@@ -16,7 +16,8 @@ export class AuthService {
 
   httoptions = {
     headers: new HttpHeaders({
-    'method': 'POST'
+    'method': 'POST',
+    'Content-Type': 'application/json'
     }),
   }
   constructor(
@@ -35,6 +36,14 @@ export class AuthService {
     return this.http.get(`${CITIES}by_request/active/?skip=0&limit=10000&parent_id=${id_state}`);
   }
 
+  recovery(email:string){
+    return this.http.post(`${AUTORIZATION}password-recover-send-mail/${email}`,'',this.httoptions);
+  }
+
+  newPassword(data){
+    return this.http.post(`${AUTORIZATION}password-recover-token/`,data,this.httoptions);
+  }
+
   signUp(data){
     return this.http.post(`${AUTORIZATION}user-create`,data,this.httoptions);
   }
@@ -43,7 +52,9 @@ export class AuthService {
     const datos = new FormData();
     datos.append('username',data.username);
     datos.append('password',data.password);
-    return this.http.post(`${AUTHENTICATION}login/access-token`,datos,this.httoptions)
+    return this.http.post(`${AUTHENTICATION}login/access-token`,datos,{headers:{
+      'method': 'POST',
+    }})
     .pipe(
       map((resp:any)=>{
         this.saveStorage(data.remember,resp);

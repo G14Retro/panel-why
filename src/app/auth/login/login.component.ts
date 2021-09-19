@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.authService.singIn(this.loginForm.value).subscribe(()=>{
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/panel-why/dashboard');
     },
     (err:any)=>{
       console.log(err);
