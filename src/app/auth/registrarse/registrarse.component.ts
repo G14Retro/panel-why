@@ -26,13 +26,13 @@ export class RegistrarseComponent implements OnInit {
 
   createForm(){
     this.registerForm = this.fb.group({
-      nombres:['',Validators.required],
-      apellidos:['',Validators.required],
+      names:['',Validators.required],
+      surnames:['',Validators.required],
       email:['',Validators.required],
       pais:['',Validators.required],
       departamento:['',Validators.required],
-      ciudad:['',Validators.required],
-      telefono:['',Validators.required],
+      geography_city_id:['',Validators.required],
+      mobile_number:['',Validators.required],
       password:['',Validators.required],
       confirma:['',Validators.required],
     });
@@ -54,6 +54,15 @@ export class RegistrarseComponent implements OnInit {
     console.log(this.registerForm.get('departamento').value);
     this.authService.getCities(this.registerForm.get('departamento').value).subscribe((resp:any)=>{
       this.cities = resp;
+    });
+  }
+
+  singUp(){
+    this.registerForm.get('pais').disable();
+    this.registerForm.get('departamento').disable();
+    this.registerForm.get('confirma').disable();
+    console.log(this.registerForm.value);
+    this.authService.signUp(this.registerForm.value).subscribe((resp:any)=>{
       console.log(resp);
     });
   }

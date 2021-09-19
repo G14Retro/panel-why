@@ -7,7 +7,7 @@
             <mat-card-subtitle class="text-center">¡Ten un excelente día!</mat-card-subtitle>
             <mat-form-field class="col-12 mb-2" appearance="outline">
                 <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="user">
+                <input type="text" matInput formControlName="username">
             </mat-form-field>
             <mat-form-field class="col-12 mb-1" appearance="outline">
                 <mat-label>Contraseña</mat-label>
@@ -17,7 +17,7 @@
                 </a>
             </mat-form-field>
             <mat-checkbox>Recuerdame</mat-checkbox>
-            <button mat-raised-button color="primary" class="col-12 mt-2"
+            <button mat-raised-button color="primary" class="col-12 mt-2" (click)="login()"
             >Iniciat sesión</button>
             <div class="col-12 row mt-3">
                 <span class="col-6 recordar" (click)="openRemember()">¿Olvidaste tu contraseña?</span>

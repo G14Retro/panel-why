@@ -1,0 +1,46 @@
+<div class="container">
+    <form>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select>
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Número de documento</mat-label>
+            <input type="number">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Dirección</mat-label>
+            <input type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Barrio</mat-label>
+            <input type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="nacimiento">
+            <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
+            <mat-datepicker #nacimiento></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Estrato</mat-label>
+            <mat-select>
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Género</mat-label>
+            <mat-select>
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Decisor de compra</mat-label>
+            <mat-select>
+                <mat-option></mat-option>
+            </mat-select>
+        </mat-form-field>             
+    </form>
+</div>
