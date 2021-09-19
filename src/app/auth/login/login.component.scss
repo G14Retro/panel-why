@@ -1,11 +1,7 @@
-.login-container{
-    height: 100%;
-    display: grid;
-    grid-template-columns: 60% 40%;
-}
+
 
 mat-card{
-    box-shadow: none;
+    box-shadow: none !important;
     width: 100%;
 }
 mat-card .form-login{
@@ -44,3 +40,23 @@ mat-card-footer{
     color: #353535;
     font-size: 12px;
 }
+
+
+.scroll
+{
+     overflow-x:scroll;
+     overflow-y:hidden;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white!important;
+    // opacity: 1!important;
+}
+
+::ng-deep .mat-checkbox-background {
+    background-color: white; //off-white
+}
+
+
+      
