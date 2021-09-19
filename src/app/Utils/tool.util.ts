@@ -22,4 +22,14 @@ export default class Utils{
         })
     }
 
+    static swalSuccessConfirm(title:string,text:string){
+        Swal.fire({
+            icon: 'success',
+            title: title,
+            text: text,
+            showConfirmButton: true,
+            confirmButtonText: 'Entendido'
+        })
+    }
+
 }
