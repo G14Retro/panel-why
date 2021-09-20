@@ -74,6 +74,10 @@ export class DataUserService {
       };
   }
 
+  getNitTypes(){
+    return this.http.get(`${PARAMETERS}society_nit_types/by_request/active/?skip=0&limit=1000`);
+  }
+
   getSocioEconomics(){
     return this.http.get(`${PARAMETERS}society_socio_economics/by_request/active/?skip=0&limit=1000`);
   }
