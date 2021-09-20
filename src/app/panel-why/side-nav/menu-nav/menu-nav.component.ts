@@ -16,6 +16,7 @@ export class MenuNavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getPoints();
   }
 
   getPoints(){
