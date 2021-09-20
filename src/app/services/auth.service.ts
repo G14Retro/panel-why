@@ -27,7 +27,6 @@ export class AuthService {
     private jwhelper:JwtHelperService
   ) {
     this.readStorage();
-    this.tokenTest();
    }
 
   getCountries(){

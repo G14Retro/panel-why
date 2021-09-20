@@ -11,13 +11,14 @@ const PARAMETERS = environment.Prameter_Data;
 })
 export class DataUserService {
   httpOptions;
+  httpOptionsPost;
   email;
   constructor(
     private authService:AuthService,
     private http:HttpClient
   ) { 
     this.init();
-    this.email = JSON.parse(localStorage.getItem('dataUser')).email;
+    this.email = JSON.parse(localStorage.getItem('dataSession')).username;
   }
   
   getProfile(){
@@ -31,6 +32,13 @@ export class DataUserService {
       'Content-Type': 'application/json'
       })
     };
+    this.httpOptionsPost = {
+      headers: new HttpHeaders({
+        'Authorization':`Bearer ${this.authService.userToken}`,
+        'Content-Type': 'application/json',
+        'method': 'POST',
+        })
+      };
   }
 
   getSocioEconomics(){
@@ -63,6 +71,11 @@ export class DataUserService {
 
   getWayPays(){
     return this.http.get(`${PARAMETERS}society_way_to_pays/by_request/active/?skip=0&limit=1000`);
+  }
+
+
+  createProfile(data){
+    return this.http.post(`${DATAUSER}by_request/?email=${this.email}`,data,this.httpOptionsPost);
   }
 
 }

@@ -51,11 +51,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return
     }
+    localStorage.setItem('dataSession',JSON.stringify(this.loginForm.value))
     this.authService.singIn(this.loginForm.value).subscribe(()=>{
-      this.router.navigateByUrl('/perfil');
+      window.location.replace('/perfil');
     },
     (err:any)=>{
-      console.log(err);
       if (err.status === 400) {
         Utils.swalError('¡Lo siento!','Usuario o contraseña incorrecto.');
       }
