@@ -4,18 +4,6 @@
     </mat-sidenav>
     
     <mat-sidenav-content>
-        <mat-toolbar>
-            <div class="col-2"></div>
-            <div class="col-8 text-center">
-                <input class="search" matInput placeholder="Buscar...">
-                <mat-icon matSuffix style="margin-left: -2em;"><i class="fi-rr-search"></i></mat-icon>
-            </div>
-            <div class="col-2">
-                <button mat-fab class="col-4" style="margin-right: 2rem;" [routerLink]="['/cartera/configuracion']"><i class="fi-rr-settings"></i></button>
-                <button mat-fab class="col-4"><i class="fi-rr-bell"></i></button>
-            </div>
-        </mat-toolbar>
-        <mat-divider></mat-divider>
         <div class="content">
             <router-outlet></router-outlet>
         </div>

@@ -15,13 +15,17 @@ import { RegistrarseComponent } from '../registrarse/registrarse.component';
 export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   oculto:boolean = true
+  date:Date;
+
+  anio;
   constructor(
     private fb:FormBuilder,
     private register:MatDialog,
     private remember:MatDialog,
     private authService:AuthService,
     private router:Router
-  ) { }
+  ) {
+   }
 
   ngOnInit(): void {
     this.createForm();

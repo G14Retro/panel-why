@@ -63,6 +63,7 @@ export class RegistrarseComponent implements OnInit {
   singUp(){
     this.authService.signUp(this.registerForm.value).subscribe(()=>{
       Utils.swalSuccess('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.');
+      this.authService.sendEmailActive(this.registerForm.get('username'));
       this.registroRef.close();
     },(err:any)=>{
       if (err.status === 461) {

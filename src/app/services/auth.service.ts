@@ -100,4 +100,13 @@ export class AuthService {
   validToken():boolean{
     return !this.jwhelper.isTokenExpired(this.userToken);
   }
+
+  sendEmailActive(email){
+    console.log("enviando mail");
+   return this.http.post(`${AUTORIZATION}activate-user-send-mail/${email}`,{},{headers:{'method': 'POST'}});
+  }
+
+  activeUser(token){
+    return this.http.post(`${AUTORIZATION}activate-user-token/${token}`,{},{headers:{'method': 'POST'}})
+  }
 }

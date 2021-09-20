@@ -5,6 +5,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { RecordarPassComponent } from './recordar-pass/recordar-pass.component';
 import { RecoveryComponent } from './recovery/recovery.component';
+import { ActiveUserComponent } from './active-user/active-user.component';
 
 
 
@@ -13,7 +14,8 @@ import { RecoveryComponent } from './recovery/recovery.component';
     LoginComponent,
     RegistrarseComponent,
     RecordarPassComponent,
-    RecoveryComponent
+    RecoveryComponent,
+    ActiveUserComponent
   ],
   imports: [
     CommonModule,
