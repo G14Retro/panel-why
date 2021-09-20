@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class MenuNavComponent implements OnInit {
 
   actual = 0;
   constructor(
-    private dashboard:DashboardService
+    private dashboard:DashboardService,
+    private authService:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +22,10 @@ export class MenuNavComponent implements OnInit {
     this.dashboard.getPoints().subscribe((resp:any)=>{
       this.actual = resp.points_actual;
     });
+  }
+
+  logOut(){
+    this.authService.logOut();
   }
 
 }

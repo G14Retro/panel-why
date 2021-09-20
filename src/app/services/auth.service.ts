@@ -109,4 +109,10 @@ export class AuthService {
   activeUser(token){
     return this.http.post(`${AUTORIZATION}activate-user-token/${token}`,{},{headers:{'method': 'POST'}})
   }
+
+  logOut(){
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.replace('/login');
+  }
 }
