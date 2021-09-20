@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
 import { DataUserService } from '../services/data-user.service';
 import Utils from '../Utils/tool.util';
@@ -23,8 +24,11 @@ export class ProfileComponent implements OnInit {
   pagos = [];
   constructor(
     private fb:FormBuilder,
-    private dataService:DataUserService
-  ) { }
+    private dataService:DataUserService,
+    private authService:AuthService
+  ) { 
+    this.authService.tokenTest();
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -38,14 +42,14 @@ export class ProfileComponent implements OnInit {
       address: ['',Validators.required],
       neighborhood: ['',Validators.required],
       date_birth: ['',Validators.required],
-      socio_economic_id: ['',Validators.required],
-      gender_id: ['',Validators.required],
-      purchase_decision_id: ['',Validators.required],
-      marital_status_id: ['',Validators.required],
-      academic_level_id: ['',Validators.required],
-      employment_status_id: ['',Validators.required],
-      income_level_id: ['',Validators.required],
-      way_to_pay_id: ['',Validators.required],
+      society_socio_economic_id: ['',Validators.required],
+      society_gender_id: ['',Validators.required],
+      society_purchase_decision_id: ['',Validators.required],
+      society_marital_status_id: ['',Validators.required],
+      society_academic_level_id: ['',Validators.required],
+      society_employment_status_id: ['',Validators.required],
+      society_income_level_id: ['',Validators.required],
+      society_way_to_pay_id: ['',Validators.required],
     });
   }
 
@@ -53,9 +57,10 @@ export class ProfileComponent implements OnInit {
 
     this.dataService.getProfile().subscribe((resp:any)=>{
       console.log(resp);
+      window.location.replace('/panel-why/dashboard');
     },(err:any)=>{
       if (err.status === 461) {
-        Utils.swalWarning('¡Atención!','Debe completar su información para continuar.')
+        Utils.swalWarning('¡Atención!','Debe completar su información para continuar.');
       }
     });
   }
@@ -84,6 +89,26 @@ export class ProfileComponent implements OnInit {
     });
     this.dataService.getWayPays().subscribe((resp:any)=>{
       this.pagos = resp;
+    });
+  }
+
+  cancel(){
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.replace('/login')
+  }
+
+  continue(){
+    if (this.profileForm.invalid) {
+      return
+    }
+    this.profileForm.addControl('user_type',new FormControl('A'));
+    this.profileForm.addControl('geography_language_id',new FormControl(62));
+    this.profileForm.get('date_birth').setValue(moment(this.profileForm.get('date_birth').value).format('YYYY-MM-DD'))
+    console.log(this.profileForm.value);
+    this.dataService.createProfile(this.profileForm.value).subscribe((resp:any)=>{
+      console.log(resp);
+      window.location.replace('/panel-why/dashboard')
     });
   }
 
