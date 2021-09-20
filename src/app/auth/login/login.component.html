@@ -23,9 +23,9 @@
                         </a>
                         <mat-error *ngIf="loginForm.get('password').hasError('required')">Por favor este campo es requerido</mat-error>
                     </mat-form-field>
-                    <mat-checkbox>Recuerdame</mat-checkbox>
+                    <mat-checkbox formControlName="remember">Recuerdame</mat-checkbox>
                     <button mat-raised-button color="primary" class="col-12 mt-2" (click)="login()"
-                    >Iniciat sesión</button>
+                    >Iniciar sesión</button>
                     <div class="col-12 row mt-3">
                         <span class="col-6 recordar text-white" (click)="openRemember()">¿Olvidaste tu contraseña?</span>
                         <div class="col-6 text-white" style="text-align: right;">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <mat-card-footer class="text-white">App design and development by
-                        CAMTECH™ © 2016-2021
+                        CAMTECH™ © 2016-{{anio}}
                         Todos los derechos reservados.</mat-card-footer>
                 </form>
             </mat-card>
