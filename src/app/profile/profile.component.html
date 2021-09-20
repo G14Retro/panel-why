@@ -1,105 +1,117 @@
-<div class="container text-center mt-5">
-    <h1>Perfil</h1>
-    <form [formGroup]="profileForm">
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Tipo de documento</mat-label>
-            <mat-select>
-                <mat-option>.......</mat-option>
-                <mat-option value="cc">Cédula de ciudadanía</mat-option>
-                <mat-option value="ce">Cédula de extranjería</mat-option>
-                <mat-option value="pp">Pasaporte</mat-option>
-                <mat-option value="ti">Tarjeta de identidad</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Número de documento</mat-label>
-            <input type="number" matInput  formControlName="nit">
-            <mat-error *ngIf="profileForm.get('nit').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Dirección</mat-label>
-            <input type="text" matInput formControlName="address">
-            <mat-error *ngIf="profileForm.get('address').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Barrio</mat-label>
-            <input type="text" matInput formControlName="neighborhood">
-            <mat-error *ngIf="profileForm.get('neighborhood').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput [matDatepicker]="nacimiento" formControlName="date_birth">
-            <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
-            <mat-datepicker #nacimiento></mat-datepicker>
-            <mat-error *ngIf="profileForm.get('date_birth').hasError('required')">Por favor este campo es requerido</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Estrato</mat-label>
-            <mat-select formControlName="society_socio_economic_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let estrato of estratos" [value]="estrato.id">{{estrato.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_socio_economic_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Género</mat-label>
-            <mat-select formControlName="society_gender_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let genero of generos" [value]="genero.id">{{genero.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_gender_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Decisor de compra</mat-label>
-            <mat-select formControlName="society_purchase_decision_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let decisor of decisores" [value]="decisor.id">{{decisor.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_purchase_decision_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>      
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Estado civil</mat-label>
-            <mat-select formControlName="society_marital_status_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let estado of estados" [value]="estado.id">{{estado.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_marital_status_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Nivel Academico</mat-label>
-            <mat-select formControlName="society_academic_level_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let nivel of lvl_academicos" [value]="nivel.id">{{nivel.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_academic_level_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>    
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Estado Laboral</mat-label>
-            <mat-select formControlName="society_employment_status_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let estado of est_laborales" [value]="estado.id">{{estado.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_employment_status_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Nivel de ingresos</mat-label>
-            <mat-select formControlName="society_income_level_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let nivel of lvl_ingresos" [value]="nivel.id">{{nivel.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_income_level_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-6">
-            <mat-label>Forma de pago</mat-label>
-            <mat-select formControlName="society_way_to_pay_id">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let pago of pagos" [value]="pago.id">{{pago.description}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('society_way_to_pay_id').hasError('required')">Por favor este campo es requerido</mat-error>
-        </mat-form-field> 
-        <div class="col-12">
-            <button mat-stroked-button color="primary" class="col-6" (click)="cancel()">Cancelar</button>
-            <button mat-raised-button color="primary" class="col-6" (click)="continue()">Continuar</button>
+<div class="container-fluid text-center mt-5">
+    <div class="row">
+        <div class="col-lg-3">
+            
         </div>
-    </form>
+        <div class="col-lg-6">
+            <div class="cuadro pt-5 pb-5 ps-1 pe-1 rounded">
+                <h1>¡Ya casi! Completa tu información</h1>
+                <form [formGroup]="profileForm">
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1">
+                        <mat-label>Tipo de documento</mat-label>
+                        <mat-select>
+                            <mat-option>.......</mat-option>
+                            <mat-option value="cc">Cédula de ciudadanía</mat-option>
+                            <mat-option value="ce">Cédula de extranjería</mat-option>
+                            <mat-option value="pp">Pasaporte</mat-option>
+                            <mat-option value="ti">Tarjeta de identidad</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Número de documento</mat-label>
+                        <input type="number" matInput  formControlName="nit">
+                        <mat-error *ngIf="profileForm.get('nit').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Dirección</mat-label>
+                        <input type="text" matInput formControlName="address">
+                        <mat-error *ngIf="profileForm.get('address').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Barrio</mat-label>
+                        <input type="text" matInput formControlName="neighborhood">
+                        <mat-error *ngIf="profileForm.get('neighborhood').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="nacimiento" formControlName="date_birth">
+                        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
+                        <mat-datepicker #nacimiento></mat-datepicker>
+                        <mat-error *ngIf="profileForm.get('date_birth').hasError('required')">Por favor este campo es requerido</mat-error>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Estrato</mat-label>
+                        <mat-select formControlName="society_socio_economic_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let estrato of estratos" [value]="estrato.id">{{estrato.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_socio_economic_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Género</mat-label>
+                        <mat-select formControlName="society_gender_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let genero of generos" [value]="genero.id">{{genero.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_gender_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Decisor de compra</mat-label>
+                        <mat-select formControlName="society_purchase_decision_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let decisor of decisores" [value]="decisor.id">{{decisor.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_purchase_decision_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>      
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Estado civil</mat-label>
+                        <mat-select formControlName="society_marital_status_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let estado of estados" [value]="estado.id">{{estado.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_marital_status_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Nivel Academico</mat-label>
+                        <mat-select formControlName="society_academic_level_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let nivel of lvl_academicos" [value]="nivel.id">{{nivel.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_academic_level_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>    
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Estado Laboral</mat-label>
+                        <mat-select formControlName="society_employment_status_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let estado of est_laborales" [value]="estado.id">{{estado.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_employment_status_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+                        <mat-label>Nivel de ingresos</mat-label>
+                        <mat-select formControlName="society_income_level_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let nivel of lvl_ingresos" [value]="nivel.id">{{nivel.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_income_level_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-10 ms-1">
+                        <mat-label>Forma de pago</mat-label>
+                        <mat-select formControlName="society_way_to_pay_id">
+                            <mat-option>--------------</mat-option>
+                            <mat-option *ngFor="let pago of pagos" [value]="pago.id">{{pago.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="profileForm.get('society_way_to_pay_id').hasError('required')">Por favor este campo es requerido</mat-error>
+                    </mat-form-field> 
+                    <div class="col-12">
+                        <button mat-stroked-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5" (click)="cancel()">Cancelar</button>
+                        <button mat-raised-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1" (click)="continue()">Continuar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+    </div>
 </div>

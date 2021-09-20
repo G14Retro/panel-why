@@ -1,4 +1,18 @@
-<div class="container">
-    <p>{{mensaje}}</p>
-    <button mat-raised-button color="primary" *ngIf="showBtn" (click)="login()">Ir a login</button>
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 mt-5 mb-5">
+            <div class="card text-center text-white mt-5 p-4 bg-trasparente">
+                <div class="card-body mt-5 mb-5">
+                    <h1>{{mensaje}}</h1>
+                  <button mat-raised-button color="primary" (click)="login()">Ir a login</button>
+                </div>
+              </div>
+            
+            
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+   
+    
 </div>
