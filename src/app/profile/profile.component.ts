@@ -91,6 +91,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileForm.get('society_employment_status_id').setValue(resp.body.society_employment_status_id);
       this.profileForm.get('society_income_level_id').setValue(resp.body.society_income_level_id);
       this.profileForm.get('society_way_to_pay_id').setValue(resp.body.society_way_to_pay_id);
+
+      this.profileForm.get('society_nit_type_id').disable();
+      this.profileForm.get('nit').disable();
+      this.profileForm.get('society_gender_id').disable();
     },(err:any)=>{
       if (err.status === 461) {
         Utils.swalWarning('¡Atención!','Debe completar su información para continuar.');
@@ -154,6 +158,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profileForm.addControl('user_type',new FormControl('A'));
     this.profileForm.addControl('geography_language_id',new FormControl(62));
     this.profileForm.get('date_birth').setValue(moment(this.profileForm.get('date_birth').value).format('YYYY-MM-DD'));
+    this.profileForm.enable();
     this.dataService.updateProfile(this.profileForm.value).subscribe((resp:any)=>{
       Utils.swalSuccess('¡Excelente!','Se ha actualizado la información satisfactoriamente.');
       this.getProfile();
