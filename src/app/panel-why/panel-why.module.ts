@@ -11,6 +11,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PuntosComponent } from './modules/puntos/puntos.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 import { TablaPagosComponent } from './modules/pagos/components/tabla-pagos/tabla-pagos.component';
+import { TablaPuntosComponent } from './modules/puntos/components/tabla-puntos/tabla-puntos.component';
 
 
 
@@ -23,7 +24,8 @@ import { TablaPagosComponent } from './modules/pagos/components/tabla-pagos/tabl
     PagosComponent,
     PuntosComponent,
     UsuariosComponent,
-    TablaPagosComponent 
+    TablaPagosComponent,
+    TablaPuntosComponent 
   ],
   imports: [
     CommonModule,
