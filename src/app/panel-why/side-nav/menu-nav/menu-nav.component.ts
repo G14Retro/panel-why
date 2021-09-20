@@ -10,6 +10,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class MenuNavComponent implements OnInit {
 
   actual = 0;
+  profile = '';
   constructor(
     private dashboard:DashboardService,
     private authService:AuthService
@@ -17,11 +18,18 @@ export class MenuNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPoints();
+    this.getProfile();
   }
 
   getPoints(){
     this.dashboard.getPoints().subscribe((resp:any)=>{
       this.actual = resp.points_actual;
+    });
+  }
+
+  getProfile(){
+    this.dashboard.getProfile().subscribe((resp:any)=>{
+      this.profile = resp.user_type;
     });
   }
 

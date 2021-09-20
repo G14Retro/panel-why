@@ -5,6 +5,8 @@ import { AuthService } from './auth.service';
 
 
 const TRANSACTION = environment.Data_Transaction;
+const DATAUSER = environment.Data_User_Profiles;
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,10 @@ export class DashboardService {
   }
   getPoints(){
     return this.http.get(`${TRANSACTION}transaction_accounts/by_request/${this.email}`,this.httpOptions);
+  }
+
+  getProfile(){
+    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
   }
 
 }
