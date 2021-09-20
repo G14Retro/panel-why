@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   profileForm:FormGroup;
 
+  tipos_docs = [];
   estratos = [];
   generos = [];
   decisores = [];
@@ -100,6 +101,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getSelects(){
+    
+    this.dataService.getNitTypes().subscribe((resp:any)=>{
+      this.tipos_docs = resp;
+    });
+
     this.dataService.getSocioEconomics().subscribe((resp:any)=>{
       this.estratos = resp;
     });
@@ -149,6 +155,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profileForm.addControl('geography_language_id',new FormControl(62));
     this.profileForm.get('date_birth').setValue(moment(this.profileForm.get('date_birth').value).format('YYYY-MM-DD'));
     this.dataService.updateProfile(this.profileForm.value).subscribe((resp:any)=>{
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado la información satisfactoriamente.');
       this.getProfile();
     })
   }
