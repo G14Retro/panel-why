@@ -1,6 +1,7 @@
 <div class="sidenav mt-5">
     <img src="" alt="" height="128px" width="128px">
     <h3 class="mt-5">¡Bienvenido de vuelta!</h3>
+    <h2>{{profile}}</h2>
     <h2>Puntos: {{actual | number}}</h2>
     <mat-nav-list class="menu">
         
@@ -8,9 +9,9 @@
             <i class="fi-rr-bank" style="margin-right: 1rem;"></i> Dashboard
         </a>
 
-        <a mat-list-item [routerLink]="['/panel-why/perfil']" routerLinkActive="activo">
+        <!-- <a mat-list-item [routerLink]="['/panel-why/perfil']" routerLinkActive="activo">
             <i class="fi-rr-calculator" style="margin-right: 1rem;"></i> Perfil
-        </a>
+        </a> -->
 
         <a mat-list-item [routerLink]="['/panel-why/pagos']" routerLinkActive="activo" >
             <i class="fi-rr-stats" style="margin-right: 1rem;"></i> Pagos

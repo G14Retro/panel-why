@@ -102,7 +102,6 @@ export class AuthService {
   }
 
   sendEmailActive(email){
-    console.log("enviando mail");
    return this.http.post(`${AUTORIZATION}activate-user-send-mail/${email}`,{},{headers:{'method': 'POST'}});
   }
 

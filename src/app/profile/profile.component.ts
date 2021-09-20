@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
     private dataService:DataUserService,
     private authService:AuthService
   ) { 
-    this.authService.tokenTest();
   }
 
   ngOnInit(): void {
@@ -38,6 +37,7 @@ export class ProfileComponent implements OnInit {
 
   createForm(){
     this.profileForm = this.fb.group({
+      society_nit_type_id:['',Validators.required],
       nit: ['',Validators.required],
       address: ['',Validators.required],
       neighborhood: ['',Validators.required],
