@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
@@ -12,9 +12,10 @@ const PARAMETERS = environment.Prameter_Data;
   providedIn: 'root'
 })
 export class DataUserService {
-  httpOptions;
-  httpOptionsPost;
-  email;
+  private httpOptions;
+  private httpOptionsPost;
+  private email;
+  private _refresh$ = new Subject<void>();
   constructor(
     private authService:AuthService,
     private http:HttpClient
@@ -23,9 +24,34 @@ export class DataUserService {
     this.email = JSON.parse(localStorage.getItem('dataSession')).username;
   }
   
-  getProfile(){
-    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
+  get refresh$(){
+    return this._refresh$;
   }
+
+  getProfile(){
+    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions)
+    .pipe(
+      map((resp:any)=>{
+        this.saveStorage(resp)
+        return resp
+      })
+    );
+  }
+
+  private saveStorage(data){
+    console.log("Ejecutando Save");
+    console.log(data);
+    if (data.status == 200) {
+      console.log("Codigo 200");
+      localStorage.setItem('dataProfile',JSON.stringify(data.body))
+    }
+    if (data.status == 461) {
+      console.log("Codigo 461");
+      localStorage.setItem('dataProfile',JSON.stringify(null))
+    }
+  }
+
+  private readData
 
   validateProfile():Observable<any>{
     return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
@@ -83,6 +109,15 @@ export class DataUserService {
 
   createProfile(data){
     return this.http.post(`${DATAUSER}by_request/?email=${this.email}`,data,this.httpOptionsPost);
+  }
+  
+  updateProfile(data){
+    return this.http.put(`${DATAUSER}by_request/${this.email}`,data,this.httpOptionsPost)
+    .pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    );
   }
 
 }
