@@ -8,20 +8,18 @@ const TRANSACTION = environment.Data_Transaction;
 @Injectable({
   providedIn: 'root'
 })
-export class PayService {
-
+export class PointService {
   private httpOptions;
   private httpOptionsPost;
   private email;
   constructor(
     private http:HttpClient,
     private authService:AuthService
-  ) {
+  ) { 
     this.init();
     this.email = JSON.parse(localStorage.getItem('dataSession')).username;
-   }
-
-   init(){
+  }
+  init(){
     this.httpOptions = {
       headers: new HttpHeaders({
       'Authorization':`Bearer ${this.authService.userToken}`,
@@ -37,7 +35,8 @@ export class PayService {
       };
   }
 
-  getPays(){
-    return this.http.get(`${TRANSACTION}transaction_payments/by_request/all/?email=${this.email}&skip=0&limit=1000`,this.httpOptions)
+  getPoints(){
+    return this.http.get(`${TRANSACTION}transaction_points/by_request/all/?email=${this.email}&skip=0&limit=1000`,this.httpOptions);
   }
+
 }
