@@ -93,7 +93,7 @@ export class AuthService {
       'method': 'POST',
       'Content-Type': 'application/json'
     })
-    this.http.post(`${AUTHENTICATION}login/test-token/`,{},{headers}).subscribe((resp:any)=>{
+    this.http.post(`${AUTHENTICATION}login/test-token`,{},{headers}).subscribe((resp:any)=>{
       localStorage.setItem('dataUser',JSON.stringify(resp))
     });
   }

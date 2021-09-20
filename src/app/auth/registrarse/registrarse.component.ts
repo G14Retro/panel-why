@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import Utils from 'src/app/Utils/tool.util';
 
@@ -18,6 +19,7 @@ export class RegistrarseComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private authService:AuthService,
+    private registroRef:MatDialogRef<RegistrarseComponent>
   ) { }
 
   ngOnInit(): void {
@@ -59,9 +61,9 @@ export class RegistrarseComponent implements OnInit {
   }
 
   singUp(){
-    console.log(this.registerForm.value);
     this.authService.signUp(this.registerForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.')
+      Utils.swalSuccess('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.');
+      this.registroRef.close();
     },(err:any)=>{
       if (err.status === 461) {
         Utils.swalError('¡Lo siento!','El usuario ya se encuentra registrado')

@@ -10,8 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: '**', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent,},
+  { path: 'login', component: LoginComponent,canActivate:[LoginGuard]},
   { path: 'perfil', component: ProfileComponent},
   { path: 'auth/authentication/password-recover/:token', component: RecoveryComponent},
   { path: 'panel-why',component: PanelWhyComponent,children:MENU_ROUTES,},
