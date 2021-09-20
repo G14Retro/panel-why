@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import Utils from 'src/app/Utils/tool.util';
 
 @Component({
   selector: 'app-registrarse',
@@ -58,13 +59,16 @@ export class RegistrarseComponent implements OnInit {
   }
 
   singUp(){
-    this.registerForm.get('pais').disable();
-    this.registerForm.get('departamento').disable();
-    this.registerForm.get('confirma').disable();
     console.log(this.registerForm.value);
-    this.authService.signUp(this.registerForm.value).subscribe((resp:any)=>{
-      console.log(resp);
-    });
+    this.authService.signUp(this.registerForm.value).subscribe(()=>{
+      Utils.swalSuccess('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.')
+    },(err:any)=>{
+      if (err.status === 461) {
+        Utils.swalError('¡Lo siento!','El usuario ya se encuentra registrado')
+      }
+
+    }
+    );
   }
 
 }

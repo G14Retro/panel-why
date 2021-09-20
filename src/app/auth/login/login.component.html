@@ -12,6 +12,8 @@
                     <mat-form-field class="col-12 mb-2" appearance="outline">
                         <mat-label class="text-white">Email</mat-label>
                         <input class="text-white" type="text" matInput formControlName="username">
+                        <mat-error *ngIf="loginForm.get('username').hasError('email')">Por favor ingresa un email valido</mat-error>
+                        <mat-error *ngIf="loginForm.get('username').hasError('required')">Por favor este campo es requerido</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12 mb-1" appearance="outline">
                         <mat-label class="text-white">Contraseña</mat-label>
@@ -19,6 +21,7 @@
                         <a mat-icon-button matSuffix (click)="oculto = !oculto" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oculto">
                             <mat-icon>{{oculto ?  'visibility_off' : 'visibility'}}</mat-icon>
                         </a>
+                        <mat-error *ngIf="loginForm.get('password').hasError('required')">Por favor este campo es requerido</mat-error>
                     </mat-form-field>
                     <mat-checkbox>Recuerdame</mat-checkbox>
                     <button mat-raised-button color="primary" class="col-12 mt-2" (click)="login()"

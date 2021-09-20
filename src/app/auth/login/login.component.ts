@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   createForm(){
     this.loginForm = this.fb.group({
-      username:['',Validators.required],
+      username:['',[Validators.required,Validators.email]],
       password:['',Validators.required],
       remember:[false,Validators.required],
     });
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.authService.singIn(this.loginForm.value).subscribe(()=>{
-      this.router.navigateByUrl('/panel-why/dashboard');
+      this.router.navigateByUrl('/perfil');
     },
     (err:any)=>{
       console.log(err);

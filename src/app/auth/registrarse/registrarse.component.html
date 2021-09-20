@@ -39,14 +39,14 @@
             <input type="number" matInput formControlName="mobile_number">
         </mat-form-field>
         <mat-form-field class="col-12 mb-1" appearance="outline">
-            <mat-label>Password</mat-label>
+            <mat-label>Contraseña</mat-label>
             <input [type]="password ? 'password' : 'text'" matInput formControlName="password">
             <a mat-icon-button matSuffix (click)="password = !password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="password">
                 <mat-icon>{{password ?  'visibility_off' : 'visibility'}}</mat-icon>
             </a>
         </mat-form-field>
         <mat-form-field class="col-12 mb-1" appearance="outline">
-            <mat-label>Password</mat-label>
+            <mat-label>Confirma la contraseña</mat-label>
             <input [type]="confirma ? 'password' : 'text'" matInput formControlName="confirma">
             <a mat-icon-button matSuffix (click)="confirma = !confirma" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="confirma">
                 <mat-icon>{{confirma ?  'visibility_off' : 'visibility'}}</mat-icon>
