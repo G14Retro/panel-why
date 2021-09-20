@@ -5,10 +5,10 @@
             <mat-label>Tipo de documento</mat-label>
             <mat-select formControlName="society_nit_type_id">
                 <mat-option>.......</mat-option>
-                <mat-option value="cc">Cédula de ciudadanía</mat-option>
-                <mat-option value="ce">Cédula de extranjería</mat-option>
-                <mat-option value="pp">Pasaporte</mat-option>
-                <mat-option value="ti">Tarjeta de identidad</mat-option>
+                <mat-option value="1">Cédula de ciudadanía</mat-option>
+                <mat-option value="2">Cédula de extranjería</mat-option>
+                <mat-option value="3">Pasaporte</mat-option>
+                <mat-option value="4">Tarjeta de identidad</mat-option>
             </mat-select>
             <mat-error *ngIf="profileForm.get('society_nit_type_id').hasError('required')">Por favor selecciona una opción</mat-error>
         </mat-form-field>
