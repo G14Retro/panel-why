@@ -1,9 +1,9 @@
-<mat-sidenav-container>
-    <mat-sidenav #sideNav mode="side" opened>
+<mat-sidenav-container class="col-12">
+    <mat-sidenav #sideNav mode="side" class="col-lg-2 bg-gradiente" opened>
        <app-menu-nav></app-menu-nav>
     </mat-sidenav>
     
-    <mat-sidenav-content>
+    <mat-sidenav-content class="col-lg-10">
         <div class="content">
             <router-outlet></router-outlet>
         </div>

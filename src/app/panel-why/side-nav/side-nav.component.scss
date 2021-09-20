@@ -12,3 +12,8 @@ mat-sidenav{
     margin-top: 3em;
     margin-left: 3em;
 }
+
+.bg-gradiente{
+    background: rgb(196,70,89);
+    background: linear-gradient(0deg, rgba(196,70,89,1) 0%, rgba(196,78,96,1) 100%);
+}

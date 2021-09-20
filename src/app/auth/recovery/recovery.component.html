@@ -1,4 +1,5 @@
-<mat-card>
+<div class="container-fluid bg">
+    <mat-card>
     <form [formGroup]="recoveryForm">
         <mat-form-field class="col-12 mb-1" appearance="outline">
             <mat-label>Nueva contraseña</mat-label>
@@ -29,3 +30,4 @@
         <button mat-raised-button color="primary" (click)="sendPassword()">Restaurar contraseña</button>
     </form>
 </mat-card>
+</div>
