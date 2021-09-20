@@ -3,6 +3,11 @@ mat-sidenav-container{
     height: 100%;
 }
 
+mat-sidenav{
+    padding-left: 2em;
+    width: 20em
+}
+
 .content{
     margin-top: 3em;
     margin-left: 3em;

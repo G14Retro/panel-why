@@ -4,14 +4,18 @@
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Nombres</mat-label>
             <input type="text" matInput formControlName="names">
+            <mat-error *ngIf="registerForm.get('names').hasError('required')">Por favor ingrese su nombre</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Apellidos</mat-label>
             <input type="text" matInput formControlName="surnames">
+            <mat-error *ngIf="registerForm.get('surnames').hasError('required')">Por favor ingrese su apellido</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Correo electrónico</mat-label>
             <input type="email" matInput formControlName="email">
+            <mat-error *ngIf="registerForm.get('email').hasError('required')">Por favor ingrese su correo</mat-error>
+            <mat-error *ngIf="registerForm.get('email').hasError('email')">Por favor ingrese un correo valido</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>País</mat-label>
@@ -19,6 +23,7 @@
                 <mat-option>.....</mat-option>
                 <mat-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.get('pais').hasError('required')">Por favor seleccione una opción</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Departamento</mat-label>
@@ -26,6 +31,7 @@
                 <mat-option>.....</mat-option>
                 <mat-option *ngFor="let state of states" [value]="state.id">{{state.name}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.get('departamento').hasError('required')">Por favor seleccione una opción</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Ciudad</mat-label>
@@ -33,10 +39,13 @@
                 <mat-option>.....</mat-option>
                 <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.get('geography_city_id').hasError('required')">Por favor seleccione una opción</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-2" appearance="outline">
             <mat-label>Teléfono</mat-label>
             <input type="number" matInput formControlName="mobile_number">
+            <mat-error *ngIf="registerForm.get('mobile_number').hasError('required')">Por favor ingrese su número celular</mat-error>
+            <mat-error *ngIf="registerForm.get('mobile_number').hasError('pattern')">Ingrese un número de celular valido</mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-1" appearance="outline">
             <mat-label>Contraseña</mat-label>
@@ -44,6 +53,11 @@
             <a mat-icon-button matSuffix (click)="password = !password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="password">
                 <mat-icon>{{password ?  'visibility_off' : 'visibility'}}</mat-icon>
             </a>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasNumber">Su contraseña debe tener un número</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasCapitalCase">Su contraseña debe tener una mayuscula</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasSmallCase">Su contraseña debe tener una minuscula</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasSpecialCharacters">Su contraseña debe tener un caracter especial</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.required">¡Advertencia! Este campo es requerido</span></mat-error>
         </mat-form-field>
         <mat-form-field class="col-12 mb-1" appearance="outline">
             <mat-label>Confirma la contraseña</mat-label>
@@ -51,16 +65,21 @@
             <a mat-icon-button matSuffix (click)="confirma = !confirma" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="confirma">
                 <mat-icon>{{confirma ?  'visibility_off' : 'visibility'}}</mat-icon>
             </a>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="error.confirma.errors.hasNumber">Su contraseña debe tener un número</span></mat-error>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="error.confirma.errors.hasCapitalCase">Su contraseña debe tener una mayuscula</span></mat-error>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="error.confirma.errors.hasSmallCase">Su contraseña debe tener una minuscula</span></mat-error>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="error.confirma.errors.hasSpecialCharacters">Su contraseña debe tener un caracter especial</span></mat-error>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="error.confirma.errors.required">¡Advertencia! Este campo es requerido</span></mat-error>
+            <mat-error *ngIf="error.confirma.errors"><span *ngIf="!error.confirma.errors.isMatching">Su contraseña no es igual a la ingresada previamente</span>
+            </mat-error>
         </mat-form-field>
-        <mat-checkbox class="col-12">
+        <mat-checkbox class="col-12" formControlName="checkbox">
             <p class="text-start text-wrap"> Deseo recibir información acerca de las encuestas en
                 las que soy candidato para participar mediante correo 
                 electrónico
             </p>
+            
         </mat-checkbox>
-        <button mat-raised-button color="primary" class="col-12 mb-2" (click)="singUp()">Registrarse</button>
-        <div class="col-12" style="text-align: right;">
-            <span>¿Ya tienes una cuenta? Inicia sesión</span>
-        </div>
+        <button [disabled]="!registerForm.get('checkbox').value" mat-raised-button color="primary" class="col-12 mb-2" (click)="singUp()">Registrarse</button>
     </form>
 </div>

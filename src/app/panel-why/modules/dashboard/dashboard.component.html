@@ -1,13 +1,20 @@
 <div class="row">
     <mat-card class="example-card text-white bg-secondary col-lg-3">
         <mat-card-header>
+            <mat-card-title>Puntos actuales</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>{{actuales | number}}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="example-card">
+        <mat-card-header>
             <mat-card-title>Puntos totales</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <mat-card-subtitle class="text-white font-weight-bold">{{total | number}}</mat-card-subtitle>
         </mat-card-content>
       </mat-card>
-    
       <mat-card class="example-card text-white bg-secondary col-lg-3 ms-3">
         <mat-card-header>
             <mat-card-title>Puntos a redimir</mat-card-title>
@@ -23,7 +30,9 @@
             <mat-card-title>Valor</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-card-subtitle class="text-white font-weight-bold">{{valor | number}}</mat-card-subtitle>
+
+            <mat-card-subtitle class="text-white font-weight-bold">{{valor | currency:'':'symbol':'1.0'}}</mat-card-subtitle>
+
         </mat-card-content>
       </mat-card>
 </div>
