@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from '../services/auth.service';
 import { DataUserService } from '../services/data-user.service';
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private dataService:DataUserService,
-    private authService:AuthService
+    private authService:AuthService,
+    private aRoute:ActivatedRoute
   ) { 
   }
 
