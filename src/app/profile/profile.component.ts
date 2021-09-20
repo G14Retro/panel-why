@@ -62,7 +62,6 @@ export class ProfileComponent implements OnInit {
 
   getSelects(){
     this.dataService.getSocioEconomics().subscribe((resp:any)=>{
-      console.log(resp);
       this.estratos = resp;
     });
     this.dataService.getSocioGenders().subscribe((resp:any)=>{
