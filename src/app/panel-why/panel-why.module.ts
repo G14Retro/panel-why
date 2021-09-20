@@ -10,6 +10,7 @@ import { PagosComponent } from './modules/pagos/pagos.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PuntosComponent } from './modules/puntos/puntos.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
+import { TablaPagosComponent } from './modules/pagos/components/tabla-pagos/tabla-pagos.component';
 
 
 
@@ -22,7 +23,7 @@ import { UsuariosComponent } from './modules/usuarios/usuarios.component';
     PagosComponent,
     PuntosComponent,
     UsuariosComponent,
-    
+    TablaPagosComponent 
   ],
   imports: [
     CommonModule,

@@ -20,7 +20,7 @@
             <i class="fi-rr-dollar" style="margin-right: 1rem;"></i> Puntos
         </a>
         
-        <a mat-list-item [routerLink]="['/cartera/pago-linea']" routerLinkActive="activo" id="sing-out">
+        <a mat-list-item (click)="logOut()">
             <i class="fi-rr-sign-out" style="margin-right: 1rem;"></i> Cerrar sesión
         </a>
 
