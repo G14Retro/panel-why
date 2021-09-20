@@ -1,5 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
@@ -25,12 +27,17 @@ export class DataUserService {
     return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
   }
 
+  validateProfile():Observable<any>{
+    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
+  }
+
   init(){
     this.httpOptions = {
       headers: new HttpHeaders({
       'Authorization':`Bearer ${this.authService.userToken}`,
-      'Content-Type': 'application/json'
-      })
+      'Content-Type': 'application/json',
+      }),
+      observe: 'response'
     };
     this.httpOptionsPost = {
       headers: new HttpHeaders({
