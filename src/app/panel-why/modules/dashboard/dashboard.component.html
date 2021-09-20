@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<div class="row col-12">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Puntos totales</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>{{total | number}}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    
+      <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Puntos a redimir</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>{{redimir | number}}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+      
+      
+      <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Valor</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>{{valor | number}}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+</div>
