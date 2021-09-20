@@ -1,19 +1,20 @@
-<div class="container-fluid text-center mt-5">
+<div class="container-fluid text-center mt-5" [hidden]="!showForm">
     <div class="row">
         <div class="col-lg-3">           
         </div>
         <div class="col-lg-6">
             <div class="cuadro pt-5 pb-5 ps-1 pe-1 rounded">
-                <h1>¡Ya casi! Completa tu información</h1>
+                <h1 *ngIf="showBtns">¡Ya casi! Completa tu información</h1>
+                <h1 *ngIf="!showBtns">Actualización de perfil</h1>
                 <form [formGroup]="profileForm">
                     <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1">
                         <mat-label>Tipo de documento</mat-label>
                         <mat-select formControlName="society_nit_type_id">
                             <mat-option>.......</mat-option>
-                            <mat-option value="1">Cédula de ciudadanía</mat-option>
-                            <mat-option value="2">Cédula de extranjería</mat-option>
-                            <mat-option value="3">Pasaporte</mat-option>
-                            <mat-option value="4">Tarjeta de identidad</mat-option>
+                            <mat-option [value]="1">Cédula de ciudadanía</mat-option>
+                            <mat-option [value]="2">Cédula de extranjería</mat-option>
+                            <mat-option [value]="3">Pasaporte</mat-option>
+                            <mat-option [value]="4">Tarjeta de identidad</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
@@ -102,9 +103,12 @@
                         </mat-select>
                         <mat-error *ngIf="profileForm.get('society_way_to_pay_id').hasError('required')">Por favor este campo es requerido</mat-error>
                     </mat-form-field> 
-                    <div class="col-12">
+                    <div class="col-12" *ngIf="showBtns">
                         <button mat-stroked-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5" (click)="cancel()">Cancelar</button>
                         <button mat-raised-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1" (click)="continue()">Continuar</button>
+                    </div>
+                    <div class="col-12" *ngIf="!showBtns">
+                        <button mat-raised-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1" (click)="updateProfile()">Actualizar</button>
                     </div>
                 </form>
             </div>
