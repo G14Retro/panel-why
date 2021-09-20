@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const COUNTRIES = environment.Parameters_Geography_Countries;
 const STATES = environment.Parameters_Geography_States
@@ -13,7 +14,8 @@ const AUTHENTICATION = environment.Auth_Authentication
   providedIn: 'root'
 })
 export class AuthService {
-
+  userToken = '';
+  userData:any;
   httoptions = {
     headers: new HttpHeaders({
     'method': 'POST',
@@ -21,8 +23,12 @@ export class AuthService {
     }),
   }
   constructor(
-    private http:HttpClient
-  ) { }
+    private http:HttpClient,
+    private jwhelper:JwtHelperService
+  ) {
+    this.readStorage();
+    this.tokenTest();
+   }
 
   getCountries(){
     return this.http.get(`${COUNTRIES}by_request/active/?skip=0&limit=100&parent_id=22`);
@@ -65,9 +71,34 @@ export class AuthService {
 
   private saveStorage(remember,resp){
     if (remember == true) {
-      localStorage.setItem('user',resp);
+      localStorage.setItem('user',JSON.stringify(resp));
     }else{
-      sessionStorage.setItem('user',resp);
+      sessionStorage.setItem('user',JSON.stringify(resp));
     }
+  }
+
+  private readStorage(){
+    if (localStorage.getItem('user')) {
+      this.userToken = JSON.parse(localStorage.getItem('user')).access_token
+    }else if (sessionStorage.getItem('user')) {
+      this.userToken = JSON.parse(sessionStorage.getItem('user')).access_token
+    }else{
+      this.userToken = '';
+    }
+  }
+
+  tokenTest(){
+    const headers = new HttpHeaders({
+      'Authorization':`Bearer ${this.userToken}`,
+      'method': 'POST',
+      'Content-Type': 'application/json'
+    })
+    this.http.post(`${AUTHENTICATION}login/test-token/`,{},{headers}).subscribe((resp:any)=>{
+      localStorage.setItem('dataUser',JSON.stringify(resp))
+    });
+  }
+
+  validToken():boolean{
+    return !this.jwhelper.isTokenExpired(this.userToken);
   }
 }

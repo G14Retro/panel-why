@@ -1,0 +1,29 @@
+<div class="sidenav mt-5">
+    <img src="" alt="" height="128px" width="128px">
+    <h3 class="mt-5">¡Bienvenido de vuelta!</h3>
+    <h1>User</h1>
+    <mat-nav-list class="menu">
+        
+        <a mat-list-item [routerLink]="['/panel-why/pagos']" routerLinkActive="activo" >
+            <i class="fi-rr-stats" style="margin-right: 1rem;"></i> Pagos
+        </a>
+
+        <a mat-list-item [routerLink]="['/cartera/obligaciones']" routerLinkActive="activo">
+            <i class="fi-rr-bank" style="margin-right: 1rem;"></i> Mis obligaciones
+        </a>
+
+        <a mat-list-item [routerLink]="['/cartera/simulador']" routerLinkActive="activo">
+            <i class="fi-rr-calculator" style="margin-right: 1rem;"></i> Simulador
+        </a>
+
+        <a mat-list-item [routerLink]="['/cartera/pago-linea']" routerLinkActive="activo">
+            <i class="fi-rr-dollar" style="margin-right: 1rem;"></i> Pago en línea
+        </a>
+        
+        <a mat-list-item [routerLink]="['/cartera/pago-linea']" routerLinkActive="activo" id="sing-out" style="margin-top: 7.2em;"
+        >
+            <i class="fi-rr-sign-out" style="margin-right: 1rem;"></i> Cerrar sesión
+        </a>
+    </mat-nav-list>
+    
+</div>

@@ -32,4 +32,14 @@ export default class Utils{
         })
     }
 
+    static swalWarning(title:string,text:string){
+        Swal.fire({
+            icon: 'warning',
+            title: title,
+            text: text,
+            showConfirmButton: false,
+            timer: 2500
+        })
+    }
+
 }

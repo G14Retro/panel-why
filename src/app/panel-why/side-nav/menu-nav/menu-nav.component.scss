@@ -1,0 +1,10 @@
+::ng-deep .mat-list-base .mat-list-item{
+    color: #717171;
+}
+.activo{
+    color: #134A74 !important;
+    font-weight: 500;
+}
+.activo:focus{
+    background-color: #FFF;
+}

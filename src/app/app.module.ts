@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { MaterialModule } from './shared/material/material.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { PanelWhyModule } from './panel-why/panel-why.module';
 
 
 @NgModule({
@@ -23,7 +26,16 @@ import { RouterModule } from '@angular/router';
     AuthModule,
     HttpClientModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    PanelWhyModule,
+    SharedModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: null,
+        allowedDomains: [],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

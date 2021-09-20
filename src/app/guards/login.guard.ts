@@ -6,20 +6,17 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(
-    private authService:AuthService
-  ) {
-    
-  }
+    private authService:AuthService,
+  ){}
 
   canActivate(): boolean {
-    if (!this.authService.validToken()) {
-      window.location.replace('/login')
+    if (this.authService.validToken()) {
+      window.location.replace('/panel-why/dashboard');
       return false
     }else{
       return true
     }
   }
-  
 }
