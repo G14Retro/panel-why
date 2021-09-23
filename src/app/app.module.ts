@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +53,7 @@ registerLocaleData(localeEsCO,'es-CO')
       provide: LOCALE_ID,
       useValue: 'es-CO'
     },
+    {provide: DEFAULT_CURRENCY_CODE, useValue: 'COP' }
   ],
   bootstrap: [AppComponent]
 })

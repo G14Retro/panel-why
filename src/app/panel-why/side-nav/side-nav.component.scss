@@ -5,7 +5,18 @@ mat-sidenav-container{
 
 mat-sidenav{
     padding-left: 2em;
-    width: 20em
+    width: 20em;
+    ::ng-deep .sidenav{
+        padding-right: 2em;
+    }
+}
+
+mat-sidenav-content{
+    img{
+        position: absolute;
+        bottom: 2em;
+        right: 2em;
+    }
 }
 
 .content{

@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
 
   getPoints(){
     this.dashboardService.getPoints().subscribe((resp:any)=>{
-      console.log(resp);
       this.total = resp.points_total;
       this.actuales = resp.points_actual;
       this.redimir = resp.points_redention;

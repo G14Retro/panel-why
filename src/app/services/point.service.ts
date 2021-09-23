@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
-const TRANSACTION = environment.Data_Transaction;
+const AUTHORIZATION = environment.Auth_Authorization;
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +17,17 @@ export class PointService {
     private authService:AuthService
   ) { 
     this.init();
-    this.email = JSON.parse(localStorage.getItem('dataSession')).username;
   }
   init(){
     this.httpOptions = {
       headers: new HttpHeaders({
-      'Authorization':`Bearer ${this.authService.userToken}`,
+      'Authorization':`Bearer ${this.authService.user.access_token}`,
       'Content-Type': 'application/json'
       })
     };
     this.httpOptionsPost = {
       headers: new HttpHeaders({
-        'Authorization':`Bearer ${this.authService.userToken}`,
+        'Authorization':`Bearer ${this.authService.user.access_token}`,
         'Content-Type': 'application/json',
         'method': 'POST',
         })
@@ -36,7 +35,7 @@ export class PointService {
   }
 
   getPoints(){
-    return this.http.get(`${TRANSACTION}transaction_points/by_request/all/?email=${this.email}&skip=0&limit=1000`,this.httpOptions);
+    return this.http.get(`${AUTHORIZATION}points-read/?&skip=0&limit=1000`,this.httpOptions);
   }
 
 }

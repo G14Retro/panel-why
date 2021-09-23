@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserModel } from '../models/user.model';
 
 const COUNTRIES = environment.Parameters_Geography_Countries;
 const STATES = environment.Parameters_Geography_States
@@ -14,8 +15,7 @@ const AUTHENTICATION = environment.Auth_Authentication
   providedIn: 'root'
 })
 export class AuthService {
-  userToken = '';
-  userData:any;
+  user:UserModel = new UserModel();
   httoptions = {
     headers: new HttpHeaders({
     'method': 'POST',
@@ -78,27 +78,20 @@ export class AuthService {
 
   private readStorage(){
     if (localStorage.getItem('user')) {
-      this.userToken = JSON.parse(localStorage.getItem('user')).access_token
+      this.user = JSON.parse(localStorage.getItem('user'))
     }else if (sessionStorage.getItem('user')) {
-      this.userToken = JSON.parse(sessionStorage.getItem('user')).access_token
+      this.user = JSON.parse(sessionStorage.getItem('user'))
     }else{
-      this.userToken = '';
+      this.user = new UserModel();
     }
   }
 
-  tokenTest(){
-    const headers = new HttpHeaders({
-      'Authorization':`Bearer ${this.userToken}`,
-      'method': 'POST',
-      'Content-Type': 'application/json'
-    })
-    this.http.post(`${AUTHENTICATION}login/test-token`,{},{headers}).subscribe((resp:any)=>{
-      localStorage.setItem('dataUser',JSON.stringify(resp))
-    });
+  validProfile():boolean{
+    return this.user.has_perfil;
   }
 
   validToken():boolean{
-    return !this.jwhelper.isTokenExpired(this.userToken);
+    return !this.jwhelper.isTokenExpired(this.user.access_token);
   }
 
   sendEmailActive(email){

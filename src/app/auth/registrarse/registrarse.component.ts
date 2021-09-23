@@ -16,6 +16,7 @@ export class RegistrarseComponent implements OnInit {
   countries:any[] = [];
   states:any[] = [];
   cities:any[] = [];
+  checkout:boolean = false;
   constructor(
     private fb:FormBuilder,
     private authService:AuthService,
@@ -38,7 +39,9 @@ export class RegistrarseComponent implements OnInit {
       mobile_number:['',[Validators.required,Validators.pattern('.{10,10}')]],
       password:['',[Validators.required,this.passwordValidate()]],
       confirma:['',[Validators.required,this.passwordValidate(),this.matchValues('password')]],
-      checkbox:false
+      encuesta:false,
+      termino:false,
+      politica:false,
     });
   }
 
@@ -62,10 +65,13 @@ export class RegistrarseComponent implements OnInit {
   }
 
   singUp(){
+    if (this.registerForm.invalid) {
+      return
+    }
     this.authService.signUp(this.registerForm.value).subscribe(()=>{
-      Utils.swalSuccessConfirm('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.');
-      this.authService.sendEmailActive(this.registerForm.get('username'));
       this.registroRef.close();
+      Utils.swalSuccessConfirm('¡Excelente!','Se ha registrado correctamente, por favor verifique su correo para activar su cuenta.');
+      this.authService.sendEmailActive(this.registerForm.get('email').value);
     },(err:any)=>{
       if (err.status === 461) {
         Utils.swalError('¡Lo siento!','El usuario ya se encuentra registrado')
@@ -73,6 +79,14 @@ export class RegistrarseComponent implements OnInit {
 
     }
     );
+  }
+
+  validCheck(){
+    if ((this.registerForm.get('encuesta').value && this.registerForm.get('termino').value)&&this.registerForm.get('politica').value) {
+      this.checkout = true;
+    }else{
+      this.checkout = false;
+    }
   }
 
   matchValues( matchTo: string ): (AbstractControl) => ValidationErrors | null {

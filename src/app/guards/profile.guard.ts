@@ -8,16 +8,17 @@ import { DataUserService } from '../services/data-user.service';
 })
 export class ProfileGuard implements CanActivate {
 
-  valid:boolean;
   constructor(
     private authService:AuthService,
-    private dataService:DataUserService
   ) {
     
   }
 
   canActivate(): boolean {
-    this.dataService.validateProfile()
+    if (!this.authService.validProfile()) {
+      window.location.replace('/perfil');
+      return false
+    }
     return true
   }
   
