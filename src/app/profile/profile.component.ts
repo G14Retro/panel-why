@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   coodeReference(){
-    if (this.profileForm.get('reference_code').value.length == 10) {
+    if (this.profileForm.get('reference_code').value.length <= 10) {
       console.log("Validando codigo");
       this.dataService.coodeReference(this.profileForm.get('reference_code').value).subscribe((resp:any)=>{
         if (resp) {
@@ -130,6 +130,9 @@ export class ProfileComponent implements OnInit {
     this.profileForm.addControl('user_type',new FormControl('A'));
     this.profileForm.addControl('geography_language_id',new FormControl(62));
     if (this.profileForm.get('reference_code').value.length != 10) {
+      this.profileForm.get('reference_code').setValue('');
+    }
+    if (!this.validCode) {
       this.profileForm.get('reference_code').setValue('');
     }
     this.profileForm.get('date_birth').setValue(moment(this.profileForm.get('date_birth').value).format('YYYY-MM-DD'))

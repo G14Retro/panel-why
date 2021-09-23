@@ -55,6 +55,7 @@ export class MenuNavComponent implements OnInit {
   name = '';
   superUser:boolean = false;
   categoria:string = '';
+  codigo:string = '';
   private _transformer = (node: MenuNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -98,8 +99,10 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   getProfile(){
     this.dashboard.getProfile().subscribe((resp:any)=>{
+      console.log(resp);
       this.profile = resp.user_type;
       this.name = resp.owner_id;
+      this.codigo = resp.customer_code;
       if (resp.user_type === "A") {
         this.categoria = 'Bronce';
       }else if (resp.user_type === "B") {
@@ -125,7 +128,7 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   }
 
   password(){
-    const passwordRef = this.dialog.open(EditarPerfilComponent,{
+    const passwordRef = this.dialog.open(CambioContrasenaComponent,{
       width: '524px',
     })
   }

@@ -103,7 +103,7 @@
                         <mat-label>Código referencia</mat-label>
                         <input type="text" matInput  formControlName="reference_code" (change)="coodeReference()">
                         <mat-icon *ngIf="validCode" matSuffix class="text-success" matTooltip="El código ingresado es valido"><i class="fi-rr-check"></i></mat-icon>
-                        <mat-icon *ngIf="invalidCode" matSuffix class="text-danger" matTooltip="El código ingresado no encontro"><i class="fi-rr-cross"></i></mat-icon>
+                        <mat-icon *ngIf="invalidCode" matSuffix class="text-danger" matTooltip="El código ingresado no se encontro"><i class="fi-rr-cross"></i></mat-icon>
                     </mat-form-field>
                     <div class="col-12">
                         <button mat-stroked-button color="primary" class="col-xs-12 col-sm-12 col-md-5 col-lg-5" (click)="cancel()">Cancelar</button>
