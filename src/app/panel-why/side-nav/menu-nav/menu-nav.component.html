@@ -1,26 +1,79 @@
 <div class="sidenav mt-5">
+  <div>
     <img class="ms-4 img-fluid" src="https://backend-app.panelwhy.com/static/img/default_user.jpg" alt="" height="128px" width="128px"><br>
-    <h2 class=" mt-4 ms-4 text-white">Puntos: {{actual | number}}</h2>
+    <h2 class=" mt-4 ms-4 text-white">
+      <mat-icon matPrefix [ngClass]="{'bronce': categoria=='Bronce',
+      'plata': categoria == 'Plata',
+      'diamante': categoria == 'Diamante',
+      'oro': categoria == 'Oro'
+    }"
+      [matTooltip]="categoria"><i class="fi-sr-shield-check"></i></mat-icon>
+      {{name | titlecase}}
+    </h2>
+    <h3 class="text-white" style="margin-top: -1em; margin-left: 3.5em;">Puntos: {{actual | number}}</h3>
+    <h5 style="margin-top: -1.8em; margin-left: 4.8em;">Categoría: {{categoria}}</h5>
+  </div>
     <mat-nav-list class="menu">
         
         <a mat-list-item [routerLink]="['/panel-why/dashboard']" routerLinkActive="activo">
-            <i class="fi-rr-bank" style="margin-right: 1rem;"></i> Dashboard
-        </a>
-
-        <a mat-list-item [routerLink]="['/panel-why/perfil']" routerLinkActive="activo">
-            <i class="fi-rr-calculator" style="margin-right: 1rem;"></i> Perfil
+          <mat-icon matPrefix><i class="fi-rr-stats"></i></mat-icon>
+            Dashboard
+        </a>        
+        
+        <a mat-list-item [routerLink]="['/panel-why/puntos']" routerLinkActive="activo">
+          <mat-icon matPrefix><i class="fi-rr-diamond"></i></mat-icon>
+            Puntos
         </a>
 
         <a mat-list-item [routerLink]="['/panel-why/pagos']" routerLinkActive="activo" >
-            <i class="fi-rr-stats" style="margin-right: 1rem;"></i> Pagos
+          <mat-icon matPrefix><i class="fi-rr-credit-card"></i></mat-icon>
+             Pagos
         </a>
 
-        <a mat-list-item [routerLink]="['/panel-why/puntos']" routerLinkActive="activo">
-            <i class="fi-rr-dollar" style="margin-right: 1rem;"></i> Puntos
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding id="hijos">
+            <a [href]="node.route"><i class="fi-rr-exclamation" style="margin-right: .5em;"></i>{{node.name}}</a>
+          </mat-tree-node>
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon>
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+              {{node.name}}
+            </button>
+          </mat-tree-node>
+        </mat-tree>        
+
+        <a mat-list-item (click)="perfil()" routerLinkActive="activo">
+          <mat-icon matPrefix><i class="fi-rr-user"></i></mat-icon>
+          Perfil
+        </a>
+
+        <a mat-list-item (click)="password()" routerLinkActive="activo">
+          <mat-icon matPrefix><i class="fi-rr-lock-alt"></i></mat-icon>
+          Contraseña
         </a>
         
+        <div *ngIf="superUser">
+          <mat-divider></mat-divider>
+          <a mat-list-item [routerLink]="['/panel-why/usuarios']" routerLinkActive="activo" >
+            Usuarios
+          </a>
+          <a mat-list-item [routerLink]="['/panel-why/perfiles']" routerLinkActive="activo">
+            Perfiles
+          </a>
+          <a mat-list-item [routerLink]="['/panel-why/puntos-admin']" routerLinkActive="activo">
+            Puntos
+          </a>
+          <a mat-list-item [routerLink]="['/panel-why/pagos-admin']" routerLinkActive="activo">
+            Pagos
+          </a>
+        </div>
+        
         <a mat-list-item (click)="logOut()">
-            <i class="fi-rr-sign-out" style="margin-right: 1rem;"></i> Cerrar sesión
+          <mat-icon matPrefix><i class="fi-rr-sign-out"></i></mat-icon>
+           Cerrar sesión
         </a>
 
     </mat-nav-list> 

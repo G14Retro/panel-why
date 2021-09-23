@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import Utils from 'src/app/Utils/tool.util';
 import { RecordarPassComponent } from '../recordar-pass/recordar-pass.component';
@@ -15,9 +16,7 @@ import { RegistrarseComponent } from '../registrarse/registrarse.component';
 export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   oculto:boolean = true
-  date:Date;
-
-  anio;
+  currentYear:string;
   constructor(
     private fb:FormBuilder,
     private register:MatDialog,
@@ -25,6 +24,7 @@ export class LoginComponent implements OnInit {
     private authService:AuthService,
     private router:Router
   ) {
+    this.currentYear = moment(new Date()).format('YYYY');
    }
 
   ngOnInit(): void {
@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return
     }
-    localStorage.setItem('dataSession',JSON.stringify(this.loginForm.value))
     this.authService.singIn(this.loginForm.value).subscribe(()=>{
       window.location.replace('/perfil');
     },

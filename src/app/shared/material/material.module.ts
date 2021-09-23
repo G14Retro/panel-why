@@ -37,6 +37,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTreeModule} from '@angular/material/tree'; 
+import {CdkTreeModule} from '@angular/cdk/tree'; 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
@@ -81,6 +83,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     MatNativeDateModule,
     MatDividerModule,
     MatBadgeModule,
+    MatTreeModule,
+    CdkTreeModule,
     NgCircleProgressModule.forRoot(),
   ],
   exports:[
@@ -122,6 +126,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     MatNativeDateModule,
     MatDividerModule,
     MatBadgeModule,
+    MatTreeModule,
+    CdkTreeModule,
     NgCircleProgressModule
   ]
 })

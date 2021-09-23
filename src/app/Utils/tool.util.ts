@@ -8,7 +8,7 @@ export default class Utils{
             title: title,
             text: text,
             showConfirmButton: false,
-            timer: 2500
+            timer: 3000
         });
     }
 

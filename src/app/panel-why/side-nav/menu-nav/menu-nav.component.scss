@@ -1,10 +1,59 @@
 ::ng-deep .mat-list-base .mat-list-item{
     color: white;
+    margin-left: 1em;
 }
 .activo{
     color: #aab1b6 !important;
     font-weight: 500;
 }
 .activo:focus{
-    background-color: #FFF;
+    background-color: #C4475A;
+}
+
+mat-nav-list{
+    mat-icon{
+        margin-right: .5em;
+        font-size: 20px;
+    }
+}
+
+mat-tree{
+    background-color: #C4475A;
+    #hijos{
+        margin-left: 2em;
+    }
+    mat-tree-node{
+        font-size: 1em;
+        color: #fff;
+    }
+    button{
+        font-size: 1.2em;
+        margin-left: 1.5em;
+    }
+}
+
+#lvl1:hover{
+    background-color: #BC4859;
+}
+
+
+h5{
+    color: #fff;
+    font-weight: 500;
+}
+
+.bronce{
+    color: rgb(83, 82, 82);
+}
+
+.plata{
+    color: rgb(155, 155, 155);
+}
+
+.diamante{
+    color: rgb(185, 242, 255);
+}
+
+.oro{
+    color: rgb(255, 215, 0);
 }

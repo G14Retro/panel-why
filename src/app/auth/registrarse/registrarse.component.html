@@ -73,13 +73,33 @@
             <mat-error *ngIf="error.confirma.errors"><span *ngIf="!error.confirma.errors.isMatching">Su contraseña no es igual a la ingresada previamente</span>
             </mat-error>
         </mat-form-field>
-        <mat-checkbox class="col-12" formControlName="checkbox">
-            <p class="text-start text-wrap"> Deseo recibir información acerca de las encuestas en
-                las que soy candidato para participar mediante correo 
-                electrónico
-            </p>
-            
-        </mat-checkbox>
-        <button [disabled]="!registerForm.get('checkbox').value" mat-raised-button color="primary" class="col-12 mb-2" (click)="singUp()">Registrarse</button>
+        <section>
+            <ul>
+                <li>
+                    <mat-checkbox class="col-6" formControlName="termino" (change)="validCheck()">
+                        <p> Acepto los <a href="https://panelwhy.com/terminos-y-condiciones" target="_blank">términos y condiciones</a> de la plataforma
+                        </p>           
+                    </mat-checkbox>
+                </li>
+                <li>
+                    <mat-checkbox class="col-6" formControlName="politica" (change)="validCheck()">
+                        <p> Autorizo el tratamiento de mis datos personales y acepto
+                            la <a href="https://byoptimos.com/wp-content/uploads/2021/02/Aviso-de-Privacidad-Tratamiento-de-datos-personales..pdf" target="_blank">
+                                politica de privacidad</a> <br> 
+                            de la informacion
+                        </p>           
+                    </mat-checkbox>
+                </li>
+                <li>
+                    <mat-checkbox class="col-6" formControlName="encuesta" (change)="validCheck()">
+                        <p> Deseo recibir información acerca de las encuestas en
+                            las que soy candidato para <br> participar mediante correo 
+                            electrónico
+                        </p>           
+                    </mat-checkbox>
+                </li>
+            </ul>
+        </section>
+        <button [disabled]="!checkout" mat-raised-button color="primary" class="col-12 mb-2" (click)="singUp()">Registrarse</button>
     </form>
 </div>

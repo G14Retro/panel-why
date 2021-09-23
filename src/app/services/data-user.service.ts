@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
-const DATAUSER = environment.Data_User_Profiles;
+const DATAUSER = environment.Auth_Authorization;
 const PARAMETERS = environment.Prameter_Data;
 
 @Injectable({
@@ -21,7 +21,6 @@ export class DataUserService {
     private http:HttpClient
   ) { 
     this.init();
-    this.email = JSON.parse(localStorage.getItem('dataSession')).username;
   }
   
   get refresh$(){
@@ -29,45 +28,19 @@ export class DataUserService {
   }
 
   getProfile(){
-    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions)
-    .pipe(
-      map((resp:any)=>{
-        this.saveStorage(resp)
-        return resp
-      })
-    );
-  }
-
-  private saveStorage(data){
-    console.log("Ejecutando Save");
-    console.log(data);
-    if (data.status == 200) {
-      console.log("Codigo 200");
-      localStorage.setItem('dataProfile',JSON.stringify(data.body))
-    }
-    if (data.status == 461) {
-      console.log("Codigo 461");
-      localStorage.setItem('dataProfile',JSON.stringify(null))
-    }
-  }
-
-  private readData
-
-  validateProfile():Observable<any>{
-    return this.http.get(`${DATAUSER}by_request/${this.email}`,this.httpOptions);
+    return this.http.get(`${DATAUSER}profile-read/`,this.httpOptions);
   }
 
   init(){
     this.httpOptions = {
       headers: new HttpHeaders({
-      'Authorization':`Bearer ${this.authService.userToken}`,
+      'Authorization':`Bearer ${this.authService.user.access_token}`,
       'Content-Type': 'application/json',
       }),
-      observe: 'response'
     };
     this.httpOptionsPost = {
       headers: new HttpHeaders({
-        'Authorization':`Bearer ${this.authService.userToken}`,
+        'Authorization':`Bearer ${this.authService.user.access_token}`,
         'Content-Type': 'application/json',
         'method': 'POST',
         })
@@ -112,16 +85,40 @@ export class DataUserService {
 
 
   createProfile(data){
-    return this.http.post(`${DATAUSER}by_request/?email=${this.email}`,data,this.httpOptionsPost);
+    return this.http.post(`${DATAUSER}profile-create/`,data,this.httpOptionsPost).pipe(
+      map((resp:any)=>{
+        this.authService.user.has_perfil = true;
+        this.updateStorage(this.authService.user);
+        return resp
+      })
+    );
   }
   
+  updateStorage(user){
+    if (localStorage.getItem('user')) {
+      localStorage.removeItem('user');
+      localStorage.setItem('user',JSON.stringify(user));
+    }else if (sessionStorage.getItem('user')) {
+      sessionStorage.removeItem('user');
+      sessionStorage.setItem('user',JSON.stringify(user));
+    }
+  }
+
+  coodeReference(code:string){
+    return this.http.get(`${DATAUSER}profile-read-by-reference-code/${code}`,this.httpOptions)
+  }
+
   updateProfile(data){
-    return this.http.put(`${DATAUSER}by_request/${this.email}`,data,this.httpOptionsPost)
+    return this.http.put(`${DATAUSER}profile-update/`,data,this.httpOptionsPost)
     .pipe(
       tap(()=>{
         this._refresh$.next();
       })
     );
+  }
+
+  changePassword(data){
+    return this.http.put(`${DATAUSER}user-update-password`,data,this.httpOptions);
   }
 
 }

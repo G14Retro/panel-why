@@ -1,0 +1,47 @@
+<div mat-dialog-content class="pass-dialog text-center">
+    <h2>Actualizar contraseña</h2>
+    <mat-divider class="mb-3"></mat-divider>
+    <form [formGroup]="passwordForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña actual</mat-label>
+            <input [type]="actual ? 'password' : 'text'" matInput formControlName="password">
+            <a mat-icon-button matSuffix (click)="actual = !actual" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="actual">
+                <mat-icon>{{actual ?  'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasNumber">Su contraseña debe tener un número</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasCapitalCase">Su contraseña debe tener una mayuscula</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasSmallCase">Su contraseña debe tener una minuscula</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.hasSpecialCharacters">Su contraseña debe tener un caracter especial</span></mat-error>
+            <mat-error *ngIf="error.password.errors"><span *ngIf="error.password.errors.required">¡Advertencia! Este campo es requerido</span></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña Nueva</mat-label>
+            <input [type]="nueva ? 'password' : 'text'" matInput formControlName="password_new">
+            <a mat-icon-button matSuffix (click)="nueva = !nueva" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="nueva">
+                <mat-icon>{{nueva ?  'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+            <mat-error *ngIf="error.password_new.errors"><span *ngIf="error.password_new.errors.hasNumber">Su contraseña debe tener un número</span></mat-error>
+            <mat-error *ngIf="error.password_new.errors"><span *ngIf="error.password_new.errors.hasCapitalCase">Su contraseña debe tener una mayuscula</span></mat-error>
+            <mat-error *ngIf="error.password_new.errors"><span *ngIf="error.password_new.errors.hasSmallCase">Su contraseña debe tener una minuscula</span></mat-error>
+            <mat-error *ngIf="error.password_new.errors"><span *ngIf="error.password_new.errors.hasSpecialCharacters">Su contraseña debe tener un caracter especial</span></mat-error>
+            <mat-error *ngIf="error.password_new.errors"><span *ngIf="error.password_new.errors.required">¡Advertencia! Este campo es requerido</span></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirma la contraseña</mat-label>
+            <input [type]="confirma ? 'password' : 'text'" matInput formControlName="password_new_repeat">
+            <a mat-icon-button matSuffix (click)="confirma = !confirma" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="confirma">
+                <mat-icon>{{confirma ?  'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="error.password_new_repeat.errors.hasNumber">Su contraseña debe tener un número</span></mat-error>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="error.password_new_repeat.errors.hasCapitalCase">Su contraseña debe tener una mayuscula</span></mat-error>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="error.password_new_repeat.errors.hasSmallCase">Su contraseña debe tener una minuscula</span></mat-error>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="error.password_new_repeat.errors.hasSpecialCharacters">Su contraseña debe tener un caracter especial</span></mat-error>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="error.password_new_repeat.errors.required">¡Advertencia! Este campo es requerido</span></mat-error>
+            <mat-error *ngIf="error.password_new_repeat.errors"><span *ngIf="!error.password_new_repeat.errors.isMatching">Su contraseña no es igual a la ingresada previamente</span>
+            </mat-error>
+        </mat-form-field>
+        <div class="col-12 text-center">
+            <button mat-raised-button color="primary" (click)="changePassword()">Cambiar contraseña</button>
+        </div>
+    </form>
+</div>
