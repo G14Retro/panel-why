@@ -22,6 +22,10 @@ import { PuntosAdminComponent } from './modules/puntos-admin/puntos-admin.compon
 import { PagosAdminComponent } from './modules/pagos-admin/pagos-admin.component';
 import { CambioContrasenaComponent } from './modules/perfil/pages/cambio-contrasena/cambio-contrasena.component';
 import { EditarPerfilComponent } from './modules/perfil/pages/editar-perfil/editar-perfil.component';
+import { TablaUsuariosComponent } from './modules/usuarios/tabla-usuarios/tabla-usuarios.component';
+import { TablaPerfilesComponent } from './modules/perfiles/tabla-perfiles/tabla-perfiles.component';
+import { TablaPagosAdminComponent } from './modules/pagos-admin/tabla-pagos-admin/tabla-pagos-admin.component';
+import { TablaPuntosAdminComponent } from './modules/puntos-admin/tabla-puntos-admin/tabla-puntos-admin.component';
 
 
 
@@ -45,7 +49,11 @@ import { EditarPerfilComponent } from './modules/perfil/pages/editar-perfil/edit
     PuntosAdminComponent,
     PagosAdminComponent,
     CambioContrasenaComponent,
-    EditarPerfilComponent 
+    EditarPerfilComponent,
+    TablaUsuariosComponent,
+    TablaPerfilesComponent,
+    TablaPagosAdminComponent,
+    TablaPuntosAdminComponent 
   ],
   imports: [
     CommonModule,

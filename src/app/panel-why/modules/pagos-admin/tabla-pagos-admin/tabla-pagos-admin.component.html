@@ -1,0 +1,80 @@
+<div class="btns-table">
+  <div></div>
+  <button mat-stroked-button class="btn-back">
+    Cargar Pagos
+    <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-upload"></i></mat-icon>
+  </button>
+</div>
+<div class="table-container">
+    <div class="mat-elevation-z1" style="width: 90%;">
+      <table  [dataSource]="dataSource" mat-table  matSort>
+
+        <ng-container matColumnDef="acciones">
+          <div>
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="editUser(element.id)">
+                  <i class="fi-rr-edit"></i>
+                </button>
+                <button mat-icon-button (click)="removeUser(element.id)">
+                  <i class="fi-rr-trash"></i>
+                </button>
+              </td>
+            </div>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Correo Electrónico </th>
+          <td mat-cell *matCellDef="let element"> {{element.names}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="puntos">
+          <th mat-header-cell *matHeaderCellDef> Puntos </th>
+          <td mat-cell *matCellDef="let element"> {{element.surnames | titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef> Valor </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cuenta">
+            <th mat-header-cell *matHeaderCellDef> Cuenta </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_active}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="forma_pago">
+            <th mat-header-cell *matHeaderCellDef> Forma de Pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef> Tipo de Pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="observacion">
+            <th mat-header-cell *matHeaderCellDef> Observación </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos para mostrar</td>
+        </tr>
+      </table>
+      <mat-paginator style="width: 100%;"
+      [pageSize]="10"
+      [pageSizeOptions] = "[5,10,20,100]"
+      >
+    </mat-paginator>
+  </div>
+</div>
