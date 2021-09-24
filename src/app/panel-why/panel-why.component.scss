@@ -1,3 +1,25 @@
 .container-dialog{
     padding-left: 7em;
 }
+
+.btn-succ{
+  background-color: #C44A5D;
+  color: #fff;
+  height: 48px;
+}
+
+.btn-back{
+    color: #C44A5D;
+    border-color: #C44A5D;
+    height: 48px;
+}
+
+.btns-table{
+    width: 100%;
+    padding-right: 10%;
+    margin-bottom: 2em;
+    display: grid;
+    grid-template-columns: 20% 20%;
+    justify-content: right;
+    gap: 2em;
+}
