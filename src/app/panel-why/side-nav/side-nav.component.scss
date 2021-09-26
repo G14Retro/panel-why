@@ -1,3 +1,5 @@
+@import url(../panel-why.component.scss);
+
 mat-sidenav-container{
     width: 100%;
     height: 100%;
@@ -27,4 +29,9 @@ mat-sidenav-content{
 .bg-gradiente{
     background: rgb(196,70,89);
     background: linear-gradient(0deg, rgba(196,70,89,1) 0%, rgba(196,78,96,1) 100%);
+}
+
+#btn-side{
+    position: absolute;
+    bottom: 0;
 }

@@ -1,9 +1,12 @@
 <mat-sidenav-container class="col-12">
-    <mat-sidenav #sideNav mode="side" class="col-lg-2 bg-gradiente" opened>
+    <mat-sidenav #sideNav mode="side" class="col-lg-2 bg-gradiente s" [opened]="opened">
        <app-menu-nav></app-menu-nav>
     </mat-sidenav>
     
     <mat-sidenav-content class="col-lg-10">
+        <button mat-icon-button class="btn-succ" (click)="opened = !opened" id="btn-side">
+            <mat-icon><i [ngClass]="{'fi-rr-angle-left': opened,' fi-rr-angle-right':!opened}"></i></mat-icon>
+        </button>
         <div class="content">
             <router-outlet></router-outlet>
         </div>
