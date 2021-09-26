@@ -1,15 +1,16 @@
-<mat-sidenav-container class="col-12">
-    <mat-sidenav #sideNav mode="side" class="col-lg-2 bg-gradiente s" [opened]="opened">
-       <app-menu-nav></app-menu-nav>
-    </mat-sidenav>
-    
-    <mat-sidenav-content class="col-lg-10">
-        <button mat-icon-button class="btn-succ" (click)="opened = !opened" id="btn-side">
-            <mat-icon><i [ngClass]="{'fi-rr-angle-left': opened,' fi-rr-angle-right':!opened}"></i></mat-icon>
-        </button>
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
-        <img class="ms-4 img-fluid" src="https://backend-app.panelwhy.com/static/img/logo_transparente.png" alt="" height="200px" width="200px"><br>
-    </mat-sidenav-content>
+<mat-sidenav-container>
+        <mat-sidenav #sideNav mode="side" class="bg-gradiente s" [opened]="opened">
+            <app-menu-nav></app-menu-nav>
+         </mat-sidenav>
+         
+         <mat-sidenav-content>
+             <button mat-icon-button class="btn-succ" (click)="opened = !opened" id="btn-side">
+                 <mat-icon><i [ngClass]="{'fi-rr-angle-left': opened,' fi-rr-angle-right':!opened}"></i></mat-icon>
+             </button>
+             <div class="content">
+                 <router-outlet></router-outlet>
+             </div>
+             <img class="img-fluid" src="https://backend-app.panelwhy.com/static/img/logo_transparente.png" alt="" height="120px" width="120px"><br>
+         </mat-sidenav-content>
+   
 </mat-sidenav-container>
