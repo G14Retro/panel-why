@@ -27,7 +27,8 @@ export class TablaPuntosComponent implements OnInit, AfterViewInit {
 
   getPoints(){
     this.pointService.getPoints().subscribe((resp:any)=>{
-      this.dataSource.data = resp;
+      console.log(resp);
+      this.dataSource.data = resp.data;
     })
   }
 
