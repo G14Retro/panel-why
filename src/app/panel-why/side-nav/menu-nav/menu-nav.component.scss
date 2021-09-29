@@ -58,12 +58,6 @@ h5{
     color: rgb(255, 215, 0);
 }
 
-::ng-deep .mat-icon-button{
-    padding: 0;
-    min-width: 0;
+::ng-deep mat-tree .mat-icon-button{
     width: auto !important;
-    height: 40px;
-    flex-shrink: 0;
-    line-height: 40px;
-    border-radius: 50%;
 }

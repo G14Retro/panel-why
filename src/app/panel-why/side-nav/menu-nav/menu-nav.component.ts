@@ -99,7 +99,6 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   getProfile(){
     this.dashboard.getProfile().subscribe((resp:any)=>{
-      console.log(resp);
       this.profile = resp.user_type;
       this.name = resp.owner_id;
       this.codigo = resp.customer_code;
