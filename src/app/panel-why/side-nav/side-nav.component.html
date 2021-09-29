@@ -4,8 +4,8 @@
          </mat-sidenav>
          
          <mat-sidenav-content>
-             <button mat-icon-button class="btn-succ" (click)="opened = !opened" id="btn-side">
-                 <mat-icon><i [ngClass]="{'fi-rr-angle-left': opened,' fi-rr-angle-right':!opened}"></i></mat-icon>
+             <button mat-icon-button class="btn-succ" (click)="opened = !opened" id="btn-side" *ngIf="showbutton">
+                 <mat-icon><i [ngClass]="{'fi-rr-cross': opened,'fi-rr-menu-burger':!opened}"></i></mat-icon>
              </button>
              <div class="content">
                  <router-outlet></router-outlet>
