@@ -5,38 +5,38 @@
 
         <ng-container matColumnDef="study_code">
           <th mat-header-cell *matHeaderCellDef> Código estudio </th>
-          <td mat-cell *matCellDef="let element"> {{element.study_code}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.study_code}} </td>
         </ng-container>
 
         <ng-container matColumnDef="study_name">
           <th mat-header-cell *matHeaderCellDef> Estudio </th>
-          <td mat-cell *matCellDef="let element"> {{element.study_name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.study_name}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="registry">
           <th mat-header-cell *matHeaderCellDef> Tipo </th>
-          <td mat-cell *matCellDef="let element"> {{element.registry }} </td>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.registry }} </td>
         </ng-container>
 
         <ng-container matColumnDef="date_points">
           <th mat-header-cell *matHeaderCellDef> Fecha puntos </th>
-          <td mat-cell *matCellDef="let element"> {{element.date_points | date:'dd/MM/YYYY'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.date_points | date:'dd/MM/YYYY'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="transaction_type">
             <th mat-header-cell *matHeaderCellDef> Tipo </th>
-            <td mat-cell *matCellDef="let element"> {{element.transaction_type}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.transaction_type}} </td>
         </ng-container>
 
         <ng-container matColumnDef="points">
             <th mat-header-cell *matHeaderCellDef> Puntos </th>
-            <td mat-cell *matCellDef="let element"> {{element.points }} </td>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.points }} </td>
         </ng-container>
 
         <ng-container matColumnDef="observation">
             <th mat-header-cell *matHeaderCellDef> Observación </th>
-            <td mat-cell *matCellDef="let element"> {{element.observation}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.observation}} </td>
         </ng-container>
 
 
@@ -47,9 +47,10 @@
           <td class="mat-cell" colspan="4">No hay datos para mostrar</td>
         </tr>
       </table>
-      <mat-paginator style="width: 100%;"
-      [pageSize]="10"
-      [pageSizeOptions] = "[10,20,100]"
+      <mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      (page) ="pageEvent($event)"
+      [pageSizeOptions] = "pageSizeOptions"
       >
     </mat-paginator>
     </div>

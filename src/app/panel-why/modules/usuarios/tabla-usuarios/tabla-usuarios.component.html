@@ -1,12 +1,44 @@
-<div>
-  <button mat-stroked-button class="btn-back float-end me-2 mb-2 me-md-4 mb-md-4">
-    Cargar Usuarios
-    <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-upload"></i></mat-icon>
+<div class="masivos">
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Archivo a subir</mat-label>
+      <mat-select #masivo [(ngModel)]="selectMasivo">
+        <mat-option>----</mat-option>
+        <mat-option value="create">Crear Usuarios</mat-option>
+        <mat-option value="update">Actualizar Usuarios</mat-option>
+        <mat-option value="active">Activar Usuarios</mat-option>
+        <mat-option value="inactive">Inactivar Usuarios</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <button mat-stroked-button class="btn-back" [disabled]="masivo.selected == null" (click)="inputFile()">
+      Cargar Archivo
+      <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-upload"></i></mat-icon>
+    </button>
+  </div>
+  <div  class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Descargar plantilla</mat-label>
+      <mat-select #plantilla>
+        <mat-option>----</mat-option>
+        <mat-option value="https://backend-app-panelwhy-com.camtech.com.co/static/templates/usuarios_crear.xlsx">Plantilla Crear Usuarios</mat-option>
+        <mat-option value="https://backend-app.panelwhy.com/static/templates/usuarios_actuaizar.xlsx">Plantilla Actualizar Usuarios</mat-option>
+        <mat-option value="https://backend-app.panelwhy.com/static/templates/usuarios_activar.xlsx">Plantilla Activar Usuarios</mat-option>
+        <mat-option value="https://backend-app.panelwhy.com/static/templates/usuarios_inactivar.xlsx">Plantilla Inactivar Usuarios</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-icon-button [hidden]="plantilla.selected == null" id="btn-plantilla">
+    <mat-icon (click)="btnPlantilla()"><i class="fi-rr-download"></i></mat-icon>
   </button>
-  <button mat-raised-button class="btn-succ float-end me-2 mb-2 me-md-4 mb-md-4">
-    Crear Usuario
-    <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-add"></i></mat-icon>
-  </button>
+  <a [href]="plantilla.value" #download target="_blank" hidden>Descargar Archivo</a>
+  <input type="file" hidden #uploadFile>
+</div>
+<div class="float-end">
+  <div class="col-6 me-4 mb-4" (click)="downloadUsers()">
+    <button mat-raised-button>Descargar Usuarios</button>
+  </div>
 </div>
 <div class="ms-2 ms-md-4 me-2 me-md-4 mb-5 mb-md-0">
       <div class="mat-elevation-z1">

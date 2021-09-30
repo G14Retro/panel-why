@@ -12,24 +12,41 @@ export class TablaPagosComponent implements OnInit,AfterViewInit {
 
   displayedColumns:string[] = ['points','value','mobile_number','way_to_pay','date_payed','transaction_type','observation'];
   dataSource = new MatTableDataSource();
+
+  length;
+  pageSize = 10;
+  page = 1;
+  pageSizeOptions: number[] = [10, 25, 50, 100];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private payService:PayService
   ) { }
 
   ngOnInit(): void {
-    this.getPays();
+    this.getPays(this.page,this.pageSize);
   }
 
   ngAfterViewInit(){
-    this.dataSource.paginator = this.paginator;
     this.paginator._intl.itemsPerPageLabel="Registros por pagina"
   }
 
-  getPays(){
-    this.payService.getPays().subscribe((resp:any)=>{
-      this.dataSource.data = resp
+  getPays(page:number,pageSize:number){
+    const params = {
+      page: page,
+      pageSize: pageSize
+    }
+    this.payService.getPays(params).subscribe((resp:any)=>{
+      console.log(resp);
+      this.dataSource.data = resp.data
+      this.length = resp.data_total_count;
+      this.pageSize = resp.data_query_count;
     });
+  }
+
+  pageEvent(event:any){
+    this.pageSize = event.pageSize;
+    this.page = event.pageIndex + 1;
+    this.getPays(this.page,this.pageSize);
   }
 
 }

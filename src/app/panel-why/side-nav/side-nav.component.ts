@@ -12,7 +12,6 @@ export class SideNavComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(window.screen.width);
     if (window.screen.width < 576) {
       this.showbutton = true;
     }else{
