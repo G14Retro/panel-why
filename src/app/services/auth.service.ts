@@ -30,15 +30,15 @@ export class AuthService {
    }
 
   getCountries(){
-    return this.http.get(`${COUNTRIES}by_request/active/?skip=0&limit=100&parent_id=22`);
+    return this.http.post(`${COUNTRIES}by_request/all/?parent_id=22`,{});
   }
 
   getStates(id_country){
-    return this.http.get(`${STATES}by_request/active/?skip=0&limit=1000&parent_id=${id_country}`);
+    return this.http.post(`${STATES}by_request/all/?parent_id=${id_country}`,{});
   }
 
   getCities(id_state){
-    return this.http.get(`${CITIES}by_request/active/?skip=0&limit=10000&parent_id=${id_state}`);
+    return this.http.post(`${CITIES}by_request/all/?parent_id=${id_state}`,{});
   }
 
   recovery(email:string){

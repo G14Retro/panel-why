@@ -14,9 +14,42 @@
 // hue. Available color palettes: https://material.io/design/color/
 $panel-why-primary: mat.define-palette(mat.$indigo-palette);
 $panel-why-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$panel-why: (
+    50 : #f8e9eb,
+    100 : #edc8cd,
+    200 : #e2a3ac,
+    300 : #d67e8b,
+    400 : #cd6272,
+    500 : #c44659,
+    600 : #be3f51,
+    700 : #b63748,
+    800 : #af2f3e,
+    900 : #a2202e,
+    A100 : #ffdcdf,
+    A200 : #ffa9b1,
+    A400 : #ff7683,
+    A700 : #ff5d6b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
 
 // The warn palette is optional (defaults to red).
-$panel-why-warn: mat.define-palette(mat.$red-palette);
+$panel-why-warn: mat.define-palette(mat.$red-palette,A400,800);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -25,6 +58,7 @@ $panel-why-theme: mat.define-light-theme((
     primary: $panel-why-primary,
     accent: $panel-why-accent,
     warn: $panel-why-warn,
+    panelWhy: $panel-why,
   )
 ));
 
@@ -47,4 +81,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 table{
   width: 100%;
   text-align: center
+}
+
+th{
+  color: white !important;
+  font-weight: bold;
+  background-color: #C44659;
+  text-align: center !important;
+  align-content: center !important;
+  align-items: center !important;
 }

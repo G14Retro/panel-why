@@ -47,20 +47,19 @@ export class RegistrarseComponent implements OnInit {
 
   getCountries(){
     this.authService.getCountries().subscribe((resp:any)=>{
-      this.countries = resp
+      this.countries = resp.data
     });
   }
 
   getStates(){
     this.authService.getStates(this.registerForm.get('pais').value).subscribe((resp:any)=>{
-      this.states = resp;
+      this.states = resp.data;
     });
   }
 
   getCities(){
-    console.log(this.registerForm.get('departamento').value);
     this.authService.getCities(this.registerForm.get('departamento').value).subscribe((resp:any)=>{
-      this.cities = resp;
+      this.cities = resp.data;
     });
   }
 

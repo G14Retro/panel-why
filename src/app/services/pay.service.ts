@@ -36,7 +36,7 @@ export class PayService {
       };
   }
 
-  getPays(){
-    return this.http.get(`${AUTHORIZATION}payments-read/?&skip=0&limit=1000`,this.httpOptions)
+  getPays(params){
+    return this.http.get(`${AUTHORIZATION}payments-read/?data_page_rows=${params.pageSize}&data_page_current=${params.page}`,this.httpOptions)
   }
 }

@@ -34,8 +34,8 @@ export class PointService {
       };
   }
 
-  getPoints(){
-    return this.http.get(`${AUTHORIZATION}points-read/?&skip=0&limit=1000`,this.httpOptions);
+  getPoints(params){
+    return this.http.get(`${AUTHORIZATION}points-read/?data_page_rows=${params.pageSize}&data_page_current=${params.page}`,this.httpOptions);
   }
 
 }
