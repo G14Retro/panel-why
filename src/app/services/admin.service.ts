@@ -28,7 +28,7 @@ export class AdminService {
   updateFile(file:File,type:string){
     const document = new FormData();
     document.append('file',file)
-    console.log(document.get('file'));
+    Object.assign(this.httpOptionsFile,{responseType: "blob"})
     return this.http.post(`${USERADMIN}by_file/${type}/`,document,this.httpOptionsFile);
   }
 
