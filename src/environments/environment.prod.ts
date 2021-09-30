@@ -8,4 +8,5 @@ export const environment = {
   Data_User_Profiles: 'https://backend-app-panelwhy-com.camtech.com.co/api/v1/data/user/user_profiles/',
   Prameter_Data: 'https://backend-app-panelwhy-com.camtech.com.co/api/v1/parameters/society/',
   Data_Transaction: 'https://backend-app-panelwhy-com.camtech.com.co/api/v1/data/transaction/',
+  User_Admin: 'https://backend-app-panelwhy-com.camtech.com.co/api/v1/data/user/users/'
 };
