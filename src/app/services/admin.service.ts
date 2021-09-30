@@ -49,8 +49,9 @@ export class AdminService {
       this.httpOptionsFile = {
         headers: new HttpHeaders({
           'Authorization':`Bearer ${this.authService.user.access_token}`,
-          'Content-Type': 'multipart/form-data',
+          'enctype': 'multipart/form-data, aplication/json',
           'method': 'POST',
+          'accept': '*/*'
           })
       };
   }

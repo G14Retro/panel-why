@@ -60,7 +60,7 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit {
 
   uploadPlantilla(file){
     this.adminService.updateFile(file,this.selectMasivo).subscribe((resp:any)=>{
-      console.log(resp);
+      Utils.downloadFile(resp,'Resultados')
     })
   }
 
