@@ -100,7 +100,6 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   getProfile(){
     this.dashboard.getProfile().subscribe((resp:any)=>{
       this.profile = resp.user_type;
-      this.name = resp.owner_id;
       this.codigo = resp.customer_code;
       if (resp.user_type === "A") {
         this.categoria = 'Bronce';
@@ -113,6 +112,9 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
       }else{
         this.categoria = 'Bronce';
       }
+    });
+    this.dashboard.getUser().subscribe((resp:any)=>{
+      this.name = resp.names + ' ' + resp.surnames
     });
   }
 

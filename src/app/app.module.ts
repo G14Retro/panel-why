@@ -17,6 +17,7 @@ import { LoaderInterceptor } from './shared/interceptors/loading.interceptor';
 import { registerLocaleData } from '@angular/common';
 
 import localeEsCO from "@angular/common/locales/es-CO";
+import { BlobErrorHttpInterceptor } from './shared/interceptors/error-blob.interceptor';
 registerLocaleData(localeEsCO,'es-CO')
 
 @NgModule({
@@ -47,6 +48,11 @@ registerLocaleData(localeEsCO,'es-CO')
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BlobErrorHttpInterceptor,
       multi: true
     },
     {

@@ -89,32 +89,32 @@ export class EditarPerfilComponent implements OnInit {
   getSelects(){
     
     this.dataService.getNitTypes().subscribe((resp:any)=>{
-      this.tipos_docs = resp;
+      this.tipos_docs = resp.data;
     });
 
     this.dataService.getSocioEconomics().subscribe((resp:any)=>{
-      this.estratos = resp;
+      this.estratos = resp.data;
     });
     this.dataService.getSocioGenders().subscribe((resp:any)=>{
-      this.generos = resp;
+      this.generos = resp.data;
     });
     this.dataService.getPurchaseDecisions().subscribe((resp:any)=>{
-      this.decisores = resp
+      this.decisores = resp.data;
     });
     this.dataService.getMaritalStatuses().subscribe((resp:any)=>{
-      this.estados = resp;
+      this.estados = resp.data;
     });
     this.dataService.getAcademicLevels().subscribe((resp:any)=>{
-      this.lvl_academicos = resp;
+      this.lvl_academicos = resp.data;
     });
     this.dataService.getEmploymentStatuses().subscribe((resp:any)=>{
-      this.est_laborales= resp;
+      this.est_laborales= resp.data;
     });
     this.dataService.getIncomeLevels().subscribe((resp:any)=>{
-      this.lvl_ingresos = resp;
+      this.lvl_ingresos = resp.data;
     });
     this.dataService.getWayPays().subscribe((resp:any)=>{
-      this.pagos = resp;
+      this.pagos = resp.data;
     });
   }
 

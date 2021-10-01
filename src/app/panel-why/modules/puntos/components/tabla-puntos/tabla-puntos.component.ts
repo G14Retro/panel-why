@@ -38,7 +38,8 @@ export class TablaPuntosComponent implements OnInit, AfterViewInit {
 
     this.pointService.getPoints(params).subscribe((resp:any)=>{
       this.dataSource.data = resp.data;
-      this.length = resp.data_total_count
+      this.length = resp.data_total_count;
+      this.pageSize = resp.data_page_rows;
     })
   }
 

@@ -1,17 +1,86 @@
-<div>
-    <div></div>
-    <button mat-stroked-button class="btn-back float-end me-2 mb-2 me-md-4 mb-md-4">
-      Cargar Puntos
+<div class="masivos">
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Archivo a subir</mat-label>
+      <mat-select #masivo [(ngModel)]="selectMasivo">
+        <mat-option>----</mat-option>
+        <mat-option value="create">Crear Puntos</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <button mat-stroked-button class="btn-back" [disabled]="masivo.selected == null" (click)="inputFile()">
+      Cargar Archivo
       <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-upload"></i></mat-icon>
     </button>
   </div>
+  <div  class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Descargar plantilla</mat-label>
+      <mat-select #plantilla>
+        <mat-option>----</mat-option>
+        <mat-option value="https://backend-app-panelwhy-com.camtech.com.co/static/templates/puntos_crear.xlsx">Plantilla Crear Puntos</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-icon-button [hidden]="plantilla.selected == null" id="btn-plantilla">
+    <mat-icon (click)="btnPlantilla()"><i class="fi-rr-download"></i></mat-icon>
+  </button>
+  <a [href]="plantilla.value" #download target="_blank" hidden>Descargar Archivo</a>
+  <input type="file" hidden #uploadFile>
+</div>
+<h2 class="ms-4">Búsqueda</h2>
+<div class="row col-12 ps-4">
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por correo</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por ciudad</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por código de estudio</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por nombre de estudio</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por fecha de puntos</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por tipo</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+</div>
+<div class="float-end row">
+  <div class="col-5 me-4 mb-4" (click)="downloadPoints()">
+    <button mat-raised-button class="btn-succ">Descargar Puntos
+      <mat-icon matSuffix style="font-size: 16px;"><i class="fi-rr-download"></i></mat-icon>
+    </button>
+  </div>
+  <div class="col-5 me-4 mb-4">
+    <button mat-raised-button class="btn-succ">Crear Punto
+      <mat-icon matSuffix style="font-size: 16px;"><i class="fi-rr-add"></i></mat-icon>
+    </button>
+  </div>
+</div>
 <div class="ms-2 ms-md-4 me-2 me-md-4 mb-5 mb-md-0">
     <div class="mat-elevation-z1">
       <table  [dataSource]="dataSource" mat-table  matSort>
 
-        <ng-container matColumnDef="acciones">
+        <!-- <ng-container matColumnDef="acciones">
           <div>
-              <th mat-header-cell *matHeaderCellDef></th>
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
               <td mat-cell *matCellDef="let element">
                 <button mat-icon-button (click)="editUser(element.id)">
                   <i class="fi-rr-edit"></i>
@@ -21,47 +90,51 @@
                 </button>
               </td>
             </div>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef> Correo Electrónico </th>
-          <td mat-cell *matCellDef="let element"> {{element.names}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.User.email}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+          <td mat-cell *matCellDef="let element"> {{element.GeographyCity.name | uppercase}} </td>
+        </ng-container>
 
         <ng-container matColumnDef="codigo_estudio">
-          <th mat-header-cell *matHeaderCellDef> Puntos </th>
-          <td mat-cell *matCellDef="let element"> {{element.surnames | titlecase}} </td>
+          <th mat-header-cell *matHeaderCellDef> Codigo de Estudio </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.study_code }} </td>
         </ng-container>
 
         <ng-container matColumnDef="estudio">
-          <th mat-header-cell *matHeaderCellDef> Valor </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          <th mat-header-cell *matHeaderCellDef> Estudio </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.study_name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="registro">
-            <th mat-header-cell *matHeaderCellDef> Cuenta </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_active}} </td>
+            <th mat-header-cell *matHeaderCellDef> Registro </th>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.registry}} </td>
         </ng-container>
 
         <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef> Forma de Pago </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.transaction_type }} </td>
         </ng-container>
 
+        <ng-container matColumnDef="fecha_puntos">
+          <th mat-header-cell *matHeaderCellDef> Fecha de Puntos </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.date_points | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+      
         <ng-container matColumnDef="puntos">
-            <th mat-header-cell *matHeaderCellDef> Tipo de Pago </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+            <th mat-header-cell *matHeaderCellDef> Puntos</th>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.points }} </td>
         </ng-container>
 
         <ng-container matColumnDef="observacion">
             <th mat-header-cell *matHeaderCellDef> Observación </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_superuser | date:'dd/MM/yyyy'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.TransactionPoint.observation }} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -71,9 +144,10 @@
           <td class="mat-cell" colspan="4">No hay datos para mostrar</td>
         </tr>
       </table>
-      <mat-paginator style="width: 100%;"
-      [pageSize]="10"
-      [pageSizeOptions] = "[5,10,20,100]"
+      <mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      (page) ="pageEvent($event)"
+      [pageSizeOptions] = "pageSizeOptions"
       >
     </mat-paginator>
   </div>
