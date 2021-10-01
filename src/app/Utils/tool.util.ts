@@ -12,6 +12,15 @@ export default class Utils{
         });
     }
 
+
+    static swalErrorConfirm(title:string,text:string){
+        Swal.fire({
+            icon: 'error',
+            title: title,
+            text: text,
+        });
+    }
+
     static swalSuccess(title:string,text:string){
         Swal.fire({
             icon: 'success',

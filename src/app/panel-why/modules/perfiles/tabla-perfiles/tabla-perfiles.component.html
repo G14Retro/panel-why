@@ -1,47 +1,129 @@
+<div class="masivos">
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Archivo a subir</mat-label>
+      <mat-select #masivo [(ngModel)]="selectMasivo">
+        <mat-option>----</mat-option>
+        <mat-option value="create">Crear Perfiles</mat-option>
+        <mat-option value="update">Actualizar Perfiles</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="me-2 mb-2 me-md-4 mb-md-4">
+    <button mat-stroked-button class="btn-back" [disabled]="masivo.selected == null" (click)="inputFile()">
+      Cargar Archivo
+      <mat-icon matSuffix style="font-size: 1em;margin-top: .5em;"><i class="fi-rr-upload"></i></mat-icon>
+    </button>
+  </div>
+  <div  class="me-2 mb-2 me-md-4 mb-md-4">
+    <mat-form-field color="primary" appearance="outline">
+      <mat-label>Descargar plantilla</mat-label>
+      <mat-select #plantilla>
+        <mat-option>----</mat-option>
+        <mat-option value="https://backend-app-panelwhy-com.camtech.com.co/static/templates/perfiles_crear.xlsx">Plantilla Crear Perfiles</mat-option>
+        <mat-option value="https://backend-app-panelwhy-com.camtech.com.co/static/templates/perfiles_actualizar.xlsx">Plantilla Actualizar Usuarios</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-icon-button [hidden]="plantilla.selected == null" id="btn-plantilla">
+    <mat-icon (click)="btnPlantilla()"><i class="fi-rr-download"></i></mat-icon>
+  </button>
+  <a [href]="plantilla.value" #download target="_blank" hidden></a>
+  <input type="file" hidden #uploadFile>
+</div>
+<h2 class="ms-4">Búsqueda</h2>
+<div class="row col-12 ps-4">
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por correo</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por ciudad</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-2">
+    <mat-label>Buscar por tipo de usuario</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+  </mat-form-field>
+</div>
+<div class="float-end row">
+  <div class="col-5 me-4 mb-4" (click)="downloadProfiles()">
+    <button mat-raised-button class="btn-succ">Descargar Perfiles
+      <mat-icon matSuffix style="font-size: 16px;"><i class="fi-rr-download"></i></mat-icon>
+    </button>
+  </div>
+  <div class="col-5 me-4 mb-4">
+    <button mat-raised-button class="btn-succ">Crear Perfil
+      <mat-icon matSuffix style="font-size: 16px;"><i class="fi-rr-add"></i></mat-icon>
+    </button>
+  </div>
+</div>
 <div class="ms-2 ms-md-4 me-2 me-md-4 mb-3 mb-md-0">
     <div class="mat-elevation-z1">
       <table  [dataSource]="dataSource" mat-table  matSort>
 
         <ng-container matColumnDef="acciones">
           <div>
-              <th mat-header-cell *matHeaderCellDef></th>
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="editUser(element.id)">
-                  <i class="fi-rr-edit"></i>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon style="font-size: 1em;"><i class="fi-rr-menu-dots-vertical"></i></mat-icon>
                 </button>
-                <button mat-icon-button (click)="removeUser(element.id)">
-                  <i class="fi-rr-trash"></i>
-                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Ver detalle</button>
+                  <button mat-menu-item>Editar</button>
+                </mat-menu>
               </td>
             </div>
         </ng-container>
 
         <ng-container matColumnDef="nombres">
           <th mat-header-cell *matHeaderCellDef> Nombres </th>
-          <td mat-cell *matCellDef="let element"> {{element.names | titlecase}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.User.names}} </td>
         </ng-container>
-
 
         <ng-container matColumnDef="apellidos">
           <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-          <td mat-cell *matCellDef="let element"> {{element.surnames | titlecase}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.User.surnames}} </td>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef> Correo Electrónico </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.User.email}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef> Estado </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_active}} </td>
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+          <td mat-cell *matCellDef="let element"> {{element.GeographyCity.name | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="tipo_usuario">
             <th mat-header-cell *matHeaderCellDef> Tipo de Usuario </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_superuser }} </td>
+            <td mat-cell *matCellDef="let element"> {{element.UserProfile.user_type }} </td>
         </ng-container>
 
+        <ng-container matColumnDef="puntos_actuales">
+          <th mat-header-cell *matHeaderCellDef> Puntos Actuales </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionAccount.points_actual}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="puntos_totales">
+          <th mat-header-cell *matHeaderCellDef> Puntos Totales </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionAccount.points_total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="puntos_redimidos">
+          <th mat-header-cell *matHeaderCellDef> Puntos Redimidos </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionAccount.points_redention}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="puntos_pagos">
+          <th mat-header-cell *matHeaderCellDef> Pagos </th>
+          <td mat-cell *matCellDef="let element"> {{element.TransactionAccount.value | currency:'':'symbol':'1.0'}} </td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -50,9 +132,10 @@
           <td class="mat-cell" colspan="4">No hay datos para mostrar</td>
         </tr>
       </table>
-      <mat-paginator style="width: 100%;"
-      [pageSize]="10"
-      [pageSizeOptions] = "[5,10,20,100]"
+      <mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      (page) ="pageEvent($event)"
+      [pageSizeOptions] = "pageSizeOptions"
       >
     </mat-paginator>
   </div>

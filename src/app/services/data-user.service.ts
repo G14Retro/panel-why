@@ -48,39 +48,39 @@ export class DataUserService {
   }
 
   getNitTypes(){
-    return this.http.get(`${PARAMETERS}society_nit_types/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_nit_types/by_request/all/`,{});
   }
 
   getSocioEconomics(){
-    return this.http.get(`${PARAMETERS}society_socio_economics/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_socio_economics/by_request/all/`,{});
   }
 
   getSocioGenders(){
-    return this.http.get(`${PARAMETERS}society_genders/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_genders/by_request/all/`,{});
   }
 
   getPurchaseDecisions(){
-    return this.http.get(`${PARAMETERS}society_purchase_decisions/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_purchase_decisions/by_request/all/`,{});
   }
 
   getMaritalStatuses(){
-    return this.http.get(`${PARAMETERS}society_marital_statuses/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_marital_statuses/by_request/all/`,{});
   }
 
   getAcademicLevels(){
-    return this.http.get(`${PARAMETERS}society_academic_levels/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_academic_levels/by_request/all/`,{});
   }
 
   getEmploymentStatuses(){
-    return this.http.get(`${PARAMETERS}society_employment_statuses/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_employment_statuses/by_request/all/`,{});
   }
 
   getIncomeLevels(){
-    return this.http.get(`${PARAMETERS}society_income_levels/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_income_levels/by_request/all/`,{});
   }
 
   getWayPays(){
-    return this.http.get(`${PARAMETERS}society_way_to_pays/by_request/active/?skip=0&limit=1000`);
+    return this.http.post(`${PARAMETERS}society_way_to_pays/by_request/all/`,{});
   }
 
 

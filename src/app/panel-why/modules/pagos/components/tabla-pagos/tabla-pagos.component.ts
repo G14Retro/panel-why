@@ -39,7 +39,7 @@ export class TablaPagosComponent implements OnInit,AfterViewInit {
       console.log(resp);
       this.dataSource.data = resp.data
       this.length = resp.data_total_count;
-      this.pageSize = resp.data_query_count;
+      this.pageSize = resp.data_page_rows;
     });
   }
 

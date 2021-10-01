@@ -43,4 +43,8 @@ export class DashboardService {
     return this.http.get(`${DATAUSER}profile-read/`,this.httpOptions);
   }
 
+  getUser(){
+    return this.http.get(`${DATAUSER}user-read`,this.httpOptions);
+  }
+
 }
