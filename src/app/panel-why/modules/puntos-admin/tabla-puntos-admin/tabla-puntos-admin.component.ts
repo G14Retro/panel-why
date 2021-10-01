@@ -57,7 +57,7 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit {
   }
 
   uploadPlantilla(file){
-    this.adminService.updateFile(file,this.selectMasivo).subscribe((resp:any)=>{
+    this.adminService.filePoints(file,this.selectMasivo).subscribe((resp:any)=>{
       console.log(resp);
       if (this.selectMasivo == 'create') {
         this.nameFile = 'User-Create-'+moment(new Date).format('yyyy-MM-DD_hh-mm-ss');
