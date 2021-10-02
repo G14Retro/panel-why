@@ -75,7 +75,7 @@
     </button>
   </div>
   <div class="col-5 me-4 mb-4">
-    <button mat-raised-button class="btn-succ">Crear Usuario
+    <button mat-raised-button class="btn-succ" (click)="newUser()">Crear Usuario
       <mat-icon matSuffix style="font-size: 16px;"><i class="fi-rr-add"></i></mat-icon>
     </button>
   </div>
@@ -94,8 +94,8 @@
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>Ver detalle</button>
                     <button mat-menu-item>Editar</button>
-                    <button mat-menu-item>Habilitar</button>
-                    <button mat-menu-item>Inhabilitar</button>
+                    <button mat-menu-item *ngIf="!element.User.is_active">Habilitar</button>
+                    <button mat-menu-item *ngIf="element.User.is_active">Inhabilitar</button>
                   </mat-menu>
                 </td>
               </div>
@@ -119,7 +119,7 @@
   
           <ng-container matColumnDef="estado">
               <th mat-header-cell *matHeaderCellDef> Estado </th>
-              <td mat-cell *matCellDef="let element"> {{element.User.is_active}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.User.is_active | boolean}} </td>
           </ng-container>
   
           <ng-container matColumnDef="telefono">
