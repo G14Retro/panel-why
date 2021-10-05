@@ -5,7 +5,9 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
+import Swal from 'sweetalert2';
 import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
+import { DetalleUsuarioComponent } from '../detalle-usuario/detalle-usuario.component';
 
 @Component({
   selector: 'app-tabla-usuarios',
@@ -47,12 +49,12 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscription.unsubscribe();
   }
 
-  editUser(id){
-
-  }
-
-  removeUser(id){
-
+  detailUser(id,state:boolean){
+    const userRef = this.dialog.open(DetalleUsuarioComponent,{
+      width: '840px',
+      disableClose: true,
+      data:{id_user: id, edit: state}
+    });
   }
 
   btnPlantilla():void{
@@ -121,6 +123,24 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
     const userRef = this.dialog.open(CrearUsuarioComponent,{
       width: '840px',
       disableClose: true,
+    });
+  }
+
+  statusUserById(id_user,type:string){
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Desea cambiar el estado del usuario?',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      reverseButtons: true,
+      confirmButtonColor: '#C44A5D'
+    }).then(result=>{
+      if (result.isConfirmed) {
+        this.adminService.statusUserById(id_user,type).subscribe(()=>{
+          Utils.swalSuccess('¡Excelente!','Se ha cambiado el estado del usuario correctamente.');
+        });
+      }
     });
   }
 

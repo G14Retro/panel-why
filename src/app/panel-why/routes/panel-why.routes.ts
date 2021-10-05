@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { ProfileComponent } from "src/app/profile/profile.component";
+import { AdminGuard } from "src/app/guards/admin.guard";
 import { DashboardComponent } from "../modules/dashboard/dashboard.component";
 import { PagosAdminComponent } from "../modules/pagos-admin/pagos-admin.component";
 import { PagosComponent } from "../modules/pagos/pagos.component";
@@ -16,8 +16,8 @@ export const MENU_ROUTES:Routes = [
     {path: 'completar-perfil',children:COMPLETAR_PERFIL_ROUTES},
     {path:'pagos',component:PagosComponent},
     {path:'puntos',component:PuntosComponent},
-    {path:'usuarios',component:UsuariosComponent},
-    {path:'perfiles',component:PerfilesComponent},
-    {path:'puntos-admin',component:PuntosAdminComponent},
-    {path:'pagos-admin',component:PagosAdminComponent},
+    {path:'usuarios',component:UsuariosComponent,canActivate:[AdminGuard]},
+    {path:'perfiles',component:PerfilesComponent,canActivate:[AdminGuard]},
+    {path:'puntos-admin',component:PuntosAdminComponent,canActivate:[AdminGuard]},
+    {path:'pagos-admin',component:PagosAdminComponent,canActivate:[AdminGuard]},
 ]

@@ -21,3 +21,11 @@
     justify-content: right;
     gap: 2em;
 }
+
+.btns-dialog{
+  margin-top: 2em;
+  display: grid;
+  padding-left: 5em;
+  grid-template-columns: repeat(2,15em);
+  gap: .5em;
+}

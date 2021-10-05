@@ -1,0 +1,72 @@
+<button style="float: right;" mat-icon-button mat-dialog-close>
+    <i class="fi-rr-cross"></i>
+</button>
+<form mat-dialog-content class="content ms-5" [formGroup]="pointForm">
+    <h1>Crear Punto</h1>
+    <mat-divider class="mb-3"></mat-divider>
+    <div>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1">
+            <mat-label>Ingrese un Correo Electrónico</mat-label>
+            <input type="text" matInput cdkFocusInitial (keydown.enter)="getUsers()" 
+            [matAutocomplete]="user" 
+            formControlName="email">
+            <mat-icon matSuffix (click)="getUsers()"><i class="fi-rr-search"></i></mat-icon>
+            <mat-autocomplete #user="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.email}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1"
+        *ngIf="id_user > 0" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="nombre">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Código de Estudio</mat-label>
+            <input type="text" matInput  formControlName="study_code">
+            <mat-error *ngIf="pointForm.get('study_code').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Nombre del Estudio</mat-label>
+            <input type="text" matInput  formControlName="study_name">
+            <mat-error *ngIf="pointForm.get('study_name').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Registro</mat-label>
+            <input type="text" matInput  formControlName="registry">
+            <mat-error *ngIf="pointForm.get('registry').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Observación</mat-label>
+            <input type="text" matInput  formControlName="observation">
+            <mat-error *ngIf="pointForm.get('observation').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Tipo de Transacción</mat-label>
+            <mat-select formControlName="transaction_type">
+                <mat-option value="CR">Créditos</mat-option>
+                <mat-option value="RV">Reversos</mat-option>
+            </mat-select>
+            <mat-error *ngIf="pointForm.get('transaction_type').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Puntos</mat-label>
+            <input type="number" matInput  formControlName="points">
+            <mat-error *ngIf="pointForm.get('points').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Fecha de Puntos</mat-label>
+            <input matInput [matDatepicker]="puntos" formControlName="date_points">
+            <mat-datepicker-toggle matSuffix [for]="puntos"></mat-datepicker-toggle>
+            <mat-datepicker #puntos></mat-datepicker>
+            <mat-error *ngIf="pointForm.get('date_points').hasError('required')">Por favor seleccione una opción</mat-error>
+          </mat-form-field>
+    </div>
+    <div class="btns-dialog ms-2">
+        <button mat-stroked-button class="btn-back" (click)="pointRef.close()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="createPoint()">Guardar</button>
+    </div>
+</form>

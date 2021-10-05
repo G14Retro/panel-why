@@ -1,8 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
+import { CrearPerfilComponent } from '../components/crear-perfil/crear-perfil.component';
+import { DetallePerfilComponent } from '../components/detalle-perfil/detalle-perfil.component';
 
 @Component({
   selector: 'app-tabla-perfiles',
@@ -24,6 +27,7 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
   constructor(
     private adminService:AdminService,
+    private dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -95,6 +99,21 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
     this.adminService.downloadProfiles().subscribe((resp:any)=>{
       console.log(resp);
       Utils.downloadFile(resp,'UserProfile-'+moment(new Date).format('yyyy-MM-DD_hh-mm-ss'));
+    })
+  }
+
+  newProfile(){
+    const perfilRef = this.dialog.open(CrearPerfilComponent,{
+      width: '850px',
+      disableClose: true,
+    })
+  }
+
+  detailProfile(profile,edit:boolean){
+    const profileRef = this.dialog.open(DetallePerfilComponent,{
+      width: '850px',
+      disableClose: true,
+      data: {profile: profile, edit: edit}
     })
   }
 

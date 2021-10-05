@@ -2,7 +2,12 @@
     <i class="fi-rr-cross"></i>
 </button>
 <form mat-dialog-content class="content-dialog" [formGroup]="userForm">
-    <h2>Crear Usuario</h2>
+    <div class="row">
+        <h2 class="col-11">Detalle Usuario</h2>
+        <button mat-icon-button class="col-1" *ngIf="!datos.edit" (click)="edit()">
+            <mat-icon><i class="fi-rr-edit"></i></mat-icon>
+        </button>
+    </div>
     <mat-divider class="mb-3"></mat-divider>
     <div class="camposDialog">
         <mat-form-field appearance="outline">
@@ -52,14 +57,14 @@
         <mat-form-field appearance="outline">
             <mat-label>¿Es Usuario Administrador?</mat-label>
             <mat-select formControlName="is_superuser">
-                <mat-option [value]="1">Si</mat-option>
-                <mat-option [value]="0">No</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
             </mat-select>
             <mat-error *ngIf="userForm.get('geography_city_id').hasError('required')">Por favor seleccione una opción</mat-error>
         </mat-form-field>
     </div>
-    <div class="btns-dialog">
-        <button mat-stroked-button class="btn-back" (click)="userRef.close()">Cancelar</button>
-        <button mat-raised-button class="btn-succ" (click)="updateteUser()">Guardar</button>
+    <div class="btns-dialog" [hidden]="!datos.edit">
+        <button mat-stroked-button class="btn-back" (click)="edit()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="updateUser()">Guardar</button>
     </div>
 </form>

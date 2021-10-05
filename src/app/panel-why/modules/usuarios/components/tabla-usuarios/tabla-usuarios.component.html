@@ -92,10 +92,10 @@
                     <mat-icon style="font-size: 1em;"><i class="fi-rr-menu-dots-vertical"></i></mat-icon>
                   </button>
                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item>Ver detalle</button>
-                    <button mat-menu-item>Editar</button>
-                    <button mat-menu-item *ngIf="!element.User.is_active">Habilitar</button>
-                    <button mat-menu-item *ngIf="element.User.is_active">Inhabilitar</button>
+                    <button mat-menu-item (click)="detailUser(element.User.id,false)">Ver detalle</button>
+                    <button mat-menu-item (click)="detailUser(element.User.id,true)">Editar</button>
+                    <button mat-menu-item *ngIf="!element.User.is_active" (click)="statusUserById(element.User.id,'active')">Habilitar</button>
+                    <button mat-menu-item *ngIf="element.User.is_active" (click)="statusUserById(element.User.id,'inactive')">Inhabilitar</button>
                   </mat-menu>
                 </td>
               </div>

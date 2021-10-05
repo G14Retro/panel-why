@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
+import { CrearPagoComponent } from '../components/crear-pago/crear-pago.component';
 
 @Component({
   selector: 'app-tabla-pagos-admin',
@@ -23,6 +25,7 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
   constructor(
     private adminService:AdminService,
+    private dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,12 +37,11 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
     this.paginator._intl.itemsPerPageLabel="Registros por pagina";
   }
 
-  editUser(id){
-
-  }
-
-  removeUser(id){
-
+  newPay(){
+    const pagoRef = this.dialog.open(CrearPagoComponent,{
+      width: '850px',
+      disableClose: true,
+    })
   }
 
   downloadPays(){
