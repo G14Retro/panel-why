@@ -1,0 +1,23 @@
+@import url(../../panel-why.component.scss);
+.content-dialog{
+    margin-top: 2em;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.camposDialog{
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.btns-dialog{
+    padding-left: 9em;
+    padding-bottom: 2em;
+    display: grid;
+    grid-template-columns: 15em 15em;
+    grid-template-rows: 3.5em;
+    justify-self: center;
+    gap: 1em;
+}

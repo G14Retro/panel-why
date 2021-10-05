@@ -86,6 +86,10 @@ export class AuthService {
     }
   }
 
+  validIsSuperUser():boolean{
+    return this.user.is_superuser;
+  }
+
   validProfile():boolean{
     return this.user.has_perfil;
   }

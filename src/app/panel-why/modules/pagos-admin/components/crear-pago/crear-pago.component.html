@@ -1,0 +1,76 @@
+<button style="float: right;" mat-icon-button mat-dialog-close>
+    <i class="fi-rr-cross"></i>
+</button>
+<form mat-dialog-content class="content ms-5" [formGroup]="pagoForm">
+    <h1>Crear Punto</h1>
+    <mat-divider class="mb-3"></mat-divider>
+    <div>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1">
+            <mat-label>Ingrese un Correo Electrónico</mat-label>
+            <input type="text" matInput cdkFocusInitial (keydown.enter)="getUsers()" 
+            [matAutocomplete]="user" 
+            formControlName="email">
+            <mat-icon matSuffix (click)="getUsers()"><i class="fi-rr-search"></i></mat-icon>
+            <mat-autocomplete #user="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.email}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1"
+        *ngIf="id_user > 0" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="nombre">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Número Celular</mat-label>
+            <input type="number" matInput  formControlName="mobile_number">
+            <mat-error *ngIf="pagoForm.get('mobile_number').hasError('required')">Por favor ingrese su número celular</mat-error>
+            <mat-error *ngIf="pagoForm.get('mobile_number').hasError('pattern')">Ingrese un número de celular valido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Forma de pago</mat-label>
+            <mat-select formControlName="way_to_pay">
+                <mat-option>--------------</mat-option>
+                <mat-option *ngFor="let pago of pagos" [value]="pago.id">{{pago.description}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="pagoForm.get('way_to_pay').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Observación</mat-label>
+            <input type="text" matInput  formControlName="observation">
+            <mat-error *ngIf="pagoForm.get('observation').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Puntos</mat-label>
+            <input type="number" matInput  formControlName="points">
+            <mat-error *ngIf="pagoForm.get('points').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Valor Puntos</mat-label>
+            <input type="number" matInput  formControlName="value">
+            <mat-error *ngIf="pagoForm.get('value').hasError('required')">Por favor este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Fecha de Puntos</mat-label>
+            <input matInput [matDatepicker]="puntos" formControlName="date_payed">
+            <mat-datepicker-toggle matSuffix [for]="puntos"></mat-datepicker-toggle>
+            <mat-datepicker #puntos></mat-datepicker>
+            <mat-error *ngIf="pagoForm.get('date_payed').hasError('required')">Por favor seleccione una opción</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
+            <mat-label>Tipo de Transacción</mat-label>
+            <mat-select formControlName="transaction_type">
+                <mat-option value="PG">Pagos</mat-option>
+                <mat-option value="RV">Reversos</mat-option>
+            </mat-select>
+            <mat-error *ngIf="pagoForm.get('transaction_type').hasError('required')">Por favor seleccione una opción.</mat-error>
+        </mat-form-field> 
+    </div>
+    <div class="btns-dialog ms-2">
+        <button mat-stroked-button class="btn-back" (click)="payRef.close()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="createPay()">Guardar</button>
+    </div>
+</form>

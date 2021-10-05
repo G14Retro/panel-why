@@ -1,15 +1,20 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
+import Swal from 'sweetalert2';
+import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
+import { DetalleUsuarioComponent } from '../detalle-usuario/detalle-usuario.component';
 
 @Component({
   selector: 'app-tabla-usuarios',
   templateUrl: './tabla-usuarios.component.html',
   styleUrls: ['./tabla-usuarios.component.scss']
 })
-export class TablaUsuariosComponent implements OnInit, AfterViewInit {
+export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   selectMasivo = '';
   displayedColumns:string[] = ['acciones','nombres','apellidos','email','estado','telefono','ciudad'];
@@ -21,25 +26,35 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
+  //Observable para los cambios de la matriz
+  subscription:Subscription;
   nameFile:string;
   constructor(
     private adminService:AdminService,
+    private dialog:MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.getAllUsers(this.page,this.pageSize);
+    this.subscription = this.adminService.refresh$.subscribe(()=>{
+      this.getAllUsers(this.page,this.pageSize);
+    });
   }
 
   ngAfterViewInit(){
     this.paginator._intl.itemsPerPageLabel="Registros por pagina";
   }
 
-  editUser(id){
-
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
-  removeUser(id){
-
+  detailUser(id,state:boolean){
+    const userRef = this.dialog.open(DetalleUsuarioComponent,{
+      width: '840px',
+      disableClose: true,
+      data:{id_user: id, edit: state}
+    });
   }
 
   btnPlantilla():void{
@@ -102,6 +117,31 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit {
     this.pageSize = event.pageSize;
     this.page = event.pageIndex + 1;
     this.getAllUsers(this.page,this.pageSize);
+  }
+
+  newUser(){
+    const userRef = this.dialog.open(CrearUsuarioComponent,{
+      width: '840px',
+      disableClose: true,
+    });
+  }
+
+  statusUserById(id_user,type:string){
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Desea cambiar el estado del usuario?',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      reverseButtons: true,
+      confirmButtonColor: '#C44A5D'
+    }).then(result=>{
+      if (result.isConfirmed) {
+        this.adminService.statusUserById(id_user,type).subscribe(()=>{
+          Utils.swalSuccess('¡Excelente!','Se ha cambiado el estado del usuario correctamente.');
+        });
+      }
+    });
   }
 
 }

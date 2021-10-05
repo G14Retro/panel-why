@@ -22,10 +22,16 @@ import { PuntosAdminComponent } from './modules/puntos-admin/puntos-admin.compon
 import { PagosAdminComponent } from './modules/pagos-admin/pagos-admin.component';
 import { CambioContrasenaComponent } from './modules/perfil/pages/cambio-contrasena/cambio-contrasena.component';
 import { EditarPerfilComponent } from './modules/perfil/pages/editar-perfil/editar-perfil.component';
-import { TablaUsuariosComponent } from './modules/usuarios/tabla-usuarios/tabla-usuarios.component';
+import { TablaUsuariosComponent } from './modules/usuarios/components/tabla-usuarios/tabla-usuarios.component';
 import { TablaPerfilesComponent } from './modules/perfiles/tabla-perfiles/tabla-perfiles.component';
 import { TablaPagosAdminComponent } from './modules/pagos-admin/tabla-pagos-admin/tabla-pagos-admin.component';
 import { TablaPuntosAdminComponent } from './modules/puntos-admin/tabla-puntos-admin/tabla-puntos-admin.component';
+import { CrearUsuarioComponent } from './modules/usuarios/components/crear-usuario/crear-usuario.component';
+import { DetalleUsuarioComponent } from './modules/usuarios/components/detalle-usuario/detalle-usuario.component';
+import { CrearPerfilComponent } from './modules/perfiles/components/crear-perfil/crear-perfil.component';
+import { DetallePerfilComponent } from './modules/perfiles/components/detalle-perfil/detalle-perfil.component';
+import { CrearPuntoComponent } from './modules/puntos-admin/components/crear-punto/crear-punto.component';
+import { CrearPagoComponent } from './modules/pagos-admin/components/crear-pago/crear-pago.component';
 
 
 
@@ -53,7 +59,13 @@ import { TablaPuntosAdminComponent } from './modules/puntos-admin/tabla-puntos-a
     TablaUsuariosComponent,
     TablaPerfilesComponent,
     TablaPagosAdminComponent,
-    TablaPuntosAdminComponent 
+    TablaPuntosAdminComponent,
+    CrearUsuarioComponent,
+    DetalleUsuarioComponent,
+    CrearPerfilComponent,
+    DetallePerfilComponent,
+    CrearPuntoComponent,
+    CrearPagoComponent,
   ],
   imports: [
     CommonModule,

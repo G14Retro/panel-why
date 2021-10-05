@@ -1,15 +1,18 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
+import { CrearPuntoComponent } from '../components/crear-punto/crear-punto.component';
 
 @Component({
   selector: 'app-tabla-puntos-admin',
   templateUrl: './tabla-puntos-admin.component.html',
   styleUrls: ['./tabla-puntos-admin.component.scss']
 })
-export class TablaPuntosAdminComponent implements OnInit, AfterViewInit {
+export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns:string[] = ['email','ciudad','codigo_estudio','estudio','registro','tipo','fecha_puntos','puntos','observacion'];
   dataSource = [];
   selectMasivo;
@@ -21,24 +24,33 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
+    //Observable para los cambios de la matriz
+    subscription:Subscription;
   constructor(
     private adminService:AdminService,
+    public dialog:MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.getAllPoints(this.page,this.pageSize);
+    this.subscription = this.adminService.refresh$.subscribe(()=>{
+      this.getAllPoints(this.page,this.pageSize);
+    })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit(){
     this.paginator._intl.itemsPerPageLabel="Registros por pagina";
   }
 
-  editUser(id){
-
-  }
-
-  removeUser(id){
-
+  newPoints(){
+    const pointRef = this.dialog.open(CrearPuntoComponent,{
+      width: '850px',
+      disableClose: true,
+    })
   }
 
   btnPlantilla(){
