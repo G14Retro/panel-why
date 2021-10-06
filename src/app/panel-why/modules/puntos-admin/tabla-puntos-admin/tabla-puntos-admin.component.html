@@ -33,33 +33,35 @@
 <div class="row col-12 ps-4">
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por correo</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroCorreo" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por ciudad</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroCiudad" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por código de estudio</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroCodigoEstudio" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por nombre de estudio</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroNombreEstudio" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por fecha de puntos</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [matDatepicker]="fechaPunto" [(ngModel)]="filtroFecha" 
+    (dateChange)="filtrar()">
+    <mat-datepicker-toggle matSuffix [for]="fechaPunto"></mat-datepicker-toggle>
+    <mat-datepicker #fechaPunto></mat-datepicker>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por tipo</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroTipoPunto" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
 </div>
 <div class="float-end row">

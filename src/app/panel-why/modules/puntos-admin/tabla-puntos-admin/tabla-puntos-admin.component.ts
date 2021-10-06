@@ -21,6 +21,15 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
   pageSize = 10;
   page = 1;
   pageSizeOptions: number[] = [10, 25, 50, 100];
+
+  //Filtros
+  filtroCorreo:string = '';
+  filtroCiudad:string = '';
+  filtroCodigoEstudio:string = '';
+  filtroNombreEstudio:string = '';
+  filtroFecha:string = '';
+  filtroTipoPunto:string = '';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
@@ -72,7 +81,7 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
     this.adminService.filePoints(file,this.selectMasivo).subscribe((resp:any)=>{
       console.log(resp);
       if (this.selectMasivo == 'create') {
-        this.nameFile = 'User-Create-'+moment(new Date).format('yyyy-MM-DD_hh-mm-ss');
+        this.nameFile = 'TransactionPoint-'+moment(new Date).format('yyyy-MM-DD_hh-mm-ss');
       }
       Utils.downloadFile(resp,this.nameFile);
       Utils.swalSuccess('¡Excelente!','Se ha cargado el archivo con exito, verifica los resultados.')
@@ -90,7 +99,57 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   getAllPoints(page,pageSize){
-    const params = {};
+    const params = {data_filterby:[]};
+    if (this.filtroCorreo != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "email",
+        type: "like",
+        value: `%${this.filtroCorreo.toLowerCase()}%`
+      });
+    }
+    if (this.filtroCiudad != '') {
+      params.data_filterby.push({
+        model: "GeographyCity",
+        field: "name",
+        type: "like",
+        value: `%${this.filtroCiudad}%`
+      });
+    }
+    if (this.filtroCodigoEstudio != '') {
+      params.data_filterby.push({
+        model: "TransactionPoint",
+        field: "study_code",
+        type: "like",
+        value: `%${this.filtroCodigoEstudio.toUpperCase()}%`
+      });
+    }
+    if (this.filtroNombreEstudio != '') {
+      params.data_filterby.push({
+        model: "TransactionPoint",
+        field: "study_name",
+        type: "like",
+        value: `%${this.filtroNombreEstudio.toUpperCase()}%`
+      });
+    }
+    if (this.filtroFecha != '') {
+      if (this.filtroFecha != null) {
+        params.data_filterby.push({
+          model: "TransactionPoint",
+          field: "date_points",
+          type: "eq",
+          value: `${moment(this.filtroFecha).format('YYYY-MM-DD')}`
+        });
+      }
+    }
+    if (this.filtroTipoPunto != '') {
+      params.data_filterby.push({
+        model: "TransactionPoint",
+        field: "transaction_type",
+        type: "like",
+        value: `%${this.filtroTipoPunto.toUpperCase()}%`
+      });
+    }
     this.adminService.getAllPoints(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;
       this.length = resp.data_total_count;
@@ -101,6 +160,10 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
   pageEvent(event:any){
     this.pageSize = event.pageSize;
     this.page = event.pageIndex + 1;
+    this.getAllPoints(this.page,this.pageSize);
+  }
+
+  filtrar(){
     this.getAllPoints(this.page,this.pageSize);
   }
 

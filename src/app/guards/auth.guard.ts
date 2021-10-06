@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (!this.authService.validToken()) {
+      console.log("Validando token");
       this.authService.logOut();
       window.location.replace('/login');
       return false

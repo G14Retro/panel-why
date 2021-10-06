@@ -1,0 +1,16 @@
+<button style="float: right;" mat-icon-button mat-dialog-close>
+    <i class="fi-rr-cross"></i>
+</button>
+<form>
+    <h2>Cuentanos ¿por que nos dejas?</h2>
+    <mat-divider class="mb-3"></mat-divider>
+    <mat-form-field appearance="outline">
+        <mat-label>Deja aqui tu comentario</mat-label>
+        <textarea matInput [formControl]="comentario"></textarea>
+        <mat-error>Este campo no puede ir vacio.</mat-error>
+    </mat-form-field>
+    <div class="btn-dialog">
+        <button mat-stroked-button class="btn-back" (click)="bajaRef.close()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="confirmar()">Confirmar</button>
+    </div>
+</form>

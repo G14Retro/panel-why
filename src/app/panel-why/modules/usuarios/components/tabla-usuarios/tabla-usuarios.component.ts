@@ -16,6 +16,14 @@ import { DetalleUsuarioComponent } from '../detalle-usuario/detalle-usuario.comp
 })
 export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  //Filtros
+  filtroNombre:string = '';
+  filtroApellido:string = '';
+  filtroCorreo:string = '';
+  filtroEstado:boolean;
+  filtroTelefono:string = '';
+  filtroCiudad:string = '';
+
   selectMasivo = '';
   displayedColumns:string[] = ['acciones','nombres','apellidos','email','estado','telefono','ciudad'];
   dataSource = [];
@@ -105,7 +113,55 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   getAllUsers(page,pageSize){
-    const params = {};
+    const params = {data_filterby:[]};
+    if (this.filtroNombre != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "names",
+        type: "like",
+        value: `%${this.filtroNombre.toUpperCase()}%`
+      });
+    }
+    if (this.filtroApellido != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "surnames",
+        type: "like",
+        value: `%${this.filtroApellido.toUpperCase()}%`
+      });
+    }
+    if (this.filtroCorreo != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "email",
+        type: "like",
+        value: `%${this.filtroCorreo.toLowerCase()}%`
+      });
+    }
+    if (this.filtroEstado != null) {
+      params.data_filterby.push({
+        model: "User",
+        field: "is_active",
+        type: "eq",
+        value: `${this.filtroEstado}`
+      });
+    }
+    if (this.filtroTelefono != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "mobile_number",
+        type: "like",
+        value: `%${this.filtroTelefono}%`
+      });
+    }
+    if (this.filtroCiudad != '') {
+      params.data_filterby.push({
+        model: "GeographyCity",
+        field: "name",
+        type: "like",
+        value: `%${this.filtroCiudad}%`
+      });
+    }
     this.adminService.getAllUsers(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;
       this.length = resp.data_total_count;
@@ -142,6 +198,10 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
         });
       }
     });
+  }
+
+  filtrar(){
+    this.getAllUsers(this.page,this.pageSize);
   }
 
 }

@@ -80,6 +80,7 @@ export class AdminService {
   }
 
   getAllPoints(params,page,registros){
+    console.log(params);
     return this.http.post(`${TRANSACTIONADMIN}transaction_points/by_request/all/?data_page_rows=${registros}&data_page_current=${page}`,params,this.httpOptionsPost);
   }
 
@@ -154,7 +155,7 @@ export class AdminService {
   }
 
   getUserByEmail(params){
-    return this.http.post(`${USERADMIN}users/by_request/all/?is_active=true`,params,this.httpOptionsPost);
+    return this.http.post(`${USERADMIN}users/by_request/all/`,params,this.httpOptionsPost);
   }
 
   createPoint(id_user,data){
