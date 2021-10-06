@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import Swal from 'sweetalert2';
+import { DarseBajaComponent } from '../../components/darse-baja/darse-baja.component';
 import { CambioContrasenaComponent } from '../../modules/perfil/pages/cambio-contrasena/cambio-contrasena.component';
 import { EditarPerfilComponent } from '../../modules/perfil/pages/editar-perfil/editar-perfil.component';
 
@@ -132,6 +134,27 @@ dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     const passwordRef = this.dialog.open(CambioContrasenaComponent,{
       width: '524px',
     })
+  }
+
+  darseBaja(){
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Desea desactivar su usuario?',
+      text: 'Recuerde que un vez confirme todo el proceso perdera sus puntos y su usuario estará desactivado.',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#C44A5D',
+      reverseButtons: true,
+    }).then(result=>{
+      if (result.isConfirmed) {
+        const bajaRef = this.dialog.open(DarseBajaComponent,{
+          width: '450px',
+          disableClose: true,
+          data: {},
+        })
+      }
+    });
   }
 
 

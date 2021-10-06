@@ -32,6 +32,7 @@ import { CrearPerfilComponent } from './modules/perfiles/components/crear-perfil
 import { DetallePerfilComponent } from './modules/perfiles/components/detalle-perfil/detalle-perfil.component';
 import { CrearPuntoComponent } from './modules/puntos-admin/components/crear-punto/crear-punto.component';
 import { CrearPagoComponent } from './modules/pagos-admin/components/crear-pago/crear-pago.component';
+import { DarseBajaComponent } from './components/darse-baja/darse-baja.component';
 
 
 
@@ -66,6 +67,7 @@ import { CrearPagoComponent } from './modules/pagos-admin/components/crear-pago/
     DetallePerfilComponent,
     CrearPuntoComponent,
     CrearPagoComponent,
+    DarseBajaComponent,
   ],
   imports: [
     CommonModule,

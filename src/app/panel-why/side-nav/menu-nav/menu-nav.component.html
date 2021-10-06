@@ -48,12 +48,22 @@
 
         <a mat-list-item (click)="perfil()" routerLinkActive="activo">
           <mat-icon matPrefix><i class="fi-rr-user"></i></mat-icon>
+          Mi Usuario
+        </a>
+
+        <a mat-list-item (click)="perfil()" routerLinkActive="activo">
+          <mat-icon matPrefix><i class="fi-rr-portrait"></i></mat-icon>
           Perfil
         </a>
 
         <a mat-list-item (click)="password()" routerLinkActive="activo">
           <mat-icon matPrefix><i class="fi-rr-lock-alt"></i></mat-icon>
           Contraseña
+        </a>
+
+        <a mat-list-item (click)="darseBaja()" routerLinkActive="activo">
+          <mat-icon matPrefix><i class="fi-rr-user-remove"></i></mat-icon>
+          Desactivar Usuario
         </a>
         
         <div *ngIf="superUser">

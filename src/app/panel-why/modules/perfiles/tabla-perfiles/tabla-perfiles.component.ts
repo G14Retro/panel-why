@@ -22,6 +22,12 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
   pageSize = 10;
   page = 1;
   pageSizeOptions: number[] = [10, 25, 50, 100];
+
+  //Filtros
+  filtroCorreo:string = '';
+  filtroCiudad:string = '';
+  filtroTipo:string = '';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
@@ -36,14 +42,6 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
 
   ngAfterViewInit(){
     this.paginator._intl.itemsPerPageLabel="Registros por pagina";
-  }
-
-  editUser(id){
-
-  }
-
-  removeUser(id){
-
   }
   
   inputFile(){
@@ -81,7 +79,31 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
   }
 
   getAllProfiles(page,pageSize){
-    const params = {};
+    const params = {data_filterby:[]};
+    if (this.filtroCorreo != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "email",
+        type: "like",
+        value: `%${this.filtroCorreo.toLowerCase()}%`
+      });
+    }
+    if (this.filtroCiudad != '') {
+      params.data_filterby.push({
+        model: "GeographyCity",
+        field: "name",
+        type: "like",
+        value: `%${this.filtroCiudad}%`
+      });
+    }
+    if (this.filtroTipo != '') {
+      params.data_filterby.push({
+        model: "UserProfile",
+        field: "user_type",
+        type: "eq",
+        value: `${this.filtroTipo.toUpperCase()}`
+      });
+    }
     this.adminService.getAllProfiles(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;
       this.length = resp.data_total_count;
@@ -115,6 +137,10 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
       disableClose: true,
       data: {profile: profile, edit: edit}
     })
+  }
+
+  filtrar(){
+    this.getAllProfiles(this.page,this.pageSize);
   }
 
 }

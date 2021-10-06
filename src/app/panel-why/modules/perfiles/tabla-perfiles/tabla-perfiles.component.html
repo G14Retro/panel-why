@@ -35,18 +35,18 @@
 <div class="row col-12 ps-4">
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por correo</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroCorreo" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por ciudad</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroCiudad" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline" class="col-2">
     <mat-label>Buscar por tipo de usuario</mat-label>
-    <input type="text" matInput>
-    <mat-icon matSuffix><i class="fi-rr-search"></i></mat-icon>
+    <input type="text" matInput [(ngModel)]="filtroTipo" (keydown.enter)="filtrar()">
+    <mat-icon matSuffix (click)="filtrar()"><i class="fi-rr-search"></i></mat-icon>
   </mat-form-field>
 </div>
 <div class="float-end row">

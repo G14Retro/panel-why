@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { AdminService } from 'src/app/services/admin.service';
+import { DataUserService } from 'src/app/services/data-user.service';
 import Utils from 'src/app/Utils/tool.util';
 import { CrearPagoComponent } from '../components/crear-pago/crear-pago.component';
 
@@ -20,16 +21,28 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
   pageSize = 10;
   page = 1;
   pageSizeOptions: number[] = [10, 25, 50, 100];
+
+  //Filtros
+  filtroCorreo:string = '';
+  filtroCiudad:string = '';
+  filtroCuenta:string = '';
+  filtroFormaPago:string = '';
+  filtroTipoPago:string = '';
+
+  pagos = [];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
   constructor(
     private adminService:AdminService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private dataService:DataUserService,
   ) { }
 
   ngOnInit(): void {
     this.getAllPays(this.page,this.pageSize);
+    this.getSelects();
   }
 
   
@@ -81,9 +94,48 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
   }
 
   getAllPays(page,pageSize){
-    const params = {};
+    const params = {data_filterby:[]};
+    if (this.filtroCorreo != '') {
+      params.data_filterby.push({
+        model: "User",
+        field: "email",
+        type: "like",
+        value: `%${this.filtroCorreo.toLowerCase()}%`
+      });
+    }
+    if (this.filtroCiudad != '') {
+      params.data_filterby.push({
+        model: "GeographyCity",
+        field: "name",
+        type: "like",
+        value: `%${this.filtroCiudad}%`
+      });
+    }
+    if (this.filtroCuenta != '') {
+      params.data_filterby.push({
+        model: "TransactionPayment",
+        field: "mobile_number",
+        type: "like",
+        value: `%${this.filtroCuenta}%`
+      });
+    }
+    if (this.filtroFormaPago != null) {
+      params.data_filterby.push({
+        model: "TransactionPayment",
+        field: "way_to_pay",
+        type: "like",
+        value: `%${this.filtroFormaPago}%`
+      });
+    }
+    if (this.filtroTipoPago != '') {
+      params.data_filterby.push({
+        model: "TransactionPayment",
+        field: "transaction_type",
+        type: "like",
+        value: `%${this.filtroTipoPago}%`
+      });
+    }
     this.adminService.getAllPays(params,page,pageSize).subscribe((resp:any)=>{
-      console.log(resp);
       this.dataSource = resp.data;
       this.length = resp.data_total_count;
       this.pageSize = resp.data_page_rows;
@@ -94,6 +146,16 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
     this.pageSize = event.pageSize;
     this.page = event.pageIndex + 1;
     this.getAllPays(this.page,this.pageSize);
+  }
+
+  filtrar(){
+    this.getAllPays(this.page,this.pageSize);
+  }
+
+  getSelects(){
+    this.dataService.getWayPays().subscribe((resp:any)=>{
+      this.pagos = resp.data;
+    });
   }
 
 }

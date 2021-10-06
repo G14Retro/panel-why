@@ -121,4 +121,8 @@ export class DataUserService {
     return this.http.put(`${DATAUSER}user-update-password`,data,this.httpOptions);
   }
 
+  disableCount(cometario){
+    return this.http.put(`${DATAUSER}user-inactive?inactive_reason=${cometario}`,{},this.httpOptionsPost);
+  }
+
 }
