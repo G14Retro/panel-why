@@ -33,6 +33,42 @@ import { DetallePerfilComponent } from './modules/perfiles/components/detalle-pe
 import { CrearPuntoComponent } from './modules/puntos-admin/components/crear-punto/crear-punto.component';
 import { CrearPagoComponent } from './modules/pagos-admin/components/crear-pago/crear-pago.component';
 import { DarseBajaComponent } from './components/darse-baja/darse-baja.component';
+import { DecisoresComponent } from './modules/parametros/decisores/decisores.component';
+import { TipoDocumentoComponent } from './modules/parametros/tipo-documento/tipo-documento.component';
+import { EstadoCivilComponent } from './modules/parametros/estado-civil/estado-civil.component';
+import { EstadoLaboralComponent } from './modules/parametros/estado-laboral/estado-laboral.component';
+import { EstratosComponent } from './modules/parametros/estratos/estratos.component';
+import { FormasPagoComponent } from './modules/parametros/formas-pago/formas-pago.component';
+import { GenerosComponent } from './modules/parametros/generos/generos.component';
+import { NivelAcademicoComponent } from './modules/parametros/nivel-academico/nivel-academico.component';
+import { NivelIngresoComponent } from './modules/parametros/nivel-ingreso/nivel-ingreso.component';
+import { TablaTipoDocumentoComponent } from './modules/parametros/tipo-documento/components/tabla-tipo-documento/tabla-tipo-documento.component';
+import { CrearTipoDocumentoComponent } from './modules/parametros/tipo-documento/components/crear-tipo-documento/crear-tipo-documento.component';
+import { DetalleTipoDocumentoComponent } from './modules/parametros/tipo-documento/components/detalle-tipo-documento/detalle-tipo-documento.component';
+import { TablaEstratosComponent } from './modules/parametros/estratos/components/tabla-estratos/tabla-estratos.component';
+import { CrearEstratoComponent } from './modules/parametros/estratos/components/crear-estrato/crear-estrato.component';
+import { DetalleEstratoComponent } from './modules/parametros/estratos/components/detalle-estrato/detalle-estrato.component';
+import { TablaGenerosComponent } from './modules/parametros/generos/components/tabla-generos/tabla-generos.component';
+import { CrearGeneroComponent } from './modules/parametros/generos/components/crear-genero/crear-genero.component';
+import { DetalleGeneroComponent } from './modules/parametros/generos/components/detalle-genero/detalle-genero.component';
+import { TablaDecisoresComponent } from './modules/parametros/decisores/components/tabla-decisores/tabla-decisores.component';
+import { CrearDecisorComponent } from './modules/parametros/decisores/components/crear-decisor/crear-decisor.component';
+import { DetalleDecisorComponent } from './modules/parametros/decisores/components/detalle-decisor/detalle-decisor.component';
+import { TablaEstadoCivilComponent } from './modules/parametros/estado-civil/components/tabla-estado-civil/tabla-estado-civil.component';
+import { CrearEstadoCivilComponent } from './modules/parametros/estado-civil/components/crear-estado-civil/crear-estado-civil.component';
+import { DetalleEstadoCivilComponent } from './modules/parametros/estado-civil/components/detalle-estado-civil/detalle-estado-civil.component';
+import { TablaNivelAcademicoComponent } from './modules/parametros/nivel-academico/components/tabla-nivel-academico/tabla-nivel-academico.component';
+import { CrearNivelAcademicoComponent } from './modules/parametros/nivel-academico/components/crear-nivel-academico/crear-nivel-academico.component';
+import { DetalleNivelAcademicoComponent } from './modules/parametros/nivel-academico/components/detalle-nivel-academico/detalle-nivel-academico.component';
+import { DetalleEstadoLaboralComponent } from './modules/parametros/estado-laboral/components/detalle-estado-laboral/detalle-estado-laboral.component';
+import { TablaEstadoLaboralComponent } from './modules/parametros/estado-laboral/components/tabla-estado-laboral/tabla-estado-laboral.component';
+import { CrearEstadoLaboralComponent } from './modules/parametros/estado-laboral/components/crear-estado-laboral/crear-estado-laboral.component';
+import { TablaNivelIngresosComponent } from './modules/parametros/nivel-ingreso/components/tabla-nivel-ingresos/tabla-nivel-ingresos.component';
+import { CrearNivelIngresoComponent } from './modules/parametros/nivel-ingreso/components/crear-nivel-ingreso/crear-nivel-ingreso.component';
+import { DetalleNivelIngresoComponent } from './modules/parametros/nivel-ingreso/components/detalle-nivel-ingreso/detalle-nivel-ingreso.component';
+import { TablaFormasPagoComponent } from './modules/parametros/formas-pago/components/tabla-formas-pago/tabla-formas-pago.component';
+import { CrearFormaPagoComponent } from './modules/parametros/formas-pago/components/crear-forma-pago/crear-forma-pago.component';
+import { DetalleFormaPagoComponent } from './modules/parametros/formas-pago/components/detalle-forma-pago/detalle-forma-pago.component';
 
 
 
@@ -68,6 +104,42 @@ import { DarseBajaComponent } from './components/darse-baja/darse-baja.component
     CrearPuntoComponent,
     CrearPagoComponent,
     DarseBajaComponent,
+    DecisoresComponent,
+    TipoDocumentoComponent,
+    EstadoCivilComponent,
+    EstadoLaboralComponent,
+    EstratosComponent,
+    FormasPagoComponent,
+    GenerosComponent,
+    NivelAcademicoComponent,
+    NivelIngresoComponent,
+    TablaTipoDocumentoComponent,
+    CrearTipoDocumentoComponent,
+    DetalleTipoDocumentoComponent,
+    TablaEstratosComponent,
+    CrearEstratoComponent,
+    DetalleEstratoComponent,
+    TablaGenerosComponent,
+    CrearGeneroComponent,
+    DetalleGeneroComponent,
+    TablaDecisoresComponent,
+    CrearDecisorComponent,
+    DetalleDecisorComponent,
+    TablaEstadoCivilComponent,
+    CrearEstadoCivilComponent,
+    DetalleEstadoCivilComponent,
+    TablaNivelAcademicoComponent,
+    CrearNivelAcademicoComponent,
+    DetalleNivelAcademicoComponent,
+    DetalleEstadoLaboralComponent,
+    TablaEstadoLaboralComponent,
+    CrearEstadoLaboralComponent,
+    TablaNivelIngresosComponent,
+    CrearNivelIngresoComponent,
+    DetalleNivelIngresoComponent,
+    TablaFormasPagoComponent,
+    CrearFormaPagoComponent,
+    DetalleFormaPagoComponent,
   ],
   imports: [
     CommonModule,

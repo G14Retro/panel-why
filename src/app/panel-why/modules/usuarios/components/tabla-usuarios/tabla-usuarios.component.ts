@@ -34,7 +34,7 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
-  //Observable para los cambios de la matriz
+  //Observable para los cambios de la tabla
   subscription:Subscription;
   nameFile:string;
   constructor(
