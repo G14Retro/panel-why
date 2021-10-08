@@ -8,6 +8,7 @@ import { PuntosAdminComponent } from "../modules/puntos-admin/puntos-admin.compo
 import { PuntosComponent } from "../modules/puntos/puntos.component";
 import { UsuariosComponent } from "../modules/usuarios/usuarios.component";
 import { COMPLETAR_PERFIL_ROUTES } from "./completar-perfil.routes";
+import { PARAMETROS_ROUTES } from "./parametros.routes";
 import { PERFIL_ROUTES } from "./perfil.routes";
 
 export const MENU_ROUTES:Routes = [
@@ -20,4 +21,5 @@ export const MENU_ROUTES:Routes = [
     {path:'perfiles',component:PerfilesComponent,canActivate:[AdminGuard]},
     {path:'puntos-admin',component:PuntosAdminComponent,canActivate:[AdminGuard]},
     {path:'pagos-admin',component:PagosAdminComponent,canActivate:[AdminGuard]},
+    {path:'parametros',children:PARAMETROS_ROUTES,canActivate:[AdminGuard]},
 ]

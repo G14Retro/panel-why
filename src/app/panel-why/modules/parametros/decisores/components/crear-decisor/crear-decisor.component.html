@@ -1,0 +1,21 @@
+<button style="float: right;" mat-icon-button mat-dialog-close>
+    <i class="fi-rr-cross"></i>
+</button>
+<form class="content" [formGroup]="decisorForm">
+    <h2>Nuevo Decisor</h2>
+    <mat-divider class="mb-3"></mat-divider>
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput cdkFocusInitial formControlName="description">
+        <mat-error *ngIf="decisorForm.get('description').hasError('required')">Por favor ingrese un nombre</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input type="number" matInput formControlName="code">
+        <mat-error *ngIf="decisorForm.get('code').hasError('required')">Por favor ingrese un código</mat-error>
+    </mat-form-field>
+    <div class="btns">
+        <button mat-stroked-button class="btn-back" (click)="decisorRef.close()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="createDecisor()">Crear</button>
+    </div>
+</form>

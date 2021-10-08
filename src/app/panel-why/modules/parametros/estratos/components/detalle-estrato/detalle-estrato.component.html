@@ -1,0 +1,26 @@
+<button style="float: right;" mat-icon-button mat-dialog-close>
+    <i class="fi-rr-cross"></i>
+</button>
+<form class="content" [formGroup]="estratoForm">
+    <div class="row">
+        <h2 class="col-10">Detalle Estrato</h2>
+        <button mat-icon-button class="col-1" *ngIf="!datos.edit" (click)="edit()">
+            <mat-icon><i class="fi-rr-edit"></i></mat-icon>
+        </button>
+    </div>
+    <mat-divider class="mb-3"></mat-divider>
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput cdkFocusInitial formControlName="description">
+        <mat-error *ngIf="estratoForm.get('description').hasError('required')">Por favor ingrese un nombre</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input type="number" matInput formControlName="code">
+        <mat-error *ngIf="estratoForm.get('code').hasError('required')">Por favor ingrese un código</mat-error>
+    </mat-form-field>
+    <div class="btns" *ngIf="datos.edit">
+        <button mat-stroked-button class="btn-back" (click)="edit()">Cancelar</button>
+        <button mat-raised-button class="btn-succ" (click)="updateEstrato()">Crear</button>
+    </div>
+</form>

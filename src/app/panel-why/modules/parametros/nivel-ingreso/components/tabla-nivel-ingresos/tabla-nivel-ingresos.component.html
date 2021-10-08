@@ -1,0 +1,68 @@
+<div class="me-2 me-md-4 mb-5 mb-md-0">
+    <div class="float-end mb-3">
+        <button mat-raised-button class="btn-succ" (click)="newNivelIngreso()">
+            Nuevo Nivel de Ingreso
+            <mat-icon><i class="fi-rr-add" style="font-size: .8em;"></i></mat-icon>
+        </button>
+    </div>
+    <div class="mat-elevation-z1">
+      <table  [dataSource]="dataSource" mat-table  matSort>
+
+        <ng-container matColumnDef="acciones">
+          <div>
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon style="font-size: 1em;"><i class="fi-rr-menu-dots-vertical"></i></mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="detailNivelIngreso(element.id,false)">Ver detalle</button>
+                  <button mat-menu-item (click)="detailNivelIngreso(element.id,true)">Editar</button>
+                  <button mat-menu-item *ngIf="!element.is_active" (click)="statusNivelIngresoById(element.id,'active')">Habilitar</button>
+                  <button mat-menu-item *ngIf="element.is_active" (click)="statusNivelIngresoById(element.id,'inactive')">Inhabilitar</button>
+                </mat-menu>
+              </td>
+            </div>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.is_active | boolean}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacion">
+            <th mat-header-cell *matHeaderCellDef> Fecha de Creación </th>
+            <td mat-cell *matCellDef="let element"> {{element.audit_date_create | date:'dd/MM/YYYY'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_actualizacion">
+            <th mat-header-cell *matHeaderCellDef> Fecha de Actualización </th>
+            <td mat-cell *matCellDef="let element"> {{element.audit_date_update | date:'dd/MM/YYYY'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos para mostrar</td>
+        </tr>
+      </table>
+      <mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      (page) ="pageEvent($event)"
+      [pageSizeOptions] = "pageSizeOptions"
+      >
+    </mat-paginator>
+  </div>
+</div>

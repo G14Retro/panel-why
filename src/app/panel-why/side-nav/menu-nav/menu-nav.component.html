@@ -46,7 +46,7 @@
           </mat-tree-node>
         </mat-tree>        
 
-        <a mat-list-item (click)="perfil()" routerLinkActive="activo">
+        <a mat-list-item (click)="miUsuario()" routerLinkActive="activo">
           <mat-icon matPrefix><i class="fi-rr-user"></i></mat-icon>
           Mi Usuario
         </a>
@@ -68,22 +68,23 @@
         
         <div *ngIf="superUser">
           <mat-divider></mat-divider>
-          <a mat-list-item [routerLink]="['/panel-why/usuarios']" routerLinkActive="activo" >
-            <mat-icon matPrefix><i class="fi-rr-users"></i></mat-icon>
-            Usuarios
-          </a>
-          <a mat-list-item [routerLink]="['/panel-why/perfiles']" routerLinkActive="activo">
-            <mat-icon matPrefix><i class="fi-rr-portrait"></i></mat-icon>
-            Perfiles
-          </a>
-          <a mat-list-item [routerLink]="['/panel-why/puntos-admin']" routerLinkActive="activo">
-            <mat-icon matPrefix><i class="fi-rr-diamond"></i></mat-icon>
-            Puntos
-          </a>
-          <a mat-list-item [routerLink]="['/panel-why/pagos-admin']" routerLinkActive="activo">
-            <mat-icon matPrefix><i class="fi-rr-credit-card"></i></mat-icon>
-            Pagos
-          </a>
+          <mat-tree [dataSource]="dataSourceAdmin" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <a mat-list-item [routerLink]="[node.route]" routerLinkActive="activo" >
+                <mat-icon mat-list-icon><i class="{{node.icon}}" style="font-size: .8em;"></i></mat-icon>
+                {{node.name}}
+              </a>
+            </mat-tree-node>
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon>
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+                {{node.name}}
+              </button>
+            </mat-tree-node>
+          </mat-tree>   
         </div>
         
         <a mat-list-item (click)="logOut()">
