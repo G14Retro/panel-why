@@ -69,6 +69,7 @@ import { DetalleNivelIngresoComponent } from './modules/parametros/nivel-ingreso
 import { TablaFormasPagoComponent } from './modules/parametros/formas-pago/components/tabla-formas-pago/tabla-formas-pago.component';
 import { CrearFormaPagoComponent } from './modules/parametros/formas-pago/components/crear-forma-pago/crear-forma-pago.component';
 import { DetalleFormaPagoComponent } from './modules/parametros/formas-pago/components/detalle-forma-pago/detalle-forma-pago.component';
+import { UsuarioPropioComponent } from './modules/usuario-propio/usuario-propio.component';
 
 
 
@@ -140,6 +141,7 @@ import { DetalleFormaPagoComponent } from './modules/parametros/formas-pago/comp
     TablaFormasPagoComponent,
     CrearFormaPagoComponent,
     DetalleFormaPagoComponent,
+    UsuarioPropioComponent,
   ],
   imports: [
     CommonModule,

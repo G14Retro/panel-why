@@ -2,12 +2,15 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { DataUserService } from 'src/app/services/data-user.service';
 import Swal from 'sweetalert2';
 import { DarseBajaComponent } from '../../components/darse-baja/darse-baja.component';
 import { CambioContrasenaComponent } from '../../modules/perfil/pages/cambio-contrasena/cambio-contrasena.component';
 import { EditarPerfilComponent } from '../../modules/perfil/pages/editar-perfil/editar-perfil.component';
+import { UsuarioPropioComponent } from '../../modules/usuario-propio/usuario-propio.component';
 
 
 interface MenuNode {
@@ -73,6 +76,7 @@ export class MenuNavComponent implements OnInit {
   superUser:boolean = false;
   categoria:string = '';
   codigo:string = '';
+  subscription:Subscription;
   private _transformer = (node: MenuNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -97,6 +101,7 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
     private dashboard:DashboardService,
     private authService:AuthService,
     private dialog:MatDialog,
+    private dataUserService:DataUserService
   ) { 
     this.dataSource.data = TREE_DATA;
     this.dataSourceAdmin.data = TREE_ADMIN;
@@ -108,6 +113,9 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
   ngOnInit(): void {
     this.getPoints();
     this.getProfile();
+    this.subscription = this.dataUserService.refresh$.subscribe(()=>{
+      this.getProfile();
+    });
   }
 
   getPoints(){
@@ -140,6 +148,12 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
 
   logOut(){
     this.authService.logOut();
+  }
+
+  miUsuario(){
+    const usuarioRef = this.dialog.open(UsuarioPropioComponent,{
+      width: '780px'
+    })
   }
 
   perfil(){

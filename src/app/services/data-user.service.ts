@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 
 const DATAUSER = environment.Auth_Authorization;
 const PARAMETERS = environment.Prameter_Data;
+const MYSELF = environment.Auth_Authorization;
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +124,28 @@ export class DataUserService {
 
   disableCount(cometario){
     return this.http.put(`${DATAUSER}user-inactive?inactive_reason=${cometario}`,{},this.httpOptionsPost);
+  }
+
+
+  getMyUser(){
+    return this.http.get(`${MYSELF}user-read`,this.httpOptions);
+  }
+
+  getCityById(id_city){
+    return this.http.get(`https://backend-app-panelwhy-com.camtech.com.co/api/v1/parameters/geography/geography_cities/by_request/${id_city}`,this.httpOptions);
+  }
+
+  getStateById(id_state){
+    return this.http.get(`https://backend-app-panelwhy-com.camtech.com.co/api/v1/parameters/geography/geography_states/by_request/${id_state}`,this.httpOptions);
+  }
+
+  updateMyUser(data){
+    return this.http.put(`${MYSELF}user-update`,data,this.httpOptionsPost)
+    .pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    );
   }
 
 }
