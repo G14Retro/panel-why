@@ -35,9 +35,12 @@ export class CrearDecisorComponent implements OnInit {
       return
     }
     this.parametroService.createDecisor(this.decisorForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha creado el tipo de documento con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha creado el decisor de compra con exito.');
       this.decisorRef.close();
-    });
+    },(err)=>{
+      Utils.swalSuccessConfirm('¡Lo siento!',err.error.detail);
+    }
+    );
   }
 
 }

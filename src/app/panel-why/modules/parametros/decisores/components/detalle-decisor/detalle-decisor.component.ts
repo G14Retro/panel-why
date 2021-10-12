@@ -37,9 +37,12 @@ export class DetalleDecisorComponent implements OnInit {
       return
     }
     this.parametroService.updateDecisor(this.datos.id_decisor,this.decisorForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el género con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el decisor de compra con exito.');
       this.decisorRef.close();
-    });
+    },(err)=>{
+      Utils.swalSuccessConfirm('¡Lo siento!',err.error.detail);
+    }
+    );
   }
 
   validEdit(){

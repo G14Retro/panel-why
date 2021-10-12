@@ -57,7 +57,7 @@ export class CrearPerfilComponent implements OnInit {
       society_employment_status_id: ['',Validators.required],
       society_income_level_id: ['',Validators.required],
       society_way_to_pay_id: ['',Validators.required],
-      reference_code: [''],
+      user_type: [''],
       nombre: [''],
     });
   }
@@ -138,18 +138,21 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   createProfile(){
-    console.log(this.id_user);
     if (this.perfilForm.invalid) {
       return
     }
-    this.perfilForm.addControl('user_type',new FormControl('A'));
+    this.perfilForm.addControl('reference_code',new FormControl(''));
     this.perfilForm.addControl('geography_language_id',new FormControl(62));
     this.perfilForm.get('date_birth').setValue(moment(this.perfilForm.get('date_birth').value).format('YYYY-MM-DD'));
     this.adminService.saveProfile(this.id_user,this.perfilForm.value).subscribe(()=>{
       Utils.swalSuccess('¡Excelente!','Se ha creado el perfil con exito.');
+      this.perfilRef.close();
     },(err:any)=>{
       if (err.status == 481) {
         Utils.swalErrorConfirm('¡Lo siento!','Este usuario ya cuenta con un perfil.');
+      }
+      if (err.status == 463) {
+        Utils.swalErrorConfirm('¡Lo siento!','Este usuario se encuentra inactivo.');
       }
     }
     );

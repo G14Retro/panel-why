@@ -37,7 +37,7 @@ export class DetalleNivelAcademicoComponent implements OnInit {
       return
     }
     this.parametroService.updateNivelAcademico(this.datos.id_nivel_academico,this.nivelAcademicoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el nivel académico con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el nivel académico con exito.');
       this.nivelAcademicoRef.close();
     });
   }

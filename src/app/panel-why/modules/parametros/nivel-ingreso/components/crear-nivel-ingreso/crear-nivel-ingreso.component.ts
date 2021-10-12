@@ -34,7 +34,7 @@ export class CrearNivelIngresoComponent implements OnInit {
       return
     }
     this.parametroService.createNivelIngreso(this.nivelIngresoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha creado el tipo de documento con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha creado el nivel de ingreso con exito.');
       this.nivelIngresoRef.close();
     });
   }

@@ -37,7 +37,7 @@ export class DetalleEstadoLaboralComponent implements OnInit {
       return
     }
     this.parametroService.updateEstadoLaboral(this.datos.id_estado_laboral,this.estadoLaboralForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el estado laboral con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el estado laboral con exito.');
       this.estadoLaboralRef.close();
     });
   }

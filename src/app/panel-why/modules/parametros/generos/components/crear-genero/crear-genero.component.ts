@@ -35,7 +35,7 @@ export class CrearGeneroComponent implements OnInit {
       return
     }
     this.parametroService.createGenero(this.generoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha creado el tipo de documento con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha creado el género con exito.');
       this.generoRef.close();
     });
   }

@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Subscription } from 'rxjs';
@@ -31,8 +31,10 @@ const TREE_DATA: MenuNode[] = [
   {
     name:'Asistencia',
     children: [
-      {name: 'Problemas Pagos',route:'mailto:redencionpremios@panel-why.odoo.com',parent: '1',},
-      {name: 'Problemas Puntos',route:'mailto:puntos@panel-why.odoo.com',parent: '1',},
+      {name: 'Información General',route:'mailto:info@panelwhy.com',parent: '1',},
+      {name: 'Puntos',route:'mailto:puntos@panel-why1.odoo.com',parent: '1',},
+      {name: 'Redención Puntos',route:'mailto:redenciondepuntos@panel-why1.odoo.com',parent: '1',},
+      {name: 'Soporte Técnico',route:'mailto:soporte@panel-why1.odoo.com',parent: '1',},
     ],
   },
 ]
@@ -50,14 +52,14 @@ const TREE_ADMIN: MenuNode[] = [
   {
     name:'Parámetros',
     children: [
-      {name:'Decisores',route:'/panel-why/parametros/decisores',parent:'2',icon:'fi-rr-id-badge'},
-      {name:'Estado Civil',route:'/panel-why/parametros/estado-civil',parent:'2',icon:'fi-rr-id-badge'},
-      {name:'Estado Laboral',route:'/panel-why/parametros/estado-laboral',parent:'2',icon:'fi-rr-id-badge'},
-      {name:'Estratos',route:'/panel-why/parametros/estratos',parent:'2',icon:'fi-rr-id-badge'},
-      {name:'Formas de Pago',route:'/panel-why/parametros/formas-pago',parent:'2',icon:'fi-rr-id-badge'},
-      {name:'Géneros',route:'/panel-why/parametros/generos',parent:'2',icon:'fi-rr-following'},
-      {name:'Nivel Académico',route:'/panel-why/parametros/nivel-academico',parent:'2',icon:'fi-rr-school'},
-      {name:'Nivel de Ingresos',route:'/panel-why/parametros/nivel-ingresos',parent:'2',icon:'fi-rr-id-badge'},
+      {name:'Decisores',route:'/panel-why/parametros/decisores',parent:'2',icon:'fi-rr-shopping-cart-check'},
+      {name:'Estado Civil',route:'/panel-why/parametros/estado-civil',parent:'2',icon:'fi-rr-following'},
+      {name:'Estado Laboral',route:'/panel-why/parametros/estado-laboral',parent:'2',icon:'fi-rr-laptop'},
+      {name:'Estratos',route:'/panel-why/parametros/estratos',parent:'2',icon:'fi-rr-building'},
+      {name:'Formas de Pago',route:'/panel-why/parametros/formas-pago',parent:'2',icon:'fi-rr-credit-card'},
+      {name:'Géneros',route:'/panel-why/parametros/generos',parent:'2',icon:' fi-rr-world'},
+      {name:'Nivel Académico',route:'/panel-why/parametros/nivel-academico',parent:'2',icon:' fi-rr-graduation-cap'},
+      {name:'Nivel de Ingresos',route:'/panel-why/parametros/nivel-ingresos',parent:'2',icon:'fi-rr-dollar'},
       {name:'Tipos de Documento',route:'/panel-why/parametros/tipo-documento',parent:'2',icon:'fi-rr-id-badge'},
     ]
   }
@@ -77,6 +79,12 @@ export class MenuNavComponent implements OnInit {
   categoria:string = '';
   codigo:string = '';
   subscription:Subscription;
+  classCamera:string = "";
+  classPosition:string = "";
+  classMessage:string = "";
+  mensaje:string = "";
+  urlPhotgraph:string = "";
+  @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
   private _transformer = (node: MenuNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -130,19 +138,26 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
       this.profile = resp.user_type;
       this.codigo = resp.customer_code;
       if (resp.user_type === "A") {
-        this.categoria = 'Bronce';
+        this.categoria = 'Nuevo';
       }else if (resp.user_type === "B") {
-        this.categoria = 'Plata';
+        this.categoria = 'Bronce';
       }else if (resp.user_type === "C") {
-        this.categoria = 'Diamante';
+        this.categoria = 'Plata';
       }else if (resp.user_type === "D") {
+        this.categoria = 'Diamante';
+      }else if (resp.user_type === "E") {
         this.categoria = 'Oro';
       }else{
-        this.categoria = 'Bronce';
+        this.categoria = 'Nuevo';
+      }
+      if (resp.has_photograph) {
+        this.urlPhotgraph = `https://backend-app.panelwhy.com/static/users/${resp.parent_id}.jpg`;
+      }else{
+        this.urlPhotgraph = 'https://backend-app.panelwhy.com/static/img/default_user.jpg';
       }
     });
     this.dashboard.getUser().subscribe((resp:any)=>{
-      this.name = resp.names + ' ' + resp.surnames
+      this.name = resp.names
     });
   }
 
@@ -189,5 +204,27 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
     });
   }
 
+  imgCamera($event){
+    this.classCamera = $event.type == 'mouseover' ? 'fi-rr-camera' : '';
+    this.classPosition = $event.type == 'mouseover' ? 'imgPerfil' : '';
+    this.classMessage = $event.type == 'mouseover' ? 'txt-perfil' : '';
+    this.mensaje = $event.type == 'mouseover' ? 'Subir foto' : '';
+  }
+
+  inputFile(){
+    const fileUpload = this.clickInput.nativeElement;
+    fileUpload.onchange = () => {
+      for (let index = 0; index < fileUpload.files.length; index++) {
+        this.uploadImg(fileUpload.files[index])
+      }
+    }
+    fileUpload.click();
+  }
+
+  uploadImg(file:File){
+    this.dataUserService.uploadImg(file).subscribe((resp:any)=>{
+      console.log(resp);
+    });
+  }
 
 }

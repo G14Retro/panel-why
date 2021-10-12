@@ -2,7 +2,7 @@
     <i class="fi-rr-cross"></i>
 </button>
 <form mat-dialog-content class="content ms-5" [formGroup]="pagoForm">
-    <h1>Crear Punto</h1>
+    <h1>Crear Pago</h1>
     <mat-divider class="mb-3"></mat-divider>
     <div>
         <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 ms-1">
@@ -32,10 +32,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
             <mat-label>Forma de pago</mat-label>
-            <mat-select formControlName="way_to_pay">
-                <mat-option>--------------</mat-option>
-                <mat-option *ngFor="let pago of pagos" [value]="pago.id">{{pago.description}}</mat-option>
-            </mat-select>
+            <input type="text" matInput formControlName="way_to_pay">
             <mat-error *ngIf="pagoForm.get('way_to_pay').hasError('required')">Por favor este campo es requerido</mat-error>
         </mat-form-field> 
         <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">

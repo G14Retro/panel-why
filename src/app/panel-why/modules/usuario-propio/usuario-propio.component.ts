@@ -33,10 +33,10 @@ export class UsuarioPropioComponent implements OnInit {
     this.usuarioForm = this.fb.group({
       names:['',Validators.required],
       surnames:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      pais:['',Validators.required],
-      departamento:['',Validators.required],
-      geography_city_id:['',Validators.required],
+      email:[{value:'',disabled:true},[Validators.required,Validators.email]],
+      pais:[{value:'',disabled:true},Validators.required],
+      departamento:[{value:'',disabled:true},Validators.required],
+      geography_city_id:[{value:'',disabled:true},Validators.required],
       mobile_number:['',[Validators.required,Validators.pattern('.{10,10}')]],
     })
   }
@@ -87,8 +87,9 @@ export class UsuarioPropioComponent implements OnInit {
   }
 
   updateUser(){
+    this.usuarioForm.enable();
     this.dataUserService.updateMyUser(this.usuarioForm.value).subscribe((resp)=>{
-      console.log(resp);
+      this.usuarioForm.disable();
       Utils.swalSuccess('¡Excelente!','Se ha actualizado su usuario correctamente.');
       this.usuarioRef.close();
     });

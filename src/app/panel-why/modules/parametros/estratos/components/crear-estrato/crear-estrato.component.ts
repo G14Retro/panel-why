@@ -34,7 +34,7 @@ export class CrearEstratoComponent implements OnInit {
       return
     }
     this.parametroService.createEstrato(this.estratoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha creado el tipo de documento con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha creado el estrato con exito.');
       this.estratoRef.close();
     });
   }

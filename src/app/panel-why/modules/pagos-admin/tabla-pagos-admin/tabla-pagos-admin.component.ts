@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,8 +30,6 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
   filtroFormaPago:string = '';
   filtroTipoPago:string = '';
 
-  pagos = [];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
@@ -38,11 +37,11 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
     private adminService:AdminService,
     private dialog:MatDialog,
     private dataService:DataUserService,
+    private titleCase:TitleCasePipe
   ) { }
 
   ngOnInit(): void {
     this.getAllPays(this.page,this.pageSize);
-    this.getSelects();
   }
 
   
@@ -108,7 +107,7 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
         model: "GeographyCity",
         field: "name",
         type: "like",
-        value: `%${this.filtroCiudad}%`
+        value: `%${this.titleCase.transform(this.filtroCiudad)}%`
       });
     }
     if (this.filtroCuenta != '') {
@@ -124,16 +123,18 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
         model: "TransactionPayment",
         field: "way_to_pay",
         type: "like",
-        value: `%${this.filtroFormaPago}%`
+        value: `%${this.filtroFormaPago.toLocaleUpperCase()}%`
       });
     }
     if (this.filtroTipoPago != '') {
-      params.data_filterby.push({
-        model: "TransactionPayment",
-        field: "transaction_type",
-        type: "like",
-        value: `%${this.filtroTipoPago}%`
-      });
+      if (this.filtroTipoPago != null) {
+        params.data_filterby.push({
+          model: "TransactionPayment",
+          field: "transaction_type",
+          type: "like",
+          value: `%${this.filtroTipoPago}%`
+        });
+      }
     }
     this.adminService.getAllPays(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;
@@ -150,12 +151,6 @@ export class TablaPagosAdminComponent implements OnInit, AfterViewInit {
 
   filtrar(){
     this.getAllPays(this.page,this.pageSize);
-  }
-
-  getSelects(){
-    this.dataService.getWayPays().subscribe((resp:any)=>{
-      this.pagos = resp.data;
-    });
   }
 
 }

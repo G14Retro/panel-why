@@ -37,7 +37,7 @@ export class DetalleFormaPagoComponent implements OnInit {
       return
     }
     this.parametroService.updateFormaPago(this.datos.id_forma_pago,this.formaPagoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado la forma de pago con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado la forma de pago con exito.');
       this.formaPagoRef.close();
     });
   }
