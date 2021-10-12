@@ -15,7 +15,7 @@ const MYSELF = environment.Auth_Authorization;
 export class DataUserService {
   private httpOptions;
   private httpOptionsPost;
-  private email;
+  private httpOptionsFile;
   private _refresh$ = new Subject<void>();
   constructor(
     private authService:AuthService,
@@ -45,6 +45,14 @@ export class DataUserService {
         'Content-Type': 'application/json',
         'method': 'POST',
         })
+      };
+      this.httpOptionsFile = {
+        headers: new HttpHeaders({
+          'Authorization':`Bearer ${this.authService.user.access_token}`,
+          'enctype': 'multipart/form-data',
+          'method': 'POST',
+          'accept': '*/*'
+          })
       };
   }
 
@@ -132,15 +140,26 @@ export class DataUserService {
   }
 
   getCityById(id_city){
-    return this.http.get(`https://backend-app-panelwhy-com.camtech.com.co/api/v1/parameters/geography/geography_cities/by_request/${id_city}`,this.httpOptions);
+    return this.http.get(`https://backend-app.panelwhy.com/api/v1/parameters/geography/geography_cities/by_request/${id_city}`,this.httpOptions);
   }
 
   getStateById(id_state){
-    return this.http.get(`https://backend-app-panelwhy-com.camtech.com.co/api/v1/parameters/geography/geography_states/by_request/${id_state}`,this.httpOptions);
+    return this.http.get(`https://backend-app.panelwhy.com/api/v1/parameters/geography/geography_states/by_request/${id_state}`,this.httpOptions);
   }
 
   updateMyUser(data){
     return this.http.put(`${MYSELF}user-update`,data,this.httpOptionsPost)
+    .pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    );
+  }
+
+  uploadImg(file:File){
+    const document = new FormData();
+    document.append('file',file);
+    return this.http.post(`${MYSELF}user-photograph`,document,this.httpOptionsFile)
     .pipe(
       tap(()=>{
         this._refresh$.next();

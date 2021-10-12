@@ -56,8 +56,10 @@ export class DetalleEstratoComponent implements OnInit {
 
   updateEstrato(){
     this.parametroService.updateEstrato(this.datos.id_document,this.estratoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actualizado correctamente.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el estrato correctamente.');
       this.estratoRef.close();
+    },(err)=>{
+      Utils.swalSuccessConfirm('¡Lo siento!',err.error.detail);
     });
   }
 

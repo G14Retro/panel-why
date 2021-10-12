@@ -29,7 +29,6 @@ export class CrearPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.getSelects();
   }
 
   createForm(){
@@ -89,11 +88,6 @@ export class CrearPagoComponent implements OnInit {
     });
   }
 
-  getSelects(){
-    this.dataService.getWayPays().subscribe((resp:any)=>{
-      this.pagos = resp.data;
-    });
-  }
 
   createPay(){
     if (this.pagoForm.invalid) {
@@ -105,7 +99,7 @@ export class CrearPagoComponent implements OnInit {
       this.payRef.close();
     },(err:any)=>{
       console.log(err);
-      Utils.swalErrorConfirm('¡Lo siento!','Se ha presentado un error por favor contacte al administrador.');
+      Utils.swalErrorConfirm('¡Lo siento!',err.error.detail);
     }
     );
   }

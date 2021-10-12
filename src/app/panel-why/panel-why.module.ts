@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { PanelWhyComponent } from './panel-why.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { MaterialModule } from '../shared/material/material.module';
@@ -147,7 +147,10 @@ import { UsuarioPropioComponent } from './modules/usuario-propio/usuario-propio.
     CommonModule,
     MaterialModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+  ],
+  providers:[
+    TitleCasePipe
   ]
 })
 export class PanelWhyModule { }

@@ -38,7 +38,7 @@ export class DetalleGeneroComponent implements OnInit {
       return
     }
     this.parametroService.updateGenero(this.datos.id_genero,this.generoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el género con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el género con exito.');
       this.generoRef.close();
     });
   }

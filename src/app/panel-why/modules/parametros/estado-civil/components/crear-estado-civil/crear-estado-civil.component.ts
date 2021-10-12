@@ -34,8 +34,10 @@ export class CrearEstadoCivilComponent implements OnInit {
       return
     }
     this.parametroService.createEstadoCivil(this.estadoCivilForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha creado el tipo de documento con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha creado el estado civil con exito.');
       this.estadoCivilRef.close();
+    },(err)=>{
+      Utils.swalSuccessConfirm('¡Lo siento!',err.error.detail);
     });
   }
 

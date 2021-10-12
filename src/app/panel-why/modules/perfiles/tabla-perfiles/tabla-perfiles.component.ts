@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import Utils from 'src/app/Utils/tool.util';
 import { CrearPerfilComponent } from '../components/crear-perfil/crear-perfil.component';
@@ -12,7 +14,7 @@ import { DetallePerfilComponent } from '../components/detalle-perfil/detalle-per
   templateUrl: './tabla-perfiles.component.html',
   styleUrls: ['./tabla-perfiles.component.scss']
 })
-export class TablaPerfilesComponent implements OnInit,AfterViewInit {
+export class TablaPerfilesComponent implements OnInit,AfterViewInit,OnDestroy {
 
   selectMasivo = '';
   nameFile:string;
@@ -31,19 +33,29 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('download', {static:false}) plantillaBtn:ElementRef<HTMLAnchorElement>;
   @ViewChild('uploadFile',{static:false}) clickInput:ElementRef<HTMLInputElement>;
+    //Observable para los cambios de la tabla
+    subscription:Subscription;
   constructor(
     private adminService:AdminService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private tittleCase:TitleCasePipe,
   ) { }
 
   ngOnInit(): void {
     this.getAllProfiles(this.page,this.pageSize);
+    this.subscription = this.adminService.refresh$.subscribe(()=>{
+      this.getAllProfiles(this.page,this.pageSize);
+    });
   }
 
   ngAfterViewInit(){
     this.paginator._intl.itemsPerPageLabel="Registros por pagina";
   }
   
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
   inputFile(){
     const fileUpload = this.clickInput.nativeElement;
     fileUpload.onchange = () => {
@@ -93,16 +105,18 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
         model: "GeographyCity",
         field: "name",
         type: "like",
-        value: `%${this.filtroCiudad}%`
+        value: `%${this.tittleCase.transform(this.filtroCiudad)}%`
       });
     }
     if (this.filtroTipo != '') {
-      params.data_filterby.push({
-        model: "UserProfile",
-        field: "user_type",
-        type: "eq",
-        value: `${this.filtroTipo.toUpperCase()}`
-      });
+      if (this.filtroTipo != null) {
+        params.data_filterby.push({
+          model: "UserProfile",
+          field: "user_type",
+          type: "eq",
+          value: `${this.filtroTipo.toUpperCase()}`
+        });
+      }
     }
     this.adminService.getAllProfiles(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;
@@ -119,7 +133,6 @@ export class TablaPerfilesComponent implements OnInit,AfterViewInit {
 
   downloadProfiles(){
     this.adminService.downloadProfiles().subscribe((resp:any)=>{
-      console.log(resp);
       Utils.downloadFile(resp,'UserProfile-'+moment(new Date).format('yyyy-MM-DD_hh-mm-ss'));
     })
   }

@@ -37,9 +37,12 @@ export class DetalleEstadoCivilComponent implements OnInit {
       return
     }
     this.parametroService.updateEstadoCivil(this.datos.id_estado,this.estadoCivilForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el género con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el estado civil con exito.');
       this.estadoCivilRef.close();
-    });
+    },(err)=>{
+      Utils.swalSuccessConfirm('¡Lo siento!',err.error.detail);
+    }
+    );
   }
 
   validEdit(){

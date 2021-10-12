@@ -56,7 +56,7 @@ export class DetallePerfilComponent implements OnInit {
       society_employment_status_id: ['',Validators.required],
       society_income_level_id: ['',Validators.required],
       society_way_to_pay_id: ['',Validators.required],
-      reference_code: [''],
+      user_type: [''],
     });
   }
 
@@ -121,7 +121,7 @@ export class DetallePerfilComponent implements OnInit {
         society_employment_status_id: resp.society_employment_status_id,
         society_income_level_id: resp.society_income_level_id,
         society_way_to_pay_id: resp.society_way_to_pay_id,
-        reference_code: resp.reference_code,
+        user_type: resp.user_type,
       });
     })
   }
@@ -130,7 +130,6 @@ export class DetallePerfilComponent implements OnInit {
     if (this.perfilForm.invalid) {
       return
     }
-    this.perfilForm.addControl('user_type',new FormControl('A'));
     this.perfilForm.addControl('geography_language_id',new FormControl(62));
     this.perfilForm.get('date_birth').setValue(moment(this.perfilForm.get('date_birth').value).format('YYYY-MM-DD'));
     this.adminService.updateProfileById(this.datos.profile.UserProfile.id,this.perfilForm.value).subscribe(()=>{

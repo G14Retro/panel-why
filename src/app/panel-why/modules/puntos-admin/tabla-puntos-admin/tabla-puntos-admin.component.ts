@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -38,6 +39,7 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
   constructor(
     private adminService:AdminService,
     public dialog:MatDialog,
+    private titleCase:TitleCasePipe
   ) { }
 
   ngOnInit(): void {
@@ -113,7 +115,7 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
         model: "GeographyCity",
         field: "name",
         type: "like",
-        value: `%${this.filtroCiudad}%`
+        value: `%${this.titleCase.transform(this.filtroCiudad)}%`
       });
     }
     if (this.filtroCodigoEstudio != '') {
@@ -143,12 +145,14 @@ export class TablaPuntosAdminComponent implements OnInit, AfterViewInit, OnDestr
       }
     }
     if (this.filtroTipoPunto != '') {
-      params.data_filterby.push({
-        model: "TransactionPoint",
-        field: "transaction_type",
-        type: "like",
-        value: `%${this.filtroTipoPunto.toUpperCase()}%`
-      });
+      if (this.filtroTipoPunto != null) {
+        params.data_filterby.push({
+          model: "TransactionPoint",
+          field: "transaction_type",
+          type: "like",
+          value: `%${this.filtroTipoPunto.toUpperCase()}%`
+        });
+      }
     }
     this.adminService.getAllPoints(params,page,pageSize).subscribe((resp:any)=>{
       this.dataSource = resp.data;

@@ -95,8 +95,12 @@ export class CrearPuntoComponent implements OnInit {
       Utils.swalSuccess('¡Excelente!','Se ha creado el punto correctamente.');
       this.pointRef.close();
     },(err:any)=>{
-      console.log(err);
-      Utils.swalErrorConfirm('¡Lo siento!','Ha surgido un error por favor contacte al administrador.');
+      if (err.status == 463) {
+        Utils.swalErrorConfirm('¡Lo siento!','Este usuario se encuentra inactivo.');
+      }
+      if (err.status == 486) {
+        Utils.swalErrorConfirm('¡Lo siento!','No hay puntos suficientes para realizar el reverso.');
+      }
     }
     );
   }

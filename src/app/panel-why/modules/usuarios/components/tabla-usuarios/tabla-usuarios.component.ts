@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -40,6 +41,7 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private adminService:AdminService,
     private dialog:MatDialog,
+    private tittleCase:TitleCasePipe,
   ) { }
 
   ngOnInit(): void {
@@ -147,19 +149,21 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
       });
     }
     if (this.filtroTelefono != '') {
-      params.data_filterby.push({
-        model: "User",
-        field: "mobile_number",
-        type: "like",
-        value: `%${this.filtroTelefono}%`
-      });
+      if (this.filtroTelefono != null) {
+        params.data_filterby.push({
+          model: "User",
+          field: "mobile_number",
+          type: "eq",
+          value: `${this.filtroTelefono}`
+        });
+      }
     }
     if (this.filtroCiudad != '') {
       params.data_filterby.push({
         model: "GeographyCity",
         field: "name",
         type: "like",
-        value: `%${this.filtroCiudad}%`
+        value: `%${this.tittleCase.transform(this.filtroCiudad)}%`
       });
     }
     this.adminService.getAllUsers(params,page,pageSize).subscribe((resp:any)=>{
@@ -202,6 +206,12 @@ export class TablaUsuariosComponent implements OnInit, AfterViewInit, OnDestroy 
 
   filtrar(){
     this.getAllUsers(this.page,this.pageSize);
+  }
+
+  mailActivation(email){
+    this.adminService.emailActivation(email).subscribe(()=>{
+      Utils.swalSuccess('¡Excelente!','Se ha enviado un correo para la activación del usuario.')
+    });
   }
 
 }

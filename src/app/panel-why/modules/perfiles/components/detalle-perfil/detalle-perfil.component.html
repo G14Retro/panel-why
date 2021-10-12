@@ -106,7 +106,13 @@
         </mat-form-field> 
         <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ms-1">
             <mat-label>Código referencia</mat-label>
-            <input type="text" matInput  formControlName="reference_code">
+            <mat-select formControlName="user_type">
+                <mat-option value="A">Nuevo</mat-option>
+                <mat-option value="B">Bronce</mat-option>
+                <mat-option value="C">Plata</mat-option>
+                <mat-option value="D">Diamante</mat-option>
+                <mat-option value="E">Oro</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
     <div class="btns-dialog ms-3" [hidden]="!datos.edit">

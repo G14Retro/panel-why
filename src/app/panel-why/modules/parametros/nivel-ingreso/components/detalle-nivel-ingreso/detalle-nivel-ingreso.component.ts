@@ -37,7 +37,7 @@ export class DetalleNivelIngresoComponent implements OnInit {
       return
     }
     this.parametroService.updateNivelIngreso(this.datos.id_nivel_academico,this.nivelIngresoForm.value).subscribe(()=>{
-      Utils.swalSuccess('¡Excelente!','Se ha actulizado el nivel académico con exito.');
+      Utils.swalSuccess('¡Excelente!','Se ha actualizado el nivel ingreso con exito.');
       this.nivelIngresoRef.close();
     });
   }
