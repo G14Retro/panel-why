@@ -47,4 +47,8 @@ export class DashboardService {
     return this.http.get(`${DATAUSER}user-read`,this.httpOptions);
   }
 
+  getDataPlot(){
+    return this.http.get(`${DATAUSER}user-dataplot`,this.httpOptions);
+  }
+
 }

@@ -35,8 +35,37 @@
 
         </mat-card-content>
       </mat-card>
-
     <div class="mt-5 text-center col-xs-12 col-lg-8">
         <h2>¡Acá podrás revisar toda tu actividad en el panel!</h2>
+        <div class="ms-3 grafico">
+            <div>
+                <h2>Puntos</h2>
+                <canvas id="puntos">{{chartPuntos}}</canvas>
+            </div>
+            <div>
+                <h2>Pagos</h2>
+                <canvas id="pagos">{{chartPagos}}</canvas>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 ms-3 table-responsive" style="padding-right: 35em;">
+        <table class="table">
+            <thead>
+            <tr class="table-dark">
+                <th scope="col">Mes</th>
+                <th scope="col" *ngFor="let mes of meses">{{mes}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row">Puntos</td>
+                <td *ngFor="let punto of puntos">{{punto}}</td>
+            </tr>
+            <tr>
+                <td scope="row">Pagos</td>
+                <td *ngFor="let pago of pagos">{{pago | currency:'':'symbol':'1.0'}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

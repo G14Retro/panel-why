@@ -1,2 +1,12 @@
 
-  
+.grafico{
+    display: grid;
+    grid-template-columns:  repeat(2,560px);
+    gap: 2em;
+}
+
+@media screen and (max-width: 415px){
+    .grafico{
+        grid-template-columns: 380px;
+    }
+}
