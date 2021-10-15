@@ -6,12 +6,15 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { DataUserService } from 'src/app/services/data-user.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { DarseBajaComponent } from '../../components/darse-baja/darse-baja.component';
 import { CambioContrasenaComponent } from '../../modules/perfil/pages/cambio-contrasena/cambio-contrasena.component';
 import { EditarPerfilComponent } from '../../modules/perfil/pages/editar-perfil/editar-perfil.component';
 import { UsuarioPropioComponent } from '../../modules/usuario-propio/usuario-propio.component';
 
+
+const IMG = environment.IMG_URL;
 
 interface MenuNode {
   name: string;
@@ -151,9 +154,9 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
         this.categoria = 'Nuevo';
       }
       if (resp.has_photograph) {
-        this.urlPhotgraph = `https://backend-app.panelwhy.com/static/users/${resp.parent_id}.jpg`;
+        this.urlPhotgraph = `${IMG}users/${resp.parent_id}.jpg`;
       }else{
-        this.urlPhotgraph = 'https://backend-app.panelwhy.com/static/img/default_user.jpg';
+        this.urlPhotgraph = `${IMG}img/default_user.jpg`;
       }
     });
     this.dashboard.getUser().subscribe((resp:any)=>{
@@ -224,6 +227,7 @@ dataSourceAdmin = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener
   uploadImg(file:File){
     this.dataUserService.uploadImg(file).subscribe((resp:any)=>{
       console.log(resp);
+      this.getProfile();
     });
   }
 
